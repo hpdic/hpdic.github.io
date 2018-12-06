@@ -1,1 +1,1531 @@
-Hello HPDIC
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>High Performance Data Intensive Computing</title>
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<link rel="shortcut icon" href="favicon.ico" >
+<link rel="icon" type="image/gif" href="favicon.ico" >
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89605657-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/Javascript">
+	function hideAllDiv() {
+/*		it does not work for IE:
+		var divs = document.getElementsByName_iefix("content");
+		for (var i=0; i<divs.length; i++) {
+			divs[i].style.display="none";
+		}
+*/
+		document.getElementById("welcome").style.display="none";
+		document.getElementById("research").style.display="none";
+		document.getElementById("courses").style.display="none";
+		document.getElementById("vitae").style.display="none";
+		document.getElementById("misc").style.display="none";
+		document.getElementById("contact").style.display="none";
+		return true;
+	}
+	function showDiv(showDivId) {
+		document.getElementById(showDivId).style.display="block";
+		return true;
+	}
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-17461982-3', 'iit.edu');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+<body>
+
+
+<a name="top" id="top"></a>
+<div id="wrapper">
+	<div id="menu">
+		<ul>
+			<li><a href="" onclick="hideAllDiv(); showDiv('welcome');return false;">Home</a></li>
+			<li><a href="" onclick="hideAllDiv(); showDiv('research');return false;">Research</a></li>
+			<li><a href="" onclick="hideAllDiv(); showDiv('vitae');return false;">Publications</a></li>
+			<li><a href="" onclick="hideAllDiv(); showDiv('misc');return false;">Courses</a></li>
+			<li><a href="" onclick="hideAllDiv(); showDiv('courses');return false;">Misc</a></li>
+			<li><a href="" onclick="hideAllDiv(); showDiv('contact');return false;">Contact</a></li>
+		</ul>
+	</div>
+	<!-- end #menu -->
+    <!--
+	<div id="header">
+		<div id="logo">
+			<h1><a href="">HPDIC @ Nevada</a></h1>
+		</div>
+	</div>
+    -->
+	<!-- end #header -->
+	<div id="page">
+		<div id="content">
+			<div class="post" id="welcome" name="content" style="display:block;">
+				<h2 class="title">Home</h2>
+				<div class="entry" style="display:;">
+					<!--
+					<p>I am a fourth-year PhD student in computer science at Illinois Institute of Technology. 
+					I work as a research assistant in the <a href="http://datasys.cs.iit.edu" target="_blank">DataSys Lab</a> directed by <a href="http://www.cs.iit.edu/~iraicu/index.html" target="_blank">Prof. Ioan Raicu</a>.
+		<p>
+          <ul>  
+<li>I'll join UNR as an assistant professor: <a href="http://www.unr.edu/cse/people/faculty/zhao" target="_blank">http://www.unr.edu/cse/people/faculty/zhao</a>
+<li>Postdoc, Computer Science, University of Washington, 2016
+<li>PhD, Computer Science, Illinois Institute of Technology, 2015
+<li> I am joining University of Nevada (Reno) as an Assistant Professor with my tenure track residing in College of Engineering.
+I plan to hire several PhD students (full support as research assistant); 
+if you are interested in pursuing a PhD in Big Data Systems, High-performance Computing, or Cloud Computing,
+	please email me your CV to: dzhao at uw dot edu.
+<li> I was a recipient of Moore-Sloan Postdoctoral Fellowship at University of Washington (Seattle) and awarded a PhD degree by Illinois Institute of Technology (Chicago).
+<li> I previously held positions at Pacific Northwest National Laboratory (Seattle, WA), IBM Almaden Research Center (San Jose, CA), Argonne National Laboratory (Chicago, IL), and Epic Systems (Madison, WI).
+<li>Assistant professor, computer science & engineering, <a href="http://www.unr.edu/cse/people/faculty/zhao" target="_blank">University of Nevada</a>, since 2017
+
+
+<u>Bio Sketch</u>
+We have multiple PhD openings, see the <a href="./cfp/job_ad_dec2016.html", target="_blank">announcement</a>.
+<br>
+<br>
+-->
+<!---
+The mission of High Performance & Data Intensive Computing (HPDIC) research lab is to push the technological frontier of multiple computer science areas including but not limited to: high-performance computing, data management systems, parallel computing, distributed systems, cloud computing, blockchain systems, edge computing.
+--->
+    <!--
+The lab operates on two sites: 
+<ul>
+    <li> Department of Computer Science, University of California, Davis 
+    <li> Department of Computer Science & Engineering, University of Nevada, Reno.
+</ul>
+    <br><br>
+    -->
+
+    <i><b>The lab does NOT have new openings at this point.</b></i>
+
+    <br>
+    <br>
+
+<ul> <b>Current Lab Members:</b>
+                        <li><a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> (Postdoc, Washington; PhD, Illinois Tech)
+                        <li><a href="https://www.cse.unr.edu/~hui" target="_blank">Hui Lin</a> (PhD, Illinois)
+                        <li><a href="https://wolfweb.unr.edu/homepage" target="_blank">Jianing Zhuang</a> (Postdoc, HKU; PhD, CAS)
+                        <li><a href="https://wolfweb.unr.edu/homepage/xinyingw" target="_blank"> Xinying Wang</a> (MS, Northeastern, China) 
+                        <li><a href="https://wolfweb.unr.edu/homepage/aalmamun/abdullahwebsite" target="_blank">Abdullah Al-Mamun</a> (MS, RWTH-Aachen, Germany)
+                        <li><a href="https://wolfweb.unr.edu/homepage/otawose/tot" target="_blank">Timothy Tawose</a> (MS, Bradford, United Kingdom)
+
+</ul>
+
+
+    <!---
+<ul> <b><u>News</u></b>
+    <li>[01/2019] <a href="https://wolfweb.unr.edu/homepage" target="_blank">Jianing Zhuang</a>
+        joined the HPDIC lab.
+    <li>[12/2018] <a href="https://wolfweb.unr.edu/homepage/aalmamun/abdullahwebsite" target="_blank">Abdullah Al-Mamun</a>
+        presented 
+        <u>two papers</u> 
+        in the 
+        <i>2018 IEEE International Conference on Big Data,</i> 
+        Seattle, WA.
+    <li>[10/2018] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        was invited to act as the 
+        <u>Local Co-Chair</u> 
+        of the 
+        <i>2019 ACM/IFIP/USENIX International Middleware Conference,</i> 
+        Davis, CA. 
+    <li>[08/2018] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        received a 
+        <u>research award</u> 
+        from  
+        <i>Microsoft.</i>
+    <li>[08/2018] <a href="https://wolfweb.unr.edu/homepage/aalmamun/abdullahwebsite" target="_blank">Abdullah Al-Mamun</a>
+        presented 
+        <u>two papers</u>  
+        in the 
+        <i>2018 International Conference on Parallel Processing (ICPP),</i> 
+        Eugene, OR.
+    <li>[07/2018] <a href="https://wolfweb.unr.edu/homepage/xinyingw" target="_blank">Xinying Wang</a> 
+        presented <u>a paper</u> and won the 
+        <u>Best Student Paper Award</u> 
+        in the 
+        <i>2018 IEEE International Conference on Cloud Computing,</i> 
+        San Francisco, CA. 
+    <li>[07/2018] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        was invited to serve on a 
+        <u>grant proposal review panel</u> 
+        of the  
+        <i>CISE Division, National Science Foundation (NSF), </i>
+        Alexandria, VA. 
+    <li>[07/2018] <a href="https://wolfweb.unr.edu/homepage/otawose/tot" target="_blank">Timothy Tawose</a>
+        joined the HPDIC lab.
+    <li>[05/2018] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        had 
+        <u>a paper</u> 
+        accepted in the 
+        <i>2018 IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing (CCGrid), </i>
+        Washington, DC.
+    <li>[05/2018] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        was invited to serve on a 
+        <u>grant proposal review panel</u> 
+        of the  
+        <i>ASCR Division, U.S. Department of Energy (DOE), </i>
+        Rockville, MD.
+    <li>[05/2018] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        joined Univeristy of California, Davis.
+    <li>[01/2018] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        had 
+        <u>a paper</u> 
+        accepted in the 
+        <i>IEEE Transactions on Cloud Computing</i>.
+    <li>[01/2018] <a href="https://wolfweb.unr.edu/homepage/aalmamun/abdullahwebsite" target="_blank">Abdullah Al-Mamun</a>
+        joined the HPDIC lab.
+    <li>[11/2017] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        received a 
+        <u>research award</u> 
+        from  
+        <i>Amazon.</i>
+    <li>[08/2017] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        had 
+        <u>a paper</u> 
+        accepted in the 
+        <i>2017 International Conference on Very Large Data Bases (VLDB),</i>
+        Munich, Germany.
+    <li>[07/2017] <a href="https://wolfweb.unr.edu/homepage/xinyingw" target="_blank">Xinying Wang</a> 
+        joined the HPDIC lab.
+    <li>[07/2017] <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a> 
+        founded the HPDIC lab at University of Nevada, Reno. 
+</ul>
+        --->
+
+                    <!---
+        <table style="width: 100%;">
+            <tr style="width: 100%">
+                <td valign="top" style="width: 100%; border: none">
+                    <a href="https://www.cse.unr.edu/~dfz/download/Dongfang_Zhao_CV.pdf" target="_blank">Dongfang Zhao</a>, Assistant Professor, 07/2017-
+                    <ul>
+                        <li>UW-Seattle (Postdoc); IIT-Chicago (PhD)</li>
+                        <li>Papers: <a href="https://scholar.google.com/citations?hl=en&user=ZFsLVTwAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Google Scholar</a>, 
+                            <a href="http://www.informatik.uni-trier.de/~ley/pers/hd/z/Zhao:Dongfang" target="_blank">DBLP</a></li>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="width: 100%; border: none">
+                    <a href="https://wolfweb.unr.edu/homepage/xinyingw" target="_blank">Xinying Wang</a>, 
+                    Research Assistant, 07/2017-
+                    <ul>
+                        <li>MSc, Northeastern University, China</li>
+                        <li>Topics: Cloud Computing; Memory Systems
+                        <li>First-author Papers: CLOUD'18 (Best Paper); </li>
+                    </ul>
+                </td>
+            </tr>
+            </tr>
+                <td valign="top" style="width: 100%; border: none">
+                    <a href="https://wolfweb.unr.edu/homepage/aalmamun/abdullahwebsite" target="_blank">Abdullah Al-Mamun</a>,
+                    Research Assistant, 01/2018-
+                    <ul>
+                        <li>MSc, RWTH Aachen University, Germany</li>
+                        <li>Topics: Distributed Systems; Blockchain Systems <li>First-author Papers: ICPP'18; BigData'18;</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="width: 100%; border: none">
+                    <a href="https://wolfweb.unr.edu/homepage/otawose/tot" target="_blank">Timothy Tawose</a>,
+                    Research Assistant, 07/2018-
+                    <ul>
+                        <li>MSc, University of Bradford, United Kingdom</li>
+                        <li>Topics: Parallel Computing; Scientific Computing 
+                        <li>First-author Papers: TBA</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="width: 100%; border: none">
+                    <a href="https://wolfweb.unr.edu/homepage" target="_blank">Jianing Zhuang</a>,
+                    Research Assistant, 01/2019- 
+                    <ul>
+                        <li>BSc, Nanjing University, China</li>
+                        <li>Topics: Edge Computing; Blockchain Systems
+                        <li>Papers: TBA</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="width: 100%; border: none">
+                    <a href="https://wolfweb.unr.edu/homepage" target="_blank">TBA</a>,
+                    Research Assistant, 07/2019-
+                    <ul>
+                        <li>TBA</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="width: 100%; border: none">
+                    TBA,
+                    MSc student, since Fall 2018
+                    <ul>
+                        <li>Papers: TBA</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 126px">
+                    <img alt="" height="100" src=""/>
+                </td> <td valign="top"> TBA, starting Spring 2019 <ul>
+                        <li>MSc, TBA</li>
+                        <li>Project: Edge and mobile computing</li>
+                        <li>Publications: TBA</li>
+                    </ul>
+                </td>
+            </tr>
+-->
+        </table>
+<!--
+        <p>Last updated: March 2018</p>
+        <h4>Visiting scholars:</h4>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 126px">
+                    <img alt="" height="100" src=""/>
+                </td>
+                <td valign="top">
+                    <a href="" target="_blank">TBA</a>, starting 07/2018
+                    <ul>
+                        <li>Shanghai University, China</li>
+                        <li>Project: TBA</li>
+                        <li>Publications: TBA</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 126px">
+                    <img alt="" height="100" src=""/>
+                </td>
+                <td valign="top">
+                    <a href="" target="_blank">TBA</a>, starting 07/2018
+                    <ul>
+                        <li>Shanghai University, China</li>
+                        <li>Project: TBA</li>
+                        <li>Publications: TBA</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+<br>
+<br>
+<p>
+News
+<ul>
+    <li> 09/2017: Received Azure Research Award from Microsoft 
+    <li> 08/2017: Received AWS Research Grant from Amazon
+    <li> 07/2017: Paper accepted at VLDB 2017, Munich, Germany
+    <li> 06/2017: Visited IBM Research-Almaden, San Jose, CA
+</ul>
+Scientific findings and experimental results have been published at prestigious journals and frequently presented at various leading conferences.
+We also keep tight collaborations with goverment labs (e.g., Lawrence Berkeley National Lab, Pacific Northwest National Lab, Argonne National Lab, Los Alamos National Lab) and industry partners (e.g., IBM, Microsoft, Google, Amazon).
+
+<li><a href="http://www.unr.edu/cse/people/faculty/zhao" target="_blank">Assistant Professor</a>, University of Nevada, Reno, since 2017
+
+<li>Postdoc, Computer Science and Engineering, University of Washington, Seattle, 2016 (advisor: <a href="http://www.cs.washington.edu/people/faculty/magda" target="_blank">Magda Balazinska</a>)
+<li>PhD in Computer Science, Illinois Institute of Technology, Chicago, 2015 (advisor: <a href="http://www.cs.iit.edu/~iraicu" target="_blank">Ioan Raicu</a>)
+<li>Software Engineer, Epic Systems, Wisconsin Madison, 2009-11
+<li>MS in Computer Science, Emory University, Atlanta, 2008
+-->
+
+<!--
+<br><br>
+<u>Residence before Moving to United States of America</u>
+        <li>Province of Flemish Brabant, Kingdom of Belgium, 2003 - 2005
+        <li>Liaoning Province, People's Republic of China, before 2003
+<li>Starting January 2017, I will join University of Nevada, Reno as an Assistant Professor with my tenure-track residing in the Department of Computer Science and Engineering, College of Engineering. We will have several openings for PhD research assistantships; if you are interested in pursing a PhD in computer science with specialties in big data systems, high-performance computing, or cloud computing, please email your CV to me: dzhao at uw dot edu.
+<li>Dongfang had been pursuing his Ph.D. in Computer Science under the supervision of <a href="http://www.cs.iit.edu/~iraicu/index.html" target="_blank">Prof. Ioan Raicu</a> at the <a href="http://datasys.cs.iit.edu" target="_blank">DataSys Lab</a>. During his Ph.D. study, he worked closely with the <a href="http://www.cs.iit.edu/~scs/home/home.html" target="_blank">SCS Lab</a> led by <a href="http://www.cs.iit.edu/~scs/sun/" target="_blank">Prof. Xian-He Sun</a> and <a href="http://www.cs.iit.edu/~zlan/" target="_blank">Prof. Zhiling Lan</a>, as well as <a href="http://www.mcs.anl.gov/person/rob-ross" target="_blank">Dr. Robert Ross</a> (Argonne National Lab) and <a href="https://www.pnl.gov/computing/staff/staff_info.asp?staff_num=7382" target="_blank">Dr. Jian Yin</a> (Pacific Northwest National Lab).
+I'm recently in the organization of the following venues:
+<ul>
+<li><a href="http://www.journalofbigdata.com/about/edboard" target="_blank">Journal of Big Data (Springer)</a>	
+<li><a href="http://datasys.cs.iit.edu/events/BDC2015/organization.html" target="_blank">2nd IEEE/ACM International Symposium on Big Data Computing</a>
+</ul>		  
+	<li>I received my PhD from IIT in Chicago advised by <a href="http://www.cs.iit.edu/~iraicu" target="_blank">Ioan Raicu</a> and <a href="http://www.cs.iit.edu/~sun" target="_blank">Xian-He Sun</a>.-->
+        <!--    <li><a href="./download/res.pdf" target="_blank">Research Statement</a>
+            <li><a href="./download/tea.pdf" target="_blank">Teaching Statement</a>
+			<li>My CV <a href="./cv" target="_blank">.pdf</a>
+
+            <li>Email: 
+<SCRIPT TYPE="text/javascript">
+emailE=('d' + 'zhao' + '' + '@' + 'us.ibm' + '.' + 'com') 
+document.write('<A href="mailto:' + emailE + '">dzhao @t us d0t ibm d0t com</a>')
+</script>            
+            </li>
+			<li>Phone: (408) 927-1369</li>
+			<li>Postal: IBM Research - Almaden, B3-255, San Jose, CA 95120 
+			</li>
+              <ul>
+                <li>Advisor: Ioan Raicu</li>
+                <li>Dissertation Committee: Xian-He Sun, Zhiling Lan, Erdal Oruklu</li>
+              </ul> 
+            
+            <li>Summer 2015: Research Intern, IBM Almaden Research Center, San Jose, CA. </li>
+              <ul>
+                <li>Advisor: Heiko Ludwig</li>
+              </ul> 
+         
+            <li>Summer 2014: Research Intern, Argonne National Lab, Lemont, IL. </li>
+              <ul>
+                <li>Advisor: Robert Ross</li>
+              </ul>    
+            
+            <li>Summer 2013: Research Intern, Pacific Northwest National Lab, Richland, WA. </li>
+              <ul>
+                <li>Advisor: Jian Yin</li>
+              </ul>
+          </ul>
+        </p>
+				<p><font size="1">Last updated: May 2016</font></p>
+						, 
+						advised by 
+						<a href="http://www.cs.iit.edu/~iraicu/index.html" target="_blank">Ioan Raicu</a>. 
+						My dissertation is on extreme-scale high-performance storage systems. 
+					
+						A two-page summary provides a high-level introducton:
+						<br>
+						<ul>
+						D. Zhao and I. Raicu. 
+						<a href="download/thesis_summary.pdf" target="_blank">Storage Support for Data-Intensive Applications on Extreme-Scale HPC Systems</a>,
+						<i>The 2014 ACM/IEEE Conference on Supercomputing (SC'14)</i>, New Orleans, LA, 2014.
+						<br>
+						</ul>
+						For more detail, please refer to the dissertation proposal (160+ pages):
+						<br>
+						<ul>
+						D. Zhao. <a href="download/thesis_proposal.pdf" target="_blank">Storage Support for Data-Intensive Applications on Large Scale High-Performance Computing Systems</a>,
+						<i>Doctoral Dissertation Proposal, Department of Computer Science, Illinois Institute of Technology</i>, Chicago, IL, 2014.
+						</ul>
+					-->	
+<!-- 						
+Prior to that, I worked on machine intelligence and received my master's degree in computer science from <a href="http://www.mathcs.emory.edu/Research/Area/datainfo/" target="_blank">Emory University</a> in 2008.
+ -->
+					</p>
+
+					
+<!--
+						<p>
+						Spring 2014, research intern at Argonne National Laboratory, Lemont, IL. 
+						</p>
+						<p>
+						Summer 2013, reserach intern at Pacific Northwest National Laboratory, Richand, WA.
+						</p>
+		
+						I mainly work on large-scale storage systems for high performance computing,
+						supported by NSF ACI-1054974, 
+						<a href="http://www.nsf.gov/awardsearch/showAward?AWD_ID=1054974" target="_blank">
+						CAREER: Avoiding Achilles' Heel in Exascale Computing with Distributed File Systems
+						</a>.
+					</p>
+					<p>In Spring 2014, I worked on extreme-scale storage architectures with 
+						<a href="http://www.mcs.anl.gov/person/dries-kimpe" target="_blank">
+						Dries Kimpe</a> 
+						and 
+						<a href="http://www.mcs.anl.gov/person/rob-ross" target="_blank">
+						Robert Ross</a> 
+						at Argonne National Laboratory, Lemont, Illinois.
+					</p>
+					<p>
+						In Summer 2013, I worked on storage compression for large-scale parallel applications with 
+						<a href="http://www.pnl.gov/computing/staff/staff_info.asp?staff_num=7382" target = "_blank">
+						Jian Yin</a>
+						and 
+						<a href="http://www.pnl.gov/science/staff/staff_info.asp?staff_num=7284" target = "_blank">
+						John Feo</a>
+						at Pacific Northwest National Laboratory, Richland, Washington. 
+					</p>
+					<p>Recent publications (since 2012, peer-reviewed only):
+					<font size="2">
+					<ul>
+						<li><u>Dongfang Zhao</u>, Kan Qiao and Ioan Raicu.
+							HyCache+: Towards Scalable High-Performance Caching Middleware for Parallel File Systems.
+							CCGrid 2014.
+						</li>
+						<li><u>Dongfang Zhao</u>, Jian Yin and Ioan Raicu. 
+							Improving the I/O Throughput for Data-Intensive Scientific Applications with Efficient Compression Mechanisms.
+							Poster, SC 2013.
+						</li>
+						<li><u>Dongfang Zhao</u>, Chen Shou, Tanu Malik and Ioan Raicu. 
+							Distributed Data Provenance for Large-Scale Data-Intensive Computing.
+							CLUSTER 2013.
+						</li>
+						<li><u>Dongfang Zhao</u>, Kent Burlingame, Corentin Debains, Pedro Alvarez-Tabio and Ioan Raicu. 
+							Towards High-Performance and Cost-Effective Distributed Storage Systems with Information Dispersal Algorithms.
+							CLUSTER 2013.
+						</li>
+						<li><u>Dongfang Zhao</u> and Ioan Raicu. 
+							HyCache: a User-Level Caching Middleware for Distributed File Systems.
+							HPDIC Workshop, IPDPS 2013.
+						</li>
+						<li>Tonglin Li, Xiaobing Zhou, Kevin Brandstatter, <u>Dongfang Zhao</u>, Ke Wang, Anupam Rajendran, Zhao Zhang and Ioan Raicu. 
+							ZHT: A Light-weight Reliable Persistent Dynamic Scalable Zero-hop Distributed Hash Table.
+							IPDPS 2013.
+						</li>
+						<li>Chen Shou, <u>Dongfang Zhao</u>, Tanu Malik and Ioan Raicu. 
+							Towards a Provenance-Aware Distributed Filesystem.
+							TaPP Workshop, NSDI 2013.
+						</li>
+						<li><u>Dongfang Zhao</u>, Da Zhang, Ke Wang and Ioan Raicu. 
+							Exploring Reliability of Exascale Systems Through Simulations. 
+							SpringSim 2013.
+						</li>				
+						<li><u>Dongfang Zhao</u> and Ioan Raicu. 
+							Distributed File Systems for Exascale Computing.
+							Poster, SC 2012.
+						</li>
+					</ul>
+					</font>	
+					</p>
+ -->					
+					<!--
+					<p>
+						In Summer 2013, I worked on filesystem compression at Pacific Northwest National Laboratory as a research intern supervised by 
+						<a href="http://www.pnl.gov/computing/staff/staff_info.asp?staff_num=7382" target = "_blank">Jian Yin</a>.
+					</p>
+					<p>
+						In Spring 2014, I worked on filesystem simulations at Argonne National Laboratory as a research intern supervised by 
+						<a href="http://www.mcs.anl.gov/person/rob-ross" target="_blank">Robert Ross</a>.
+					</p>
+					
+					<p>Since November 2013, I have been working on storage/network simulations with 
+						<a href="http://www.mcs.anl.gov/person/dries-kimpe" target="_blank">Dries Kimpe</a> 
+						and 
+						<a href="http://www.mcs.anl.gov/person/rob-ross" target="_blank">Robert Ross</a> 
+						at Argonne National Laboratory (ANL).
+					</p>
+					<p>Since May 2013, I have been working on data compressions with 
+						<a href="http://www.pnl.gov/computing/staff/staff_info.asp?staff_num=7382" target = "_blank">Jian Yin</a> 
+						and 
+						<a href="http://www.pnl.gov/science/staff/staff_info.asp?staff_num=7284" target = "_blank">John Feo</a>
+						at Pacific Northwest National Laboratory (PNNL).
+	
+					</p>
+					<p>I primarily work on the NSF funded project FusionFS, a distributed filesystem that has achieved 2.44 TB/s throughput on 16K nodes. Details can be found in the <a href = "http://datasys.cs.iit.edu/projects/FusionFS/index.html" target = "_black">FusoinFS website</a>. Results have been published in a variety of venues, which can be found in the publication page of our lab: <a href="http://datasys.cs.iit.edu/publications/index.html" target="_blank">DataSys Publications</a>.
+				
+					<p>
+						Since Fall 2013, I have been working on simulating exascale storage and network architectures with <a href="http://www.mcs.anl.gov/person/dries-kimpe" target="_blank">Dries Kimpe</a> and <a href="http://www.mcs.anl.gov/person/rob-ross" target="_blank">Rob Ross</a> at Argonne National Laboratory (ANL).
+					</p>
+					<p>In Summer 2013, I worked on data compression for large-scale parallel applications in the Data Intensive Scientific Computing (DISC) 
+					group at Pacific Northwest National Laboratory (PNNL), supervised by 
+					<a href="http://www.pnl.gov/computing/staff/staff_info.asp?staff_num=7382"
+						target = "_blank">Jian Yin</a>
+					and 
+					<a href="http://www.pnl.gov/science/staff/staff_info.asp?staff_num=7284"
+						target = "_blank">John Feo</a>.
+						
+					</p>
+		-->				
+					<!--
+					<p>
+						I can be reached at <a href="mailto:dfz@acm.org" target="_top">dfz@acm.org</a>
+					</p>
+					-->
+					<ul>
+				<!--	
+						<li> Recent Deadlines
+							<ul>
+									
+								<li><a href="https://www.usenix.org/conference/tapp13/call-for-contributions" target="_blank">TaPP/NSDI 2013</a>, paper 1/17/2013, decision 2/22/2013.</li>
+								<li><a href="http://www.scs.org/springsim/2013/HPC" target="_blank">HPC 2013</a>, paper 1/18/2013, decision 2/8/2013.</li>
+								<li><a href="http://www.hpdc.org/2013/papers/call-for-papers/"  target="_blank">HPDC 2013</a>, abstract 1/14/2013, paper 1/21/2013, decision 3/6/2013.</li>
+								<li><a href="http://storageconference.org/2013/CFP.pdf"  target="_blank">MSST 2013</a>, due 2/1/2013</li>
+								<li><a href="http://acm-cac2013.cis.fiu.edu/" target="_blank">CAC 2013</a>, due 3/15/2013</li>
+							</ul>
+						</li>
+						-->
+<!--						<li> Publications
+							<ul>
+								<li>Tonglin Li, Xiaobing Zhou, Kevin Brandstatter, Dongfang Zhao, 
+Ke Wang, Anupam Rajendran, Zhao Zhang and Ioan Raicu. ZHT: A Light-weight Reliable Persistent Dynamic Scalable Zero-hop Distributed Hash Table. <em>Proceedings of the 27th IEEE International Parallel & Distributed Processing Symposium (IPDPS'13)</em>, Boston, USA, May 2013.
+								</li>
+								<li>
+									Dongfang Zhao and Ioan Raicu. Distributed File Systems for Exascale Computing, <em>Doctor Research Poster, 2012 ACM/IEEE conference on Supercomputing (SC '12), </em> Salt Lake City, UT,
+           November 10-16, 2012.
+								</li>
+								<li>
+									Iman Sadooghi, Dongfang Zhao, Tonglin Li and Ioan Raicu. Understanding the Cost of Cloud Computing and Storage, <em>  1st Greater Chicago Area System Research Workshop,</em> Chicago, IL, May 22, 2012
+								</li>
+								<li>
+									Dongfang Zhao and Ioan Raicu. SCH-FS: a SSD-Cached Hybrid File System,
+     <em>  1st Greater Chicago Area System Research Workshop,</em> Chicago, IL,
+           May 22, 2012
+								</li>
+								<li>Dongfang Zhao and Li Yang. Incremental Isometric Embedding of High-Dimensional Data Using Connected Neighborhood Graphs. <em>IEEE Transactions on Pattern Analysis and Machine Intelligence (PAMI)</em>, 31(1):86-98, January 2009.</li>
+								<li>Robin Lohfert, James J. Lu and Dongfang Zhao. Solving Database Constraints Through Incremental SAT Encoding. <em>Proceedings of the 21st International Conference on Industrial, Engineering & Other Applications of Applied Intelligent Systems (IEA/AIE `08)</em>, Lecture Notes in AI, Springer, 2008.</li>
+								<li>Dongfang Zhao and Li Yang. Incremental construction of neighborhood graphs for nonlinear dimensionality reduction. <em>Proceedings of the 18th International Conference on Pattern Recognition (ICPR'06)</em>, volume 3, pages 177-180, Hong Kong, China, August 2006.
+								<li>Dongfang Zhao. Adaptive weights smoothing and applications. Master's thesis, Leuven Statistics Research Center, Katholieke Universiteit Leuven, Belgium, August 2005.
+								<li>Linhua Jiang and Dongfang Zhao. Memory-efficient and low energy consumption data structure transformations for specific embedded applications. Technical report, Inter-University Micro-Electronics Center (IMEC), Belgium, June 2004.
+							</ul>
+						</li>	
+ -->										
+					</ul>				
+				</div>
+			</div>
+			<div class="post" id="research" name="content" style="display:none">
+				<h2 class="title">Research</h2>
+				<div class="entry" style="display:;">
+<style>
+table, th, td {
+        border: 0.1px solid black;
+}
+</style>
+<br>
+
+<br>
+Funding sources:<br>
+<table style="width:100%">
+       <tr>
+         <th>Grantor</th>
+         <th>Program</th> 
+         <th>Deadline</th>
+       </tr>
+<!---
+       <tr>
+         <td>Huawei</td>
+         <td><a href="http://innovationresearch.huawei.com/IPD/hirp/portal/index.html" target="_blank">HIRP Open</a></td>
+         <td>April</td>
+       </tr>
+
+       <tr>
+         <td>AFOSR</td>
+         <td>YIP</td>
+         <td>May</td>
+       </tr>
+       --->  
+       <tr>
+         <td>Amazon</td>
+         <td>AWS Grant</td>
+         <td>June</td>
+       </tr>
+      
+       <tr>
+         <td>Microsoft</td>
+         <td>Azure Award</td>
+         <td>July</td>
+       </tr>
+
+       <tr>
+         <td>NSF</td>
+         <td>CAREER</td>
+         <td>July</td>
+       </tr>
+
+       <tr>
+         <td>Google</td>
+         <td>Faculty Award</td>
+         <td>August</td>
+       </tr>
+
+       <tr>
+         <td>DOE</td>
+         <td><a href="https://science.energy.gov/~/media/grants/pdf/foas/2017/SC_FOA_0001761.pdf" target="_blank">CAREER</a></td>
+         <td>September</td>
+       </tr>
+<!---
+       <tr>
+         <td>ONR</td>
+         <td>YIP</td>
+         <td>October</td>
+       </tr>
+       --->   
+       <tr>
+         <td>NSF</td>
+         <td>CISE Core</td>
+         <td>November</td>
+       </tr>
+</table>
+<!--
+<br>
+Students:<br>
+<table style="width:100%">
+       <tr>
+         <th>Name</th>
+         <th>Program</th> 
+         <th>Prior Degree</th>
+       </tr>
+
+       <tr>
+         <td>Abdullah Al-Mamun</td>
+         <td>PhD, CSE, UNR</td>
+         <td>MS, RWTH Aachen University, Germany</td>
+       </tr>
+
+       <tr>
+         <td>Xinying Wang</td>
+         <td>PhD, CSE, UNR</td>
+         <td>MS, Northeastern University, China</td>
+       </tr>
+</table>
+-->
+
+<br>
+Conferences:<br>
+<table style="width:100%">
+       <tr>
+         <th>Name</th>
+         <th>Link</th> 
+         <th>Deadline</th>
+       </tr>
+
+       <tr>
+         <td>HPDC</td>
+         <td></td>
+         <td>January</td>
+       </tr>
+
+       <tr>
+         <td>VLDB, SC, ICPP</td>
+         <td></td>
+         <td>March</td>
+       </tr>
+
+       <tr>
+         <td>PPoPP</td>
+         <td></td>
+         <td>August</td>
+       </tr>
+
+       <tr>
+         <td>SIGMOD, IPDPS</td>
+         <td></td>
+         <td>October</td>
+       </tr>
+
+       <tr>
+         <td>CCGRID, EDBT</td>
+         <td></td>
+         <td>November</td>
+       </tr>
+
+       <tr>
+         <td>ICDCS</td>
+         <td></td>
+         <td>December</td>
+       </tr>
+</table>
+<!--
+        <p>
+          Upcoming venues:
+            <ul>
+              <li>IEEE IPDPS 2016, Chicago, IL
+              <li>IEEE Big Data 2015, Santa Clara, CA
+            </ul>
+        </p>
+        <p>
+          Papers under review at:
+            <ul>
+              <li>2015 ACM Conference on Parallel Architectures and Compilation Techniques (PACT)          
+              <li>2015 ACM Supercomputing Conference (SC)
+            </ul>
+        </P>
+Here are some selected projects we have been recently working on:
+Current projects:
+<ul>
+<li><a href="proj/diskram/" target="_blank">Diskram: Virtual memory on big data systems</a>
+<li><a href="proj/diego-p/" target="_blank">Resource allocation of PaaS in cloud computing</a>
+<li><a href="proj/dhe/" target="_blank">DHE: Distributed Homomorphic Encryption</a> 
+<li><a href="proj/amp/" target="_blank">AMP: Automatic Multi-Processing for Mobile Computing</a> 
+</ul>
+
+Resources:
+<ul>
+<li>WolfCloud@Nevada: a 10-node cluster of virtual machines
+<li>Grid@Nevada: a 27-node cluster of high-end servers
+</ul>
+<ul>
+
+<li>Data Management
+    <ul>
+    <li> Comparison between big data systems, under review at VLDB'17
+    <li> Diskram: arbitrarily treat disk as RAM, under review at VLDB'17
+    <li> Virtual data chunking, published in SC'13, IEEE Trans. Services Computing
+    <li> Reducing data dimensionality on manifold, published in IEEE TPAMI
+    <li> Distributed data provenance, published in CLUSTER'13
+    </ul>
+
+<li>Many-core Computing
+    <ul>
+    <li>GPU-powered hash table, published in CLUSTER'13, CCPE'16
+    <li>Parallel data serialization, published in JPDC'15
+    </ul>
+
+<li>Extreme-scale Filesystem
+    <ul>
+    <li>FusionFS: a distributed file system linearly scalable to two million nodes 
+    <li>Published in SC'12, BigData'15, IEEE TPDS
+    </ul>
+
+<li>Cloud Computing
+    <ul>
+    <li>Fine-grained reproduction of virtual networking, published in IEEE CLOUD'16
+    <li>Convergence of HPC and cloud storage, published in HPDC'15
+    </ul>
+
+<li>Metadata Management
+    <ul>
+    <li>ZHT: a lightweight Zero-hop Hash Table, published in IPDPS'13, CCPE'16
+    <li>Dindex: a distributed indexer, published in IEEE Trans. Big Data
+    </ul>
+
+<li>Cooperative Caching
+    <ul>
+    <li>Hybrid cache between SSD and spin hard disk drive
+    <li>Published in IPDPS'13, CCGrid'14, CCPE'16
+    </ul>
+
+        <p>
+          Work published in: 
+            <ul>
+              <li>Concurrency and Computation: Practice and Experience (Wiley), 2015
+              <li>IEEE Transactions on Services Computing (TSC), 2015
+              <li>IEEE Transactions on Parallel and Distributed Systems (TPDS), 2015
+              <li>IEEE International Conference on Cluster Computing (CLUSTER), 2015
+              <li>International Journal of Big Data Intelligence (Inderscience), 2015
+              <li>ACM Workshop on Scientific Cloud Computing (ScienceCloud), 2015
+              <li>IEEE International Conference on Big Data (BigData), 2014
+              <li>ACM Conference on Cluster, Cloud and Grid Computing (CCGRID), 2014
+              <li>IEEE International Conference on Cluster Computing (CLUSTER), 2013
+              <li>IEEE Parallel and Distributed Processing Symposium (IPDPS), 2013
+              <li>ACM/SCS High Performance Computing Symposium (HPC), 2013
+              <li>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2009
+              <li>International Conference on Pattern Recognition (ICPR), 2006
+		  </ul>
+        </p>
+		-->
+            <!--
+				<p>
+					Research interests: distributed systems, high-performance computing, cloud computing, big data, machine intelligence
+				</p>
+									
+		
+				<p>
+					Before rejecting a paper, I reread <a href="reject.htm" target="_blank">this article</a>.
+				</p>
+				
+
+					<font size="1">
+					<p>Recent publications (since 2012, peer-reviewed only):
+					
+					<ul>
+						<li><u>Dongfang Zhao</u>, Kan Qiao and Ioan Raicu.
+							HyCache+: Towards Scalable High-Performance Caching Middleware for Parallel File Systems.
+							CCGrid 2014.
+						</li>
+						<li><u>Dongfang Zhao</u>, Jian Yin and Ioan Raicu. 
+							Improving the I/O Throughput for Data-Intensive Scientific Applications with Efficient Compression Mechanisms.
+							Poster, SC 2013.
+						</li>
+						<li><u>Dongfang Zhao</u>, Chen Shou, Tanu Malik and Ioan Raicu. 
+							Distributed Data Provenance for Large-Scale Data-Intensive Computing.
+							CLUSTER 2013.
+						</li>
+						<li><u>Dongfang Zhao</u>, Kent Burlingame, Corentin Debains, Pedro Alvarez-Tabio and Ioan Raicu. 
+							Towards High-Performance and Cost-Effective Distributed Storage Systems with Information Dispersal Algorithms.
+							CLUSTER 2013.
+						</li>
+						<li><u>Dongfang Zhao</u> and Ioan Raicu. 
+							HyCache: a User-Level Caching Middleware for Distributed File Systems.
+							HPDIC Workshop, IPDPS 2013.
+						</li>
+						<li>Tonglin Li, Xiaobing Zhou, Kevin Brandstatter, <u>Dongfang Zhao</u>, Ke Wang, Anupam Rajendran, Zhao Zhang and Ioan Raicu. 
+							ZHT: A Light-weight Reliable Persistent Dynamic Scalable Zero-hop Distributed Hash Table.
+							IPDPS 2013.
+						</li>
+						<li>Chen Shou, <u>Dongfang Zhao</u>, Tanu Malik and Ioan Raicu. 
+							Towards a Provenance-Aware Distributed Filesystem.
+							TaPP Workshop, NSDI 2013.
+						</li>
+						<li><u>Dongfang Zhao</u>, Da Zhang, Ke Wang and Ioan Raicu. 
+							Exploring Reliability of Exascale Systems Through Simulations. 
+							SpringSim 2013.
+						</li>				
+						<li><u>Dongfang Zhao</u> and Ioan Raicu. 
+							Distributed File Systems for Exascale Computing.
+							Poster, SC 2012.
+						</li>
+					</ul>
+					For a complete list of my publications, just use DBLP (~66% accuracy) and Google Scholar (100% coverage plus non-referred reports).
+					</font>	
+					</p>	
+			-->						
+					<!--
+					<p>Distributed Systems (2012 - )</p>
+						<ul>
+							<li>
+								<a href="./download/FusionFS-TR-IIT-CS-2013-08.pdf" target="_blank">FusionFS</a>
+							</li>
+							<li>
+								<a href="./download/ffsz_report_dec2013.pdf" target="_blank">Compression</a>
+							</li>
+						</ul>
+					<p>Artificial Intelligence (2005 - 2008)</p>
+					 I am working on distributed file systems for data-intensive HPC applications.
+					, including:
+					<ul>
+						<li>Simulations for new storage architectures at exascale (i.e. O(1M)+ nodes)</li>
+						<li>Prototypes of extreme scale distributed filesystems (i.e. O(10K) ~ O(100K) nodes)</li>
+						<li>Efficient data compression/decompression algorithms for distributed filesystems</li>
+						<li>Cost-effective hybrid stroage systems with SSD caching</li>
+						<li>Distributed data provenance capture and query at the filesystem level</li>
+						<li>Compute-intensive erasure codings for data redudancy</li>
+ 					 
+						<li> Active Projects
+							<ul>
+								<li>A user-level hybrid file system with SSD caching</li>
+									<ul>
+										<li><a href="">Poster</a>, 1st Chicago Systems Workshop, 2012</li>
+									</ul>
+								<li>FusionFS: distributed file systems supporting for exascale computing</li>
+									<ul>
+										<li><a href="download/poster_fusionfs.pdf">Poster</a>, SC'12 Doctor Research Showcase</li>
+									</ul>
+								
+									<li>
+										FUSE
+										<ul>
+											<li><a href="http://sourceforge.net/apps/mediawiki/fuse/index.php?title=Hello_World"
+												target="_blank">Hello World</a></li>
+											<li><a href="http://www.cs.nmsu.edu/~pfeiffer/fuse-tutorial/"
+												target="_blank">Tutorial</a></li>
+											<li><a href="http://fuse.sourceforge.net/doxygen/index.html" 
+												target="_blank">API</a></li>
+											<li>Compile: gcc -Wall `pkg-config fuse --cflags --libs` hello.c -o hello</li>
+											<li>Unmount: fusermount -u mountpoint</li>
+											<li>Check version: ldd hello; ls -l /lib64/libfuse.so.2</li>
+						  
+										</ul>
+									</li>
+								
+							</ul>
+						</li> 
+				-->	
+				<!--		
+						<li> Publications
+							<ul>
+								<li>Tonglin Li, Xiaobing Zhou, Kevin Brandstatter, Dongfang Zhao, 
+Ke Wang, Anupam Rajendran, Zhao Zhang and Ioan Raicu. ZHT: A Light-weight Reliable Persistent Dynamic Scalable Zero-hop Distributed Hash Table. <em>Proceedings of the 27th IEEE International Parallel & Distributed Processing Symposium (IPDPS'13)</em>, Boston, USA, May 2013.
+								</li>
+								<li>
+									Dongfang Zhao and Ioan Raicu. Distributed File Systems for Exascale Computing, <em>Doctor Research Poster, 2012 ACM/IEEE conference on Supercomputing (SC '12), </em> Salt Lake City, UT,
+           November 10-16, 2012.
+								</li>
+								<li>
+									Dongfang Zhao and Ioan Raicu. SCH-FS: a SSD-Cached Hybrid File System,
+     <em>  1st Greater Chicago Area System Research Workshop,</em> Chicago, IL,
+           May 22, 2012
+								</li>
+								<li>Dongfang Zhao and Li Yang. Incremental Isometric Embedding of High-Dimensional Data Using Connected Neighborhood Graphs. <em>IEEE Transactions on Pattern Analysis and Machine Intelligence (PAMI)</em>, 31(1):86-98, January 2009.</li>
+								<li>Robin Lohfert, James J. Lu and Dongfang Zhao. Solving Database Constraints Through Incremental SAT Encoding. <em>Proceedings of the 21st International Conference on Industrial, Engineering & Other Applications of Applied Intelligent Systems (IEA/AIE `08)</em>, Lecture Notes in AI, Springer, 2008.</li>
+								<li>Dongfang Zhao and Li Yang. Incremental construction of neighborhood graphs for nonlinear dimensionality reduction. <em>Proceedings of the 18th International Conference on Pattern Recognition (ICPR'06)</em>, volume 3, pages 177-180, Hong Kong, China, August 2006.
+								<li>Dongfang Zhao. Adaptive weights smoothing and applications. Master's thesis, Leuven Statistics Research Center, Katholieke Universiteit Leuven, Belgium, August 2005.
+								<li>Linhua Jiang and Dongfang Zhao. Memory-efficient and low energy consumption data structure transformations for specific embedded applications. Technical report, Inter-University Micro-Electronics Center (IMEC), Belgium, June 2004.
+							</ul>
+						</li>
+					
+					</ul>
+					Results have been published in a variety of venues, which can be found in the publication page of our lab: <a href="http://datasys.cs.iit.edu/publications/index.html" target="_blank">DataSys Publications</a>.
+				<br/> 
+				-->
+				<!--
+						Coming topics: 
+							<ul>
+								<li>9/26/2013 - 12/8/2013, FAST'14, multi-reference compression</li>	
+								<li>9/27/2013 - 12/13/2013, NSDI'14, FusionFS framework</li>
+								<li>10/18/2013 - 12/9/2013, IPDPS'14, FusionFS compression</li>
+								<li>11/11/2013 - 1/24/2014, CCGrid'14, FusionFS checkpointing</li>
+								<li>Fault tolerance on cloud/FusionFS, ref. Jian et al.'s SOSP'03 and VLDB'07</li>
+								<li>Multi grid on Hadoop, ref. Guang Lin@PNNL</li>
+								<li>GPU/XeonPhi compression</li>
+							</ul>
+				<br/>
+							Timeline:
+							<ul>
+								<li>@PNNL: USENIX ATC (Jan 2014), OSDI (May 2014), ASPLOS (July 2014), NSDI (Sept 2014), USENIX ATC (Jan 2015), SOSP (Mar 2015), ASPLOS (July 2015), NSDI (Sept 2015), USENIX ATC (Jan 2016), OSDI (May 2016)</li>
+								<li>@IIT: HPDC (Jan), SC (Apr), CLUSTER (May), IPDPS (Sep), CCGrid (Nov)</li>
+							</ul>
+							-->
+						
+				</div>
+			</div>
+			<div class="post" id="courses" name="content" style="display:none;">
+				<h2 class="title">Misc</h2>
+				<div class="entry" style="display:;">
+					<ul>
+<!--           <li><a href="download/Dongfang_Zhao_CV.pdf" target="_blank">Curriculum Vitae</a>-->
+            <li><a href="http://csmetrics.org/" target="_blank">CS department ranking based on reputable conferences and journals</a>
+            <li><a href="http://csrankings.org/" target="_blank">CS department ranking based on only top conferences</a>
+            <li><a href="download/NRC_Ranking_in_Computer_Science.html" target="_blank">NRC ranking in computer science (1995)</a>
+            <li><a href="http://www.guide2research.com/topconf" target="_blank">Conference ranking based on citations</a>
+            <li><a href="https://aminer.org/ranks/conf" target="_blank">Conference and journal ranking based on citations</a>
+            <li><a href="http://www.mcs.anl.gov/group/pmrs/conference-journal-tiers" target="_blank">Conference and journal tiers by Argonne National Lab</a>
+            <li><a href="download/reject.htm" target="_blank">When your paper is rejected...</a>
+            <li><a href="./download/p83-keshavA.pdf" target="_blank">How to Read a Paper</a> by Srinivasan Keshav<br>
+            <li><a href="http://homes.cs.washington.edu/~mernst/advice/review-technical-paper.html" target="_blank">Reviewing a technical paper</a> by Michael Ernst<br>
+                    </ul>
+
+                    <p>dongfang@hpdic.uswest2.cloudapp.azure.com (UCDavis)</p>
+					<p>dfz@alpine.cse.unr.edu (UNR)</p>
+					<p>login.research.unr.edu</p>
+					<p>https://wolfcloud.unr.edu</p>
+					<p>https://remote.unr.edu</p>
+                    <p>rdbroker.unr.edu</p>
+					<p>alpine.cse.unr.edu</p>
+					<p>login.research.unr.edu</p>
+					<p>wolfweb.unr.edu</p>
+					<p>bicycle.cs.washington.edu</p>
+					<p>tricycle.cs.washington.edu</p>
+					<p>CSERESEARCH@aqua.cs.washington.edu</p>
+                    
+                    <p>sudo usermod -aG vboxsf [your username]</p>
+
+					<p>$ git init</p>
+					<p>$ git remote add origin git@bitbucket.org:dongfang/fusionfs-zht.git</p>
+					<p>$ git config branch.master.remote origin</p> 
+					<p>$ git config branch.master.merge refs/heads/master</p>
+					<p>$ git pull</p>
+					</p>
+					<ul>
+						<li>su -; mount /dev/mapper/sil_biabahcbebch /home/dongfang/ssd</li>
+					</ul>
+					<p>Win10: 216.47.142.210</p>
+					<p>hec.cs.iit.edu: 216.47.152.30:8080</p>
+					<ul>
+						<li>FUSE module is not properly loaded: sudo ldconfig</li>
+					</ul>
+					<p>sirius: 216.47.152.142</p>
+					<p>cosmos: 216.47.142.129</p>
+					<p>wells: 71.57.46.129:8080, 24.1.58.64 </p>
+					<p>Kodiak: dzhao@kodiak.nmc-probe.org</p>
+					<p>NERSC: dzhao@hopper.nersc.gov <br>
+						myquota
+					</p>
+					<p>BlueGene/P: dzhao@eureka.alcf.anl.gov <br>
+cqsub -p FusionFS -k zepto-vn-eval -n 4 -t 5 /bin/hostname <br>
+
+cqstat -f <br>
+
+less 542069.output <br>
+
+less 542069.error <br>
+
+cqdel <br>	
+
+cbank <br>
+
+/intrepid-fs0/users/dzhao/persistent/ <br>
+				
+					</p>
+				</div>
+			</div>
+			<div class="post" id="vitae" name="content" style="display:none">
+				<h2 class="title">Publications</h2>
+				<div class="entry" style="display:; font-size: 10pt">
+                    
+                    See <a href="https://scholar.google.com/citations?hl=en&user=ZFsLVTwAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Google Scholar</a> or  						
+                    <a href="http://www.informatik.uni-trier.de/~ley/db/indices/a-tree/z/Zhao:Dongfang.html" target="_blank">DBLP</a>
+                    for a full publication list.
+
+                    <br><br>
+Papers in preparation:<br>
+<table style="width:100%">
+       <tr>
+           <th><i>Project</i></th>
+           <th><i>Venue</i></th> 
+           <th><i>Deadline</i></th>
+       </tr>
+
+       <tr>
+         <td>Resilient Networks for Edge Computing (Hui)</td>
+         <td><a href="http://www.dsn.org/cfpapers.html" target="_blank">DSN19</a></td>
+         <td>12/07/2018</td>
+       </tr>
+
+       <tr>
+         <td>RDMA Blockchains at Extreme Scales (Abdullah)</td>
+         <td><a href="http://theory.utdallas.edu/ICDCS2019/cfp.html" target="_blank">ICDCS19</a></td>
+         <td>12/14/2018</td>
+       </tr>
+       
+       <tr>
+         <td>Autonomous Blockchains for Edge Computing (Abdullah)</td>
+         <td><a href="http://theory.utdallas.edu/ICDCS2019/cfp.html" target="_blank">ICDCS19</a></td>
+         <td>01/12/2019</td>
+       </tr>
+
+       <tr>
+         <td>Parallel Electrode Array Generator (Timothy)</td>
+         <td><a href="http://www.hpdc.org/2019/papers/call-for-papers" target="_blank">HPDC19</a></td>
+         <td>01/23/2019</td>
+       </tr>
+
+       <tr>
+         <td>Virtual Blockchain Platform (Xinying)</td>
+         <td><a href="http://sigmod2019.org/podscfdp" target="_blank">SIGMOD19</a></td>
+         <td>01/25/2019</td>
+       </tr>
+
+       <tr>
+         <td>Practical RDMA Blockchains (Abdullah)</td>
+         <td><a href="http://vldb.org/2019/?important-dates" target="_blank">VLDB19</a></td>
+         <td>03/01/2019</td>
+       </tr>
+
+       <tr>
+         <td>Storage-efficient Blockchains for Edge Computing (Xinying)</td>
+         <td><a href="http://vldb.org/2019/?important-dates" target="_blank">VLDB19</a></td>
+         <td>03/15/2019</td>
+       </tr>
+
+       <tr>
+         <td>Parallel Electrode Array Solver (Timothy)</td>
+         <td><a href="" target="_blank">SC19</a></td>
+         <td>Spring 2019</td>
+       </tr>
+
+       <tr>
+         <td>Burst Management for Machine Learning on Clouds (Xinying)</td>
+         <td><a href="" target="_blank">SC19</a></td>
+         <td>Spring 2019</td>
+       </tr>
+</table>
+
+		       <!--- 
+                2018
+                    <ul>
+                    <li>Toward Performant and Energy-efficient Queries in Three-tier Wireless Sensor Networks.
+                        <br><i>International Conference on Parallel Computing (ICPP)</i>, August 2018.
+                    <li>Toward Cost-effective Memory Scaling in Clouds: Symbiosis of Virtual and Physical Memory.
+                        <br><i>IEEE International Conference on Cloud Computing (CLOUD)</i>, July 2018.
+                    <li>Davram: Distributed Virtual Memory in the User Space.
+                        <br><i>IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing (CCGrid)</i>, May 2018.
+                    <li>Locality-aware Scheduling for Containers in Cloud Computing.
+						<br><i>IEEE Transactions on Cloud Computing (TCC)</i>, accepted. 
+                    </ul>
+
+                2017
+                    <ul>
+                        <li>Editorial. 
+                            <br><i>10th Workshop on Many Task Computing, IEEE/ACM SC</i>, November 2017.
+                        <li>An improved manifold ranking based method for saliency detection.
+                            <br><i>4th International Conference on Systems and Informatics</i>, November 2017. 
+                        <li>A Distributed CBIR System Based on Improved SURF on Apache Spark.
+                            <br><i>7th iCatse Conference on IT Convergence and Security</i>, September 2017. 
+                        <li>A Novel BP Neural Network Based System for Face Detection.
+                            <br><i>7th iCatse Conference on IT Convergence and Security</i>, September 2017. 
+                        <li>Comparative Evaluation of Big-Data Systems on Scientific Image Analytics Workloads. 
+                            <br><i>International Conference on Very Large Data Bases (VLDB)</i>, August 2017. 
+                        <li>Scientific Analysis at Scale: a Comparison of Five Systems.
+                            <br><i>16th Annual Scientific Computing with Python Conference</i>, July 2017. 
+                        <li>Editorial. 
+                            <br><i>8th Workshop on Scientific Cloud Computing, ACM HPDC</i>, June 2017.
+                        <li>Toward Scalable Indexing and Search on Distributed and Unstructured Data.
+                            <br><i>IEEE International Congress on Big Data</i>, June 2017. 
+                        <li>Toward Efficient and Flexible Metadata Indexing of Big Data Systems. 
+                            <br><i>IEEE Transactions on Big Data (TBD)</i>, March 2017. 
+                    </ul>
+					
+                2016
+                    <ul>
+					<li>High-Performance Storage Support for Scientific Big Data Applications on the Cloud.
+						<br><i>Book Chapter, Resource Management for Big Data Platforms: Algorithms, Modelling, and High-Performance Computing Techniques (Springer)</i>, October 2016.
+					<li>Toward High-performance Key-value Stores through GPU Encoding and Locality-aware Encoding.
+						<br><i>Journal of Parallel and Distributed Computing (JPDC)</i>, October 2016.
+					<li>I/O-Aware Batching Scheduling and Bandwidth Allocation for Petascale Computing Systems.
+						<br><i>Journal of Parallel Computing (PARCO)</i>, October 2016.
+					<li>Exploiting Multi-Cores for Efficient Interchange of Large Messages in Distributed Systems.
+						<br><i>Concurrency and Computation: Practice and Experience (CCPE)</i>, September 2016.
+					<li>Towards Exploring Data-Intensive Scientific Applications at Extreme Scales through Systems and Simulations.
+						<br><i>IEEE Transactions on Parallel and Distributed Systems (TPDS)</i>, June 2016.
+					<li>Towards Cost-Effective and High-Performance Caching Middleware for Distributed Systems.
+						<br><i>International Journal of Big Data Intelligence</i>, June 2016.
+					<li>Editorial. 
+						<br><i>ACM 7th Workshop on Scientific Cloud Computing</i>, June 2016.
+					<li>Dynamic Virtual Chunks: On Supporting Efficient Accesses to Compressed Scientific Data.
+						<br><i>IEEE Transactions on Services Computing (TSC)</i>, February 2016.
+					<li>A Convergence of Key-Value Storage Systems from Clouds to Supercomputers.
+						<br><i>Concurrency and Computation: Practice and Experience (CCPE)</i>, January 2016.
+					<li>Albatross: an Efficient Cloud-enabled Task Scheduling and Execution Framework using Distributed Message Queues.
+						<br><i>The 12th IEEE International Conference on eScience</i>, October 2016
+					<li>Toward Real-time and Fine-grained Monitoring of Software-defined Networking in the Cloud.
+						<br><i>The 9th IEEE International Conference on Cloud Computing (CLOUD)</i>, June 2016.
+					<li>Comparing Systems for Analyzing Big Neuroscience Imaging Data.
+						<br><i>Poster, NeuroFutures</i>, June 2016.
+                    </ul>	
+				2015
+					<ul>
+					<li>FaBRiQ: Leveraging Distributed Hash Tables towards Distributed Publish-Subscribe Message Queues.
+						<br><i>IEEE/ACM International Symposium on Big Data Computing</i>, December 2015.
+					<li>Toward Locality-aware Scheduling for Containerized Cloud Services.
+						<br><i>IEEE International Conference on Big Data</i>, October 2015.
+					<li>A Flexible QoS Fortified Distributed Key-Value Storage System for the Cloud.
+						<br><i>IEEE International Conference on Big Data</i>, October 2015.	
+					<li>I/O-Aware Batch Scheduling for Petascale Computing Systems.
+						<br><i>IEEE International Conference on Cluster Computing</i>, September 2015.
+					<li>High-Performance Storage Support for Scientific Applications on the Cloud.
+						<br><i>ScienceCloud workshop, colocated with the 24th ACM International Symposium on High Performance Distributed Computing (HPDC)</i>, June 2015.
+					<li>A Dynamically Scalable Cloud Data Infrastructure for Sensor Networks.
+						<br><i>ScienceCloud workshop, colocated with the 24th ACM International Symposium on High Performance Distributed Computing (HPDC)</i>, June 2015.
+					<li>Data Confidentiality Challenges in Big Data Applications.
+						<br><i>Poster, IEEE International Conference on Big Data</i>, October 2015.
+					<li>MHT: A Light-weight Scalable Zero-hop MPI Enabling Distributed Key-Value Store.
+						<br><i>Poster, IEEE International Conference on Big Data</i>, October 2015.
+					<li>GRAPH/Z: A Key-Value Store Based Scalable Graph Processing System.
+						<br><i>Poster, IEEE International Conference on Cluster Computing</i>, September 2015.
+					<li>Big Data System Infrastructure at Extreme Scales.
+						<br><i>Thesis, Department of Computer Science, Illinois Institute of Technology</i>, July 2015.
+					</ul>	
+				2014
+					<ul>
+					<li>Virtual Chunks: On Supporting Random Accesses to Scientific Data in Compressible Storage Systems.
+						<br><i>IEEE International Conference on Big Data</i>, October 2014.
+					<li>Optimizing Load Balancing and Data-Locality with Data-Aware Scheduling.
+						<br><i>IEEE International Conference on Big Data</i>, October 2014.	
+					<li>FusionFS: Towards Supporting Data-Intensive Scientific Applications on Extreme-Scale High-Performance Computing Systems.
+						<br><i>IEEE International Conference on Big Data</i>, October 2014.	
+					<li>HyCache+: Towards Scalable High-Performance Caching Middleware for Parallel File Systems.
+						<br><i>The 14th IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing (CCGrid)</i>, May 2014.
+					<li>Storage Support for Data-Intensive Applications on Extreme-Scale HPC Systems.
+						<br><i>Doctoral Showcase, ACM/IEEE Conference on Supercomputing (SC)</i>, November 2014.
+					<li>Storage Support for Data-Intensive Scientific Applications on the Cloud.
+						<br><i>Poster, NSFCloud Workshop on Experimental Support for Cloud Computing</i>, December 2014.
+					</ul>	
+				2013
+					<ul>
+					<li>Distributed Data Provenance for Large-Scale Data-Intensive Computing.
+						<br><i>IEEE International Conference on Cluster Computing</i>, September 2013.
+					<li>Towards High-Performance and Cost-Effective Distributed Storage Systems with Information Dispersal Algorithms.
+						<br><i>IEEE International Conference on Cluster Computing</i>, September 2013.
+					<li>ZHT: A Light-Weight Reliable Persistent Dynamic Scalable Zero-Hop Distributed Hash Table.
+						<br><i>The 27th IEEE International Parallel & Distributed Processing Symposium (IPDPS)</i>, May 2013.
+					<li>Exploring Reliability of Exascale Systems Through Simulations.
+						<br><i>The 21st ACM/SCS High Performance Computing Symposium (HPC)</i>, April 2013.
+					<li>HyCache: A User-Level Caching Middleware for Distributed File Systems.
+						<br><i>International Workshop on High Performance Data Intensive Computing, collocated with IEEE International Symposium on Parallel and Distributed Processing (IPDPS)</i>, May 2013.
+					<li>Towards a Provenance-Aware Distributed Filesystem.
+						<br><i>The 5th Workshop on the Theory and Practice of Provenance, collocated with USENIX Symposium on Networked Systems Design and Implementation (NSDI)</i>, April 2013.
+					<li>Improving the I/O Throughput for Data-Intensive Scientific Applications with Efficient Compression Mechanisms.
+						<br><i>Poster, ACM/IEEE Conference on Supercomputing (SC)</i>, November 2013.
+					</ul>
+				2012
+					<ul>
+					<li>Distributed File Systems for Exascale Computing.
+						<br><i>Doctoral Showcase, ACM/IEEE Conference on Supercomputing (SC)</i>, November 2012.
+					</ul>
+				2009
+					<ul>
+					<li>Incremental Isometric Embedding of High-Dimensional Data Using Connected Neighborhood Graphs.
+						<br><i>IEEE Transactions on Pattern Analysis and Machine Intelligence (PAMI)</i>, January 2009.
+					</ul>
+				2008
+					<ul>
+					<li>Solving SQL Constraints by Incremental Translation to SAT.
+						<br><i>The 21st International Conference on Industrial, Engineering and Other Applications of Applied Intelligent Systems (IEA/AIE)</i>, June 2008.
+					</ul>
+				2006
+					<ul>
+					<li>Incremental Construction of Neighborhood Graphs for Nonlinear Dimensionality Reduction.
+						<br><i>The 18th International Conference on Pattern Recognition (ICPR)</i>, August 2006.
+					</ul>		
+				2005	
+					<ul>
+					<li>Adaptive Weights Smoothing and Applications.
+						<br><i>Thesis, Faculty of Engineering Science, Katholieke Universiteit Leuven</i>, July 2005.
+					</ul>
+               -->
+<!--				<ul>-->
+                  
+<!-- 						<li>2014 - present, Guest Researcher, Argonne National Laboratory, Argonne, IL</li> -->
+<!-- 						<li>2012 - present, PhD student, Illinois Institute of Technology, Chicago, IL</li>  -->
+<!-- 						<li>Spring 2014, Research Intern, Argonne National Laboratory, Argonne, IL</li> -->
+<!-- 						<li>Summer 2013, Research Intern, Pacific Northwest National Laboratory, Richland, WA</li> -->
+<!-- 						<li>2009 - 2011, Software Developer, Epic Systems, Madison, WI</li> -->
+<!-- 						<li>2008 - 2009, Software Developer, IDMI Systems, Atlanta, GA</li> -->
+<!-- 						<li>2008, MS, Computer Science, Emory University, Atlanta, GA</li> -->
+						
+<!-- 						<li>2005, MS, Statistics and Artificial Intelligence, University of Leuven, Belgium</li> -->
+<!-- 						<li>2003, BE, Computer Science and Technology, Northeastern University, China</li> -->
+						
+						 
+<!-- 						<li> Publications
+							<ul>
+								<li>FusionFS: a Distributed File System for Exascale Computing. <em>IEEE/ACM Supercomputing Conference</em>, poster presentation, Salt Lake City, Uath, November 2012.</li>
+								<li>Incremental Isometric Embedding of High-Dimensional Data Using Connected Neighborhood Graphs. <em>IEEE Transactions on Pattern Analysis and Machine Intelligence (PAMI)</em>, 31(1):86-98, January 2009.</li>
+								<li>Solving Database Constraints Through Incremental SAT Encoding. <em>Proceedings of the 21st International Conference on Industrial, Engineering & Other Applications of Applied Intelligent Systems (IEA/AIE `08)</em>, Lecture Notes in AI, Springer, 2008.</li>
+								<li>Incremental construction of neighborhood graphs for nonlinear dimensionality reduction. <em>Proceedings of the 18th International Conference on Pattern Recognition (ICPR'06)</em>, volume 3, pages 177-180, Hong Kong, China, August 2006.
+								<li>Adaptive weights smoothing and applications. Master's thesis, Leuven Statistics Research Center, Katholieke Universiteit Leuven, Belgium, August 2005.
+								<li>Memory-efficient and low energy consumption data structure transformations for specific embedded applications. Technical report, Inter-University Micro-Electronics Center (IMEC), Belgium, June 2004.
+							</ul>
+						</li> -->
+						<!--
+						<li> Full-time Employment
+							<ul>
+								<li>2009 - 2011, Software Developer, Epic Systems, Madison, WI</li>
+								<li>2008 - 2009, Software Developer, IDMI Systems, Atlanta, GA</li>
+								<li>2003, Software Engineer, Baosight Software, Shanghai, China</li>
+							</ul>
+						</li>
+						<li> Part-time Employment
+							<ul>
+								<li>2006 - 2007, Guest Researcher, CDC, Atlanta, GA</li>
+								<li>2005 - 2006, Research Assistant / PhD student, WMU, Kalamazoo, MI</li>
+								<li>2003 - 2004, Intern, IMEC, Leuven, Belgium</li>
+							</ul>
+						</li>
+						<li> Education
+							<ul>							
+								<li>PhD student, Computer Science, IIT, Chicago, IL, 2012 - present</li>
+								<li>MS, Computer Science, Emory University, Atlanta, GA, 2006 - 2008</li>							
+								<li>MS, Statistics and AI, Katholieke Universiteit Leuven, Belgium, 2003 - 2005</li>							
+								<li>BE, Computer Science, Northeastern University, China, 1999 - 2003</li>
+							</ul>
+						</li>
+						-->
+<!--            <li><a href="./research" target="_blank">Research statement</a>
+            <li><a href="./teach" target="_blank">Teaching statement</a>
+			<li><a href="./download/dzhao_thesis15-signed.pdf" target="_blank">Doctoral Dissertation (240 pages, July 2015)</a>
+            <li><a href="./download/Dongfang_Zhao_CV.pdf" target="_blank">Curriculum Vitae</a>
+					</ul> 
+					Here is my complete <a href="./cv" target="_blank">CV</a>. 
+ 					<a href="http://datasys.cs.iit.edu/~dongfang/cv" target="_blank"> -->
+<!-- 						complete CV</a>.				 -->
+				</div>
+			</div>
+			<div class="post" id="misc" name="content" style="display:none">
+				<h2 class="title">Courses</h2>
+				<div class="entry" style="display:;">
+                <p><a href="http://cse.unr.edu/~dfz/teaching/CS491-F18", target="_blank">CS491/691 Data Intensive Computing, Fall 2018, UNR</a></p>
+                <p><a href="http://cse.unr.edu/~dfz/teaching/CS457-F18", target="_blank">CS457/657 Database Management Systems, Fall 2018, UNR</a></p>
+
+                <p><a href="http://cse.unr.edu/~dfz/teaching/CS457-S18", target="_blank">CS457/657 Database Management Systems, Spring 2018, UNR</a></p>
+                <p><a href="http://cse.unr.edu/~dfz/teaching/data-intensive-computing-f17", target="_blank">CS491/691 Data Intensive Computing, Fall 2017, UNR</a></p>
+				<p>CS554 Data Intensive Computing, Spring 2015, IIT</p>
+				<p>CS553 Cloud Computing, Fall, 2014, IIT</p>
+				<p>CS554 Data Intensive Computing, Fall 2013, IIT</p> 
+				<p>CS553 Cloud Computing, Spring 2013, IIT</p>
+				<p>CS495 Introduction to Distributed Systems, Fall 2012, IIT</p>
+<!--
+        <h4>Faculty</h4>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 126px">
+                    <img alt="" height="100" src="images/dzhao_unr_2017.jpg"/>
+                </td>
+                <td valign="top">
+                    <a href="http://www.cse.unr.edu/~dfz" target="_blank">Prof. Dongfang Zhao</a>
+                    <ul>
+                        <li>Role: founder, director</li>
+                        <li>Prior institution: University of Washington, Seattle
+                    </ul>
+                </td>
+            </tr>
+        </table>
+
+        <h4>Members</h4>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 126px">
+                    <img alt="" height="100" src=""/>
+                </td>
+                <td valign="top">
+                    Mr. Abdullah Al-Mamun
+                    <ul>
+                        <li>Role: research assistnat, PhD student</li>
+                        <li>Prior institution: RWTH Aachen University, Germany
+                        <li>Research areas: cloud computing
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 126px">
+                    <img alt="" height="100" src=""/>
+                </td>
+                <td valign="top">
+                    <a href="https://wolfweb.unr.edu/homepage/xinyingw/wxy-blog/index.html" target="_blank">Ms. Xinying Wang</a>
+                    <ul>
+                        <li>Role: research assistant, PhD student</li> 
+                        <li>Prior institution: Northeastern University, China
+                        <li>Research areas: data management systems
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 126px">
+                    <img alt="" height="100" src=""/>
+                </td>
+                <td valign="top">
+                    TBA
+                    <ul>
+                        <li>Role: research assistant, PhD student</li>
+                        <li>Research areas: cloud computing</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 126px">
+                    <img alt="" height="100" src=""/>
+                </td>
+                <td valign="top">
+                    TBA
+                    <ul>
+                        <li>Role: research assistant, PhD student</li>
+                        <li>Research areas: high performance computing</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <h4>Collaborators</h4>
+        <ul>
+        <li>Industry
+            <ul>
+            <li>Microsoft: Johannes Gehrke
+            <li>Google: Kan Qiao
+            <li>Amazon: Yuanyuan Song
+            <li>IBM: Heiko Ludwig 
+            </ul>    
+        <li>Government Labs
+            <ul>
+            <li>Argonne National Lab: Robert Ross
+            <li>Pacific Northwest National Lab: Jian Yin
+            <li>Lawrence Berkeley National Lab: Jialin Liu
+            <li>Texas Advanced Computing Center: Zhao Zhang
+            </ul>    
+        </ul>
+-->
+
+				</div>
+			</div>
+			<div class="post" id="contact" name="content" style="display:none">
+				<h2 class="title">Contact</h2>
+				
+				<div class="entry" style="display:;">
+						Prof. Dr. Dongfang Zhao<br>
+                        <br>
+						University of Nevada, Reno<br>
+						Computer Science and Engineering, MS-171<br>
+						1664 N. Virginia St.<br>
+                        Reno, NV 89557<br>
+                    <br>
+						University of California, Davis<br>
+						Department of Computer Science<br>
+						Kemper Hall 3062<br>
+                        Davis, CA 95616</p><br>
+
+				</div>
+			</div>
+			<div style="clear: both;">&nbsp;</div>
+		</div>
+		<!-- end #content -->
+<!--						
+		<div id="sidebar">
+			<ul>
+				<li>
+					<h2>Sites</h2>
+					<ul>
+						<li>
+							<a href="https://bme.osu.edu/people/zhao.178" target="_blank">Prof. Yi Zhao@Ohio State</a>
+						</li>
+						<li>
+							<a href="http://www.unr.edu/engineering" target="_blank">College of Engineering</a>
+						</li>
+						<li>
+							<a href="https://www.linkedin.com/in/dongfang" target="_blank">LinkedIn</a>
+						</li>            
+            
+						<li>
+						<a href="http://www.ece.cmu.edu/~ganger/746.spring12/"	target="_blank">CMU Storage Course</a>						
+						</li>
+
+
+						<li>
+<embed src='http://www.shoutcast.com/media/popupPlayer_V19.swf?stationid=http://yp.shoutcast.com/sbin/tunein-station.pls?id=1273293&play_status=0' quality='high' bgcolor='#ffffff' width='398' height='104' name='popupPlayer_V19' align='middle' allowScriptAccess='always' allowFullScreen='true' type='application/x-shockwave-flash' pluginspage='http://www.adobe.com/go/getflashplayer' ></embed>
+						</li>
+
+<li>
+<embed src='http://www.shoutcast.com/media/popupPlayer_V19.swf?stationid=http://yp.shoutcast.com/sbin/tunein-station.pls?id=781042&play_status=0' quality='high' bgcolor='#ffffff' width='398' height='104' name='popupPlayer_V19' align='middle' allowScriptAccess='always' allowFullScreen='true' type='application/x-shockwave-flash' pluginspage='http://www.adobe.com/go/getflashplayer' ></embed>
+</li>
+
+						<li>
+<embed src='http://www.shoutcast.com/media/popupPlayer_V19.swf?stationid=http://yp.shoutcast.com/sbin/tunein-station.pls?id=3099602&play_status=0' quality='high' bgcolor='#ffffff' width='398' height='104' name='popupPlayer_V19' align='middle' allowScriptAccess='always' allowFullScreen='true' type='application/x-shockwave-flash' pluginspage='http://www.adobe.com/go/getflashplayer' ></embed>	
+						</li>					
+						<li>
+<embed src='http://www.shoutcast.com/media/popupPlayer_V19.swf?stationid=http://yp.shoutcast.com/sbin/tunein-station.pls?id=1266698&play_status=0' quality='high' bgcolor='#ffffff' width='398' height='104' name='popupPlayer_V19' align='middle' allowScriptAccess='always' allowFullScreen='true' type='application/x-shockwave-flash' pluginspage='http://www.adobe.com/go/getflashplayer' ></embed>						
+						</li>						
+-->	
+<!--
+						<li><a href="http://www.informatik.uni-trier.de/~ley/db/indices/a-tree/z/Zhao:Dongfang.html" target="_blank">DBLP</a></li>
+						<li><a href="http://www.linkedin.com/in/dongfang" target="_blank">LinkedIn</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+					-->
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end #page -->
+</div>
+
+<div id="footer-wrapper">
+<!--
+	<div id="three-columns">
+		<div id="column1">
+			<h2>Mails</h2>
+			<ul>
+				<li><a href="#">IIT.EDU</a></li>
+				<li><a href="#">Gmail</a></li>
+				<li><a href="#">Hotmail</a></li>
+				<li><a href="#">Ymail</a></li>
+			</ul>
+		</div>
+		<div id="column2">
+			<h2>Sites</h2>
+			<ul>
+				<li><a href="#">Google</a></li>
+				<li><a href="#">Wikipedia</a></li>
+				<li><a href="#">LinkedIn</a></li>
+				<li><a href="#">DBLP</a></li>
+			</ul>
+		</div>
+		<div id="column3">
+			<h2>Links</h2>
+			<ul>
+				<li><a href="#">Ioan Raicu</a></li>
+				<li><a href="#">James J. Lu</a></li>
+				<li><a href="#">Li Yang</a></li>
+				<li><a href="#">An Carbonez</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="footer">
+		<p>Copyright (c) 2008 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/"> CSS Templates</a>.</p>
+	</div>
+-->
+	<!-- end #footer -->
+</div>
+</body>
+
+</html>
