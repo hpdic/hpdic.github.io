@@ -136,7 +136,7 @@ img.aligncenter {
 /* Menu */
 
 #menu {
-	width: 1150px;
+	width: 1380px;
 	height: 50px;
 	margin: 0 auto;
 	padding: 0px;
@@ -183,7 +183,7 @@ img.aligncenter {
 /* Page */
 
 #page {
-	width: 1080px;
+	width: 1300px;
 	margin: 0 auto;
 	padding: 0;
 }
@@ -192,7 +192,7 @@ img.aligncenter {
 
 #content {
 	float: left;
-	width: 600px;
+	width: 800px;
 	height: 600px;
 	padding: 0px 0px 0px 0px;
 }
@@ -258,7 +258,7 @@ img.aligncenter {
 
 #sidebar {
 	float: right;
-	width: 450px;
+	width: 500px;
 	padding: 20px 0px 0px 0px;
 }
 
