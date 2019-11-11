@@ -843,7 +843,7 @@ table, th, td {
        </tr>
 
        <tr>
-         <td><font color="orange">IJCAI</font></td>
+         <td><font color="orange">IJCAI; KDD</font></td>
          <td></td>
          <td>Feburary</td>
        </tr>
@@ -865,11 +865,13 @@ table, th, td {
          <td></td>
          <td>May</td>
        </tr>
+<!---
        <tr>
          <td><font color="yellow">SOCC</font></td>
          <td></td>
          <td>June</td>
        </tr>
+--->
        <tr>
          <td><font color="yellow">INFOCOM</font></td>
          <td></td>
