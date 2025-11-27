@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>1&period; Reverse a Linked List</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 align="center">C++ Coding Snippets</h1>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#1-reverse-a-linked-list">1. Reverse a Linked List</a></li>
+<li><a href="#2-monotonic-stack">2. Monotonic Stack</a></li>
+<li><a href="#3-trie-prefix-tree">3. Trie (Prefix Tree)</a></li>
+<li><a href="#4-non-recursive-in-order-tree-traversal">4. Non-Recursive In-Order Tree Traversal</a></li>
+<li><a href="#5-breadth-first-search-bfs---graphmatrix">5. Breadth-First Search (BFS) - Graph/Matrix</a></li>
+<li><a href="#6-dfs-backtrack">6. DFS Backtrack</a></li>
+<li><a href="#7-dynamic-programming">7. Dynamic Programming</a></li>
+</ul>
+<hr>
+<h1 id="1-reverse-a-linked-list">1. Reverse a Linked List</h1>
+<p><strong>Pattern:</strong> Iterative Pointer Manipulation</p>
+<ul>
+<li><strong>Time:</strong> O(N), <strong>Space:</strong> O(1)</li>
+<li><strong>Core Logic:</strong> Save Next -&gt; Point Back -&gt; Move Forward.</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>{
+    ListNode* prev = <span class="hljs-literal">nullptr</span>;
+    ListNode* curr = head;
+    
+    <span class="hljs-keyword">while</span> (curr != <span class="hljs-literal">nullptr</span>) {
+        ListNode* nextTemp = curr-&gt;next; <span class="hljs-comment">// 1. Save next node</span>
+        curr-&gt;next = prev;               <span class="hljs-comment">// 2. Reverse pointer</span>
+        prev = curr;                     <span class="hljs-comment">// 3. Move prev forward</span>
+        curr = nextTemp;                 <span class="hljs-comment">// 4. Move curr forward</span>
+    }
+    
+    <span class="hljs-keyword">return</span> prev; <span class="hljs-comment">// New head</span>
+}
+</code></pre>
+<h2 id="️-back-to-top"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="2-monotonic-stack">2. Monotonic Stack</h1>
+<p><strong>Pattern:</strong> Maintain a sorted stack to find the &quot;First Greater/Smaller Element&quot;.</p>
+<ul>
+<li><strong>Time:</strong> O(N) (Each element pushed &amp; popped max once), <strong>Space:</strong> O(N).</li>
+<li><strong>Usage:</strong> Next Greater Element, Daily Temperatures, Largest Rectangle in Histogram.</li>
+</ul>
+<h2 id="template-next-greater-element-monotonic-decreasing-stack">Template: Next Greater Element (Monotonic Decreasing Stack)</h2>
+<p>Finds the first element to the right that is strictly larger.</p>
+<pre><code class="language-cpp"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">nextGreaterElements</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{
+    <span class="hljs-type">int</span> n = nums.<span class="hljs-built_in">size</span>();
+    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">res</span><span class="hljs-params">(n, <span class="hljs-number">-1</span>)</span></span>; <span class="hljs-comment">// Default -1 if no greater element exists</span>
+    stack&lt;<span class="hljs-type">int</span>&gt; st; <span class="hljs-comment">// Stores INDICES, not values</span>
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {
+        <span class="hljs-comment">// While current element is stronger than the one at stack top:</span>
+        <span class="hljs-comment">// We found the &quot;Next Greater&quot; for the index at st.top()!</span>
+        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>() &amp;&amp; nums[i] &gt; nums[st.<span class="hljs-built_in">top</span>()]) {
+            <span class="hljs-type">int</span> index = st.<span class="hljs-built_in">top</span>();
+            st.<span class="hljs-built_in">pop</span>();
+            res[index] = nums[i]; <span class="hljs-comment">// Record the answer</span>
+        }
+        st.<span class="hljs-built_in">push</span>(i);
+    }
+    <span class="hljs-keyword">return</span> res;
+}
+</code></pre>
+<h2 id="️-back-to-top-1"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="3-trie-prefix-tree">3. Trie (Prefix Tree)</h1>
+<ul>
+<li><strong>Header:</strong> None (Must implement manually)</li>
+<li><strong>Time Complexity:</strong> Insert/Search are <strong>O(L)</strong> where L is word length.</li>
+<li><strong>Usage:</strong> Autocomplete, Spell Checker, String Search.</li>
+</ul>
+<h2 id="minimal-implementation-template">Minimal Implementation Template</h2>
+<p>Standard Array implementation (fastest for a-z).</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">TrieNode</span> {
+    TrieNode* children[<span class="hljs-number">26</span>] = {<span class="hljs-literal">nullptr</span>};
+    <span class="hljs-type">bool</span> isEnd = <span class="hljs-literal">false</span>;
+    <span class="hljs-comment">// Or: string* word = nullptr; (For Word Search II)</span>
+    
+    <span class="hljs-built_in">TrieNode</span>() {}
+};
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Trie</span> {
+    TrieNode* root;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Trie</span>() { root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TrieNode</span>(); }
+    
+    <span class="hljs-comment">// Insert a word - O(L)</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(string word)</span> </span>{
+        TrieNode* node = root;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : word) {
+            <span class="hljs-type">int</span> idx = c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (!node-&gt;children[idx]) {
+                node-&gt;children[idx] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TrieNode</span>();
+            }
+            node = node-&gt;children[idx];
+        }
+        node-&gt;isEnd = <span class="hljs-literal">true</span>;
+    }
+    
+    <span class="hljs-comment">// Search for a word - O(L)</span>
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">search</span><span class="hljs-params">(string word)</span> </span>{
+        TrieNode* node = root;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : word) {
+            <span class="hljs-type">int</span> idx = c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (!node-&gt;children[idx]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            node = node-&gt;children[idx];
+        }
+        <span class="hljs-keyword">return</span> node-&gt;isEnd;
+    }
+    
+    <span class="hljs-comment">// Check if any word starts with prefix - O(L)</span>
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">startsWith</span><span class="hljs-params">(string prefix)</span> </span>{
+        TrieNode* node = root;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : prefix) {
+            <span class="hljs-type">int</span> idx = c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (!node-&gt;children[idx]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            node = node-&gt;children[idx];
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+};
+</code></pre>
+<h2 id="️-back-to-top-2"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="4-non-recursive-in-order-tree-traversal">4. Non-Recursive In-Order Tree Traversal</h1>
+<p><strong>Pattern:</strong> Iterative DFS using Stack</p>
+<ul>
+<li><strong>Time Complexity:</strong> <strong>O(N)</strong> (Each node is pushed and popped exactly once).</li>
+<li><strong>Space Complexity:</strong> <strong>O(H)</strong> (Where H is tree height, for the stack).</li>
+</ul>
+<h2 id="the-push-left-pop-go-right-template">The &quot;Push Left, Pop, Go Right&quot; Template</h2>
+<p>This approach simulates the system call stack. The logic is: go as left as possible, process the node, then try to go right.</p>
+<pre><code class="language-cpp"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    vector&lt;<span class="hljs-type">int</span>&gt; result;
+    stack&lt;TreeNode*&gt; st;
+    TreeNode* curr = root;
+
+    <span class="hljs-comment">// Loop condition: </span>
+    <span class="hljs-comment">// 1. &#x27;curr != nullptr&#x27;: We have a valid node to explore (go left)</span>
+    <span class="hljs-comment">// 2. &#x27;!st.empty()&#x27;: We have parents waiting to be processed</span>
+    <span class="hljs-keyword">while</span> (curr != <span class="hljs-literal">nullptr</span> || !st.<span class="hljs-built_in">empty</span>()) {
+        
+        <span class="hljs-comment">// Step 1: Reach the left-most node of the current subtree</span>
+        <span class="hljs-keyword">while</span> (curr != <span class="hljs-literal">nullptr</span>) {
+            <span class="hljs-comment">// [Pre-Order]: Process node here (Before going left)</span>
+            <span class="hljs-comment">// result.push_back(curr-&gt;val);</span>
+
+            st.<span class="hljs-built_in">push</span>(curr);
+            curr = curr-&gt;left;
+        }
+
+        <span class="hljs-comment">// Step 2: Pop the stack. This node is now the &quot;root&quot; of a subtree.</span>
+        <span class="hljs-comment">// In-order: Left (done) -&gt; Root (now) -&gt; Right (next)</span>
+        curr = st.<span class="hljs-built_in">top</span>();
+        st.<span class="hljs-built_in">pop</span>();
+        
+        <span class="hljs-comment">// [In-Order]: Process node here (After returning from left)</span>
+        result.<span class="hljs-built_in">push_back</span>(curr-&gt;val);
+
+        <span class="hljs-comment">// Step 3: Turn to the right child</span>
+        curr = curr-&gt;right;
+    }
+    
+    <span class="hljs-keyword">return</span> result;
+}
+</code></pre>
+<h2 id="️-back-to-top-3"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="5-breadth-first-search-bfs---graphmatrix">5. Breadth-First Search (BFS) - Graph/Matrix</h1>
+<p><strong>Pattern:</strong> Queue + Visited Set + Level Loop</p>
+<ul>
+<li><strong>Time:</strong> O(V + E) or O(N<em>M), <strong>Space:</strong> O(V) or O(N</em>M)</li>
+<li><strong>Usage:</strong> Shortest path in unweighted graphs, level-order traversal.</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">bfs</span><span class="hljs-params">(<span class="hljs-type">int</span> startNode, <span class="hljs-type">int</span> n, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; adj)</span> </span>{
+    queue&lt;<span class="hljs-type">int</span>&gt; q;
+    <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">visited</span><span class="hljs-params">(n, <span class="hljs-literal">false</span>)</span></span>; <span class="hljs-comment">// Or unordered_set for sparse graphs</span>
+    
+    q.<span class="hljs-built_in">push</span>(startNode);
+    visited[startNode] = <span class="hljs-literal">true</span>;
+    <span class="hljs-type">int</span> level = <span class="hljs-number">0</span>; <span class="hljs-comment">// Tracks distance from start</span>
+
+    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) {
+        <span class="hljs-type">int</span> size = q.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">// 1. Lock size for current level</span>
+        
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {
+            <span class="hljs-type">int</span> curr = q.<span class="hljs-built_in">front</span>();
+            q.<span class="hljs-built_in">pop</span>();
+
+            <span class="hljs-comment">// Process current node here...</span>
+            <span class="hljs-comment">// if (curr == target) return level;</span>
+
+            <span class="hljs-comment">// 2. Add unvisited neighbors</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> neighbor : adj[curr]) {
+                <span class="hljs-keyword">if</span> (!visited[neighbor]) {
+                    visited[neighbor] = <span class="hljs-literal">true</span>; <span class="hljs-comment">// Mark immediately when pushing!</span>
+                    q.<span class="hljs-built_in">push</span>(neighbor);
+                }
+            }
+        }
+        level++; <span class="hljs-comment">// Move to next layer</span>
+    }
+}
+</code></pre>
+<h2 id="️-back-to-top-4"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="6-dfs-backtrack">6. DFS Backtrack</h1>
+<p><strong>Pattern:</strong> Recursion + State Reset (Choose -&gt; Explore -&gt; Unchoose)</p>
+<ul>
+<li><strong>Time:</strong> O(N!) (Factorial complexity)</li>
+<li><strong>Space:</strong> O(N) (Recursion stack + Visited array)</li>
+<li><strong>Usage:</strong> Permutations, N-Queens, Path Finding in Matrix.</li>
+</ul>
+<h2 id="template-permutations-using-visited-array">Template: Permutations (Using <code>visited</code> array)</h2>
+<p>Unlike subsets (which move forward), permutations scan from <code>0</code> every time but skip used elements.</p>
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, vector&lt;<span class="hljs-type">bool</span>&gt;&amp; visited, vector&lt;<span class="hljs-type">int</span>&gt;&amp; path, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; res)</span> </span>{
+    <span class="hljs-comment">// 1. Base Case: Path length equals input size</span>
+    <span class="hljs-keyword">if</span> (path.<span class="hljs-built_in">size</span>() == nums.<span class="hljs-built_in">size</span>()) {
+        res.<span class="hljs-built_in">push_back</span>(path);
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-comment">// 2. Iterate through ALL elements</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) {
+        
+        <span class="hljs-comment">// Skip if used in current branch</span>
+        <span class="hljs-keyword">if</span> (visited[i]) <span class="hljs-keyword">continue</span>;
+        
+        <span class="hljs-comment">// [Pruning for Duplicates]: (Requires sorted nums)</span>
+        <span class="hljs-comment">// if (i &gt; 0 &amp;&amp; nums[i] == nums[i-1] &amp;&amp; !visited[i-1]) continue;</span>
+
+        <span class="hljs-comment">// 3. Make Choice</span>
+        visited[i] = <span class="hljs-literal">true</span>;
+        path.<span class="hljs-built_in">push_back</span>(nums[i]);
+
+        <span class="hljs-comment">// 4. Recurse</span>
+        <span class="hljs-built_in">backtrack</span>(nums, visited, path, res);
+
+        <span class="hljs-comment">// 5. Undo Choice (Backtrack)</span>
+        visited[i] = <span class="hljs-literal">false</span>;
+        path.<span class="hljs-built_in">pop_back</span>();
+    }
+}
+</code></pre>
+<h2 id="template-permutations-swap-based-no-visited-array">Template: Permutations (Swap-based, No <code>visited</code> array)</h2>
+<p><strong>Pattern:</strong> In-place Swap + Backtrack</p>
+<blockquote>
+<p><strong>Space Optimization:</strong> Saves O(N) space by using the input array itself to track state.
+<strong>Note:</strong> The output order might not be strictly lexicographical.</p>
+</blockquote>
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> start, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; res)</span> </span>{
+    <span class="hljs-comment">// Base Case: We have fixed positions for all indices</span>
+    <span class="hljs-keyword">if</span> (start == nums.<span class="hljs-built_in">size</span>()) {
+        res.<span class="hljs-built_in">push_back</span>(nums);
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = start; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) {
+        <span class="hljs-comment">// 1. Make Choice: Swap nums[i] to the current &#x27;start&#x27; position</span>
+        <span class="hljs-comment">// This effectively &quot;marks&quot; nums[i] as used for this level</span>
+        <span class="hljs-built_in">swap</span>(nums[start], nums[i]);
+
+        <span class="hljs-comment">// 2. Recurse: Move to the next index</span>
+        <span class="hljs-built_in">backtrack</span>(nums, start + <span class="hljs-number">1</span>, res);
+
+        <span class="hljs-comment">// 3. Undo Choice: Swap back to restore original state</span>
+        <span class="hljs-built_in">swap</span>(nums[start], nums[i]);
+    }
+}
+</code></pre>
+<h2 id="️-back-to-top-5"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="7-dynamic-programming">7. Dynamic Programming</h1>
+<p><strong>Pattern:</strong> 2D Grid / State Transition</p>
+<ul>
+<li><strong>Time:</strong> O(N*M)</li>
+<li><strong>Space:</strong> O(N*M) (Can be optimized to O(N) using rolling array)</li>
+<li><strong>Usage:</strong> Edit Distance, Longest Common Subsequence, Knapsack.</li>
+</ul>
+<h2 id="template-edit-distance-levenshtein-distance">Template: Edit Distance (Levenshtein Distance)</h2>
+<p><code>dp[i][j]</code> represents the min operations to convert <code>word1[0..i-1]</code> to <code>word2[0..j-1]</code>.</p>
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minDistance</span><span class="hljs-params">(string word1, string word2)</span> </span>{
+    <span class="hljs-type">int</span> m = word1.<span class="hljs-built_in">size</span>(), n = word2.<span class="hljs-built_in">size</span>();
+    <span class="hljs-comment">// dp[i][j]: min operations to convert word1[0..i-1] to word2[0..j-1]</span>
+    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n + <span class="hljs-number">1</span>));
+
+    <span class="hljs-comment">// 1. Base Cases: Converting string to empty string (deletions/insertions)</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= m; i++) dp[i][<span class="hljs-number">0</span>] = i;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt;= n; j++) dp[<span class="hljs-number">0</span>][j] = j;
+
+    <span class="hljs-comment">// 2. Iteration</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++) {
+            <span class="hljs-keyword">if</span> (word1[i - <span class="hljs-number">1</span>] == word2[j - <span class="hljs-number">1</span>]) {
+                dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>]; <span class="hljs-comment">// Match: No new op needed</span>
+            } <span class="hljs-keyword">else</span> {
+                dp[i][j] = <span class="hljs-built_in">min</span>({
+                    dp[i - <span class="hljs-number">1</span>][j],    <span class="hljs-comment">// Delete from word1</span>
+                    dp[i][j - <span class="hljs-number">1</span>],    <span class="hljs-comment">// Insert into word1</span>
+                    dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] <span class="hljs-comment">// Replace char</span>
+                }) + <span class="hljs-number">1</span>;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> dp[m][n];
+}
+</code></pre>
+<h2 id="template-standard-01-knapsack">Template: Standard 0/1 Knapsack</h2>
+<p>Find max value with capacity <code>W</code>.
+<strong>Crucial:</strong> Inner loop must iterate <strong>backwards</strong> to avoid using the same item twice.</p>
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">knapsack</span><span class="hljs-params">(<span class="hljs-type">int</span> W, vector&lt;<span class="hljs-type">int</span>&gt;&amp; wt, vector&lt;<span class="hljs-type">int</span>&gt;&amp; val)</span> </span>{
+    <span class="hljs-comment">// dp[j]: Max value for capacity j</span>
+    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(W + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; wt.<span class="hljs-built_in">size</span>(); i++) {
+        <span class="hljs-comment">// Iterate BACKWARDS from W down to wt[i]</span>
+        <span class="hljs-comment">// If forward, dp[j-wt[i]] would use the current item (Unbounded Knapsack)</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = W; j &gt;= wt[i]; j--) {
+            dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j - wt[i]] + val[i]);
+        }
+    }
+    
+    <span class="hljs-keyword">return</span> dp[W];
+}
+</code></pre>
+<h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+
+            
+            
+        </body>
+        </html>

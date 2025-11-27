@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>1&period; Primitive Arrays &lpar;C-Style Fixed Size&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 align="center">C++ STL and Build-in API</h1>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#1-primitive-arrays-c-style-fixed-size">1. Primitive Arrays (C-Style Fixed Size)</a></li>
+<li><a href="#2-dynamic-array-stdvector">2. Dynamic Array (std::vector)</a></li>
+<li><a href="#3-string-manipulation-stdstring">3. String Manipulation (std::string)</a></li>
+<li><a href="#4-associative-containers-hash-maps--sets">4. Associative Containers (Hash Maps &amp; Sets)</a></li>
+<li><a href="#5-container-adaptors-stack-queue-deque">5. Container Adaptors (Stack, Queue, Deque)</a></li>
+<li><a href="#6-priority-queue-heap">6. Priority Queue (Heap)</a></li>
+<li><a href="#7-algorithms">7. Algorithms</a></li>
+<li><a href="#8-bit-manipulation">8. Bit Manipulation</a></li>
+<li><a href="#9-limits--constants">9. Limits &amp; Constants</a></li>
+</ul>
+<hr>
+<h1 id="1-primitive-arrays-c-style-fixed-size">1. Primitive Arrays (C-Style Fixed Size)</h1>
+<p><strong>Header:</strong> None (Built-in type)</p>
+<h2 id="initialization">Initialization</h2>
+<ul>
+<li><strong>Note:</strong> Fixed size. Allocated on Stack (very fast). No bounds checking.</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-type">int</span> arr[<span class="hljs-number">10</span>];             <span class="hljs-comment">// ⚠️ Warning: Contains random garbage values!</span>
+<span class="hljs-type">int</span> arr[<span class="hljs-number">10</span>] = {<span class="hljs-number">0</span>};       <span class="hljs-comment">// ✅ Best Practice: Initialize all to 0 (Crucial for DP/Freq)</span>
+<span class="hljs-type">int</span> arr[] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};   <span class="hljs-comment">// Automatic size deduction</span>
+<span class="hljs-type">int</span> grid[<span class="hljs-number">100</span>][<span class="hljs-number">100</span>];      <span class="hljs-comment">// 2D Array (Use global/static if size is huge to avoid Stack Overflow)</span>
+</code></pre>
+<h2 id="operations">Operations</h2>
+<pre><code class="language-cpp">arr[i] = <span class="hljs-number">5</span>;              <span class="hljs-comment">// Access/Modify O(1)</span>
+
+<span class="hljs-comment">// Get Size (Old C style)</span>
+<span class="hljs-type">int</span> len = <span class="hljs-built_in">sizeof</span>(arr) / <span class="hljs-built_in">sizeof</span>(arr[<span class="hljs-number">0</span>]); 
+
+<span class="hljs-comment">// Get Size (C++17 style - Recommended)</span>
+<span class="hljs-type">int</span> len = std::<span class="hljs-built_in">size</span>(arr);
+
+<span class="hljs-comment">// Set memory (fast reset to 0 or -1)</span>
+<span class="hljs-comment">// Requires &lt;cstring&gt;</span>
+<span class="hljs-built_in">memset</span>(arr, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(arr)); 
+<span class="hljs-built_in">memset</span>(arr, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(arr)); 
+</code></pre>
+<h2 id="️-interview-pitfalls">⚠️ Interview Pitfalls</h2>
+<ol>
+<li><strong>Pointer Decay:</strong> When passing <code>int arr[]</code> to a function, it decays into a pointer <code>int*</code>. <strong>Size info is LOST.</strong> You must pass the size <code>n</code> separately.</li>
+<li><strong>Variable Length Arrays (VLA):</strong> Writing <code>int arr[n];</code> (where n is a variable) is <strong>NOT standard C++</strong>. Do not use it. Use <code>vector</code> instead.</li>
+</ol>
+<h2 id="️-back-to-top"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="2-dynamic-array-stdvector">2. Dynamic Array (std::vector)</h1>
+<p><strong>Header:</strong> <code>&lt;vector&gt;</code></p>
+<h2 id="initialization-1">Initialization</h2>
+<pre><code class="language-cpp">vector&lt;<span class="hljs-type">int</span>&gt; v;                  <span class="hljs-comment">// Default initialization (empty)</span>
+<span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">v</span><span class="hljs-params">(n, <span class="hljs-number">-1</span>)</span></span>;           <span class="hljs-comment">// Size n, initialized to -1</span>
+vector&lt;<span class="hljs-type">int</span>&gt; v = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};      <span class="hljs-comment">// Initializer list</span>
+vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">grid</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>)); <span class="hljs-comment">// m x n Matrix initialized to 0</span>
+</code></pre>
+<h2 id="core-operations-o1">Core Operations (O(1))</h2>
+<ul>
+<li><strong>Performance:</strong> These are amortized <strong>O(1)</strong>. Use them whenever possible.</li>
+</ul>
+<pre><code class="language-cpp">v.<span class="hljs-built_in">push_back</span>(val);      <span class="hljs-comment">// Append element to end</span>
+v.<span class="hljs-built_in">pop_back</span>();          <span class="hljs-comment">// Remove last element</span>
+v.<span class="hljs-built_in">back</span>();              <span class="hljs-comment">// Access last element reference (v[n-1])</span>
+v.<span class="hljs-built_in">front</span>();             <span class="hljs-comment">// Access first element reference (v[0])</span>
+v.<span class="hljs-built_in">size</span>();              <span class="hljs-comment">// Return number of elements (size_t)</span>
+v.<span class="hljs-built_in">empty</span>();             <span class="hljs-comment">// Check if vector is empty (bool)</span>
+v.<span class="hljs-built_in">resize</span>(n);           <span class="hljs-comment">// Resize container (fills default values if growing)</span>
+v.<span class="hljs-built_in">clear</span>();             <span class="hljs-comment">// Remove all elements (Capacity remains)</span>
+</code></pre>
+<h2 id="insert--erase-on">Insert &amp; Erase (O(N))</h2>
+<ul>
+<li><strong>⚠️ Warning:</strong> These operations shift elements. Avoid using inside loops if possible.</li>
+<li><strong>Note:</strong> Vector <code>insert</code> requires iterators, NOT index.</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-comment">// Insert val at index i</span>
+v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">begin</span>() + i, val);
+
+<span class="hljs-comment">// Insert n copies of val at index i</span>
+v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">begin</span>() + i, n, val); 
+
+<span class="hljs-comment">// Insert a range from another vector</span>
+v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">end</span>(), v2.<span class="hljs-built_in">begin</span>(), v2.<span class="hljs-built_in">end</span>()); 
+
+<span class="hljs-comment">// Erase element at index i</span>
+v.<span class="hljs-built_in">erase</span>(v.<span class="hljs-built_in">begin</span>() + i);
+
+<span class="hljs-comment">// Erase range [start, end)</span>
+v.<span class="hljs-built_in">erase</span>(v.<span class="hljs-built_in">begin</span>() + i, v.<span class="hljs-built_in">begin</span>() + j);
+
+<span class="hljs-comment">// Remove specific value (Erase-Remove Idiom)</span>
+v.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), val), v.<span class="hljs-built_in">end</span>());
+</code></pre>
+<h2 id="️-back-to-top-1"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="3-string-manipulation-stdstring">3. String Manipulation (std::string)</h1>
+<p><strong>Header:</strong> <code>&lt;string&gt;</code></p>
+<h2 id="operations-1">Operations</h2>
+<ul>
+<li><strong>Time Complexity:</strong> Append is <strong>O(1)</strong>. Insert/Erase/Substr are <strong>O(N)</strong>.</li>
+</ul>
+<pre><code class="language-cpp">s += <span class="hljs-string">&#x27;c&#x27;</span>;              <span class="hljs-comment">// Append character</span>
+s.<span class="hljs-built_in">push_back</span>(<span class="hljs-string">&#x27;c&#x27;</span>);      <span class="hljs-comment">// Append character</span>
+s.<span class="hljs-built_in">insert</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;c&#x27;</span>);   <span class="hljs-comment">// Insert &#x27;c&#x27; at index 0 (1 count)</span>
+s.<span class="hljs-built_in">substr</span>(pos, len);    <span class="hljs-comment">// Return substring starting at pos with length len</span>
+s.<span class="hljs-built_in">find</span>(str);           <span class="hljs-comment">// Find substring, returns index or string::npos</span>
+s.<span class="hljs-built_in">rfind</span>(str);          <span class="hljs-comment">// Find substring from end</span>
+s.<span class="hljs-built_in">size</span>();              <span class="hljs-comment">// Return length (Same as .length(), preferred for consistency)</span>
+</code></pre>
+<h2 id="type-conversions">Type Conversions</h2>
+<pre><code class="language-cpp"><span class="hljs-type">int</span> n = <span class="hljs-built_in">stoi</span>(s);         <span class="hljs-comment">// Convert string to int</span>
+<span class="hljs-type">long</span> <span class="hljs-type">long</span> n = <span class="hljs-built_in">stoll</span>(s);  <span class="hljs-comment">// Convert string to long long</span>
+string s = <span class="hljs-built_in">to_string</span>(n); <span class="hljs-comment">// Convert int/long to string</span>
+</code></pre>
+<h2 id="character-utilities">Character Utilities</h2>
+<p><strong>Header:</strong> <code>&lt;cctype&gt;</code></p>
+<pre><code class="language-cpp"><span class="hljs-built_in">isalnum</span>(c); <span class="hljs-comment">// Check if alphanumeric (A-Z, a-z, 0-9)</span>
+<span class="hljs-built_in">isdigit</span>(c); <span class="hljs-comment">// Check if digit (0-9)</span>
+<span class="hljs-built_in">isalpha</span>(c); <span class="hljs-comment">// Check if alphabetic character</span>
+<span class="hljs-built_in">islower</span>(c); <span class="hljs-comment">// Check if lowercase char</span>
+<span class="hljs-built_in">isupper</span>(c); <span class="hljs-comment">// Check if uppercase char</span>
+<span class="hljs-built_in">tolower</span>(c); <span class="hljs-comment">// Convert char to lowercase</span>
+<span class="hljs-built_in">toupper</span>(c); <span class="hljs-comment">// Convert char to uppercase</span>
+</code></pre>
+<h2 id="️-back-to-top-2"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="4-associative-containers-hash-maps--sets">4. Associative Containers (Hash Maps &amp; Sets)</h1>
+<p><strong>Header:</strong> <code>&lt;unordered_map&gt;</code>, <code>&lt;unordered_set&gt;</code></p>
+<h2 id="overview">Overview</h2>
+<ul>
+<li><strong>Time Complexity:</strong> Average <strong>O(1)</strong> for insert, find, and erase. Worst case O(N).</li>
+<li><strong>Implementation:</strong> Hash Table.</li>
+</ul>
+<h2 id="unordered-set-unique-keys">Unordered Set (Unique Keys)</h2>
+<pre><code class="language-cpp">unordered_set&lt;<span class="hljs-type">int</span>&gt; s;
+s.<span class="hljs-built_in">insert</span>(val);         <span class="hljs-comment">// Insert element</span>
+s.<span class="hljs-built_in">erase</span>(val);          <span class="hljs-comment">// Remove element</span>
+s.<span class="hljs-built_in">count</span>(val);          <span class="hljs-comment">// Return 1 if present, 0 otherwise</span>
+<span class="hljs-comment">// Initialization from vector (De-duplication)</span>
+<span class="hljs-function">unordered_set&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">s</span><span class="hljs-params">(vec.begin(), vec.end())</span></span>;
+</code></pre>
+<h2 id="unordered-map-key-value-pairs">Unordered Map (Key-Value Pairs)</h2>
+<pre><code class="language-cpp">unordered_map&lt;string, <span class="hljs-type">int</span>&gt; mp;
+mp[<span class="hljs-string">&quot;key&quot;</span>] = <span class="hljs-number">1</span>;         <span class="hljs-comment">// Insert or update</span>
+mp.<span class="hljs-built_in">count</span>(<span class="hljs-string">&quot;key&quot;</span>);       <span class="hljs-comment">// Check existence (Preferred over find() for boolean checks)</span>
+mp.<span class="hljs-built_in">erase</span>(<span class="hljs-string">&quot;key&quot;</span>);       <span class="hljs-comment">// Remove key</span>
+
+<span class="hljs-comment">// Iteration (C++17 Structured Binding)</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; [key, val] : mp) {
+    <span class="hljs-comment">// Process key and value</span>
+}
+</code></pre>
+<h2 id="️-back-to-top-3"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="5-container-adaptors-stack-queue-deque">5. Container Adaptors (Stack, Queue, Deque)</h1>
+<p><strong>Header:</strong> <code>&lt;stack&gt;</code>, <code>&lt;queue&gt;</code>, <code>&lt;deque&gt;</code></p>
+<h2 id="stack-lifo---last-in-first-out">Stack (LIFO - Last In First Out)</h2>
+<ul>
+<li><strong>Use Case:</strong> DFS, Backtracking, Monotonic Stack.</li>
+</ul>
+<pre><code class="language-cpp">stack&lt;<span class="hljs-type">int</span>&gt; st;
+st.<span class="hljs-built_in">push</span>(val);
+st.<span class="hljs-built_in">pop</span>();   <span class="hljs-comment">// Remove top element (void return)</span>
+st.<span class="hljs-built_in">top</span>();   <span class="hljs-comment">// Access top element</span>
+st.<span class="hljs-built_in">empty</span>(); <span class="hljs-comment">// Check if empty</span>
+</code></pre>
+<h2 id="queue-fifo---first-in-first-out">Queue (FIFO - First In First Out)</h2>
+<ul>
+<li><strong>Use Case:</strong> BFS (Breadth-First Search).</li>
+</ul>
+<pre><code class="language-cpp">queue&lt;<span class="hljs-type">int</span>&gt; q;
+q.<span class="hljs-built_in">push</span>(val);
+q.<span class="hljs-built_in">pop</span>();    <span class="hljs-comment">// Remove front element (void return)</span>
+q.<span class="hljs-built_in">front</span>();  <span class="hljs-comment">// Access front element</span>
+</code></pre>
+<h2 id="deque-double-ended-queue">Deque (Double-Ended Queue)</h2>
+<ul>
+<li><strong>Use Case:</strong> Sliding Window Maximum (Monotonic Queue).</li>
+</ul>
+<pre><code class="language-cpp">deque&lt;<span class="hljs-type">int</span>&gt; dq;
+dq.<span class="hljs-built_in">push_back</span>(val);  <span class="hljs-comment">// Insert at back</span>
+dq.<span class="hljs-built_in">push_front</span>(val); <span class="hljs-comment">// Insert at front</span>
+dq.<span class="hljs-built_in">pop_back</span>();      <span class="hljs-comment">// Remove from back</span>
+dq.<span class="hljs-built_in">pop_front</span>();     <span class="hljs-comment">// Remove from front</span>
+dq.<span class="hljs-built_in">front</span>();         <span class="hljs-comment">// Access front</span>
+dq.<span class="hljs-built_in">back</span>();          <span class="hljs-comment">// Access back</span>
+</code></pre>
+<h2 id="️-back-to-top-4"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="6-priority-queue-heap">6. Priority Queue (Heap)</h1>
+<p><strong>Header:</strong> <code>&lt;queue&gt;</code></p>
+<h2 id="overview-1">Overview</h2>
+<ul>
+<li><strong>Time Complexity:</strong> Push <strong>O(log N)</strong>, Pop <strong>O(log N)</strong>, Top <strong>O(1)</strong>.</li>
+<li><strong>Underlying Container:</strong> Vector (default).</li>
+</ul>
+<h2 id="max-heap-default-behavior">Max Heap (Default Behavior)</h2>
+<pre><code class="language-cpp">priority_queue&lt;<span class="hljs-type">int</span>&gt; maxHeap;
+</code></pre>
+<h2 id="min-heap-memorize-this-syntax">Min Heap (Memorize this syntax)</h2>
+<pre><code class="language-cpp">priority_queue&lt;<span class="hljs-type">int</span>, vector&lt;<span class="hljs-type">int</span>&gt;, greater&lt;<span class="hljs-type">int</span>&gt;&gt; minHeap;
+</code></pre>
+<h2 id="custom-comparator-eg-for-pair">Custom Comparator (e.g., for Pair)</h2>
+<pre><code class="language-cpp"><span class="hljs-comment">// Comparator for Min-Heap based on the second element of a pair</span>
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Comp</span> {
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&amp; b)</span> </span>{
+        <span class="hljs-keyword">return</span> a.second &gt; b.second; <span class="hljs-comment">// &#x27;&gt;&#x27; means smallest comes to top</span>
+    }
+};
+
+<span class="hljs-comment">// Declaration</span>
+priority_queue&lt;pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;, vector&lt;pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&gt;, Comp&gt; pq;
+</code></pre>
+<h2 id="️-back-to-top-5"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="7-algorithms">7. Algorithms</h1>
+<p><strong>Header:</strong> <code>&lt;algorithm&gt;</code>, <code>&lt;numeric&gt;</code></p>
+<h2 id="sorting--searching">Sorting &amp; Searching</h2>
+<ul>
+<li><strong>Time Complexity:</strong> Sort is <strong>O(N log N)</strong>. Binary Search is <strong>O(log N)</strong>.</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-built_in">sort</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>());             <span class="hljs-comment">// Ascending sort</span>
+<span class="hljs-built_in">sort</span>(v.<span class="hljs-built_in">rbegin</span>(), v.<span class="hljs-built_in">rend</span>());           <span class="hljs-comment">// Descending sort</span>
+
+<span class="hljs-comment">// Binary Search (Returns iterator)</span>
+<span class="hljs-comment">// lower_bound: First element &gt;= val</span>
+<span class="hljs-keyword">auto</span> it = <span class="hljs-built_in">lower_bound</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), val);
+
+<span class="hljs-comment">// upper_bound: First element &gt; val</span>
+<span class="hljs-keyword">auto</span> it = <span class="hljs-built_in">upper_bound</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), val);
+
+<span class="hljs-comment">// Calculate index from iterator</span>
+<span class="hljs-type">int</span> index = it - v.<span class="hljs-built_in">begin</span>();
+</code></pre>
+<h2 id="numerical--modification">Numerical &amp; Modification</h2>
+<pre><code class="language-cpp"><span class="hljs-built_in">reverse</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>());          <span class="hljs-comment">// In-place reverse O(N)</span>
+<span class="hljs-built_in">max</span>(a, b); / <span class="hljs-built_in">min</span>(a, b);               <span class="hljs-comment">// Return max/min</span>
+<span class="hljs-built_in">swap</span>(a, b);                           <span class="hljs-comment">// Swap values</span>
+<span class="hljs-built_in">abs</span>(n);                               <span class="hljs-comment">// Absolute value</span>
+<span class="hljs-built_in">accumulate</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);    <span class="hljs-comment">// Calculate sum O(N)</span>
+<span class="hljs-built_in">gcd</span>(a, b);                            <span class="hljs-comment">// Greatest Common Divisor (C++17)</span>
+</code></pre>
+<h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="8-bit-manipulation">8. Bit Manipulation</h1>
+<p><strong>Header:</strong> None (Built-in operators), <code>&lt;bit&gt;</code> (C++20)</p>
+<h2 id="basic-operators">Basic Operators</h2>
+<ul>
+<li><strong>Time Complexity:</strong> All bitwise operations are <strong>O(1)</strong>.</li>
+</ul>
+<pre><code class="language-cpp">a &amp; b;   <span class="hljs-comment">// AND</span>
+a | b;   <span class="hljs-comment">// OR</span>
+a ^ b;   <span class="hljs-comment">// XOR (0^0=0, 1^1=0, 1^0=1)</span>
+~a;      <span class="hljs-comment">// NOT (Invert all bits)</span>
+a &lt;&lt; n;  <span class="hljs-comment">// Left Shift (Multiply by 2^n)</span>
+a &gt;&gt; n;  <span class="hljs-comment">// Right Shift (Divide by 2^n)</span>
+</code></pre>
+<h2 id="essential-tricks-memorize-these">Essential Tricks (Memorize these!)</h2>
+<pre><code class="language-cpp"><span class="hljs-comment">// 1. Check if k-th bit is set</span>
+<span class="hljs-type">bool</span> isSet = (n &gt;&gt; k) &amp; <span class="hljs-number">1</span>;
+
+<span class="hljs-comment">// 2. Set k-th bit to 1</span>
+n |= (<span class="hljs-number">1</span> &lt;&lt; k);
+
+<span class="hljs-comment">// 3. Clear k-th bit to 0</span>
+n &amp;= ~(<span class="hljs-number">1</span> &lt;&lt; k);
+
+<span class="hljs-comment">// 4. Toggle k-th bit</span>
+n ^= (<span class="hljs-number">1</span> &lt;&lt; k);
+
+<span class="hljs-comment">// 5. Remove the lowest set bit (Brian Kernighan&#x27;s algorithm)</span>
+<span class="hljs-comment">// e.g., 10110 -&gt; 10100</span>
+n = n &amp; (n - <span class="hljs-number">1</span>); 
+
+<span class="hljs-comment">// 6. Get the lowest set bit (Lowbit)</span>
+<span class="hljs-comment">// e.g., 10110 -&gt; 00010</span>
+<span class="hljs-type">int</span> lowbit = n &amp; -n;
+
+<span class="hljs-comment">// 7. Check if power of 2 (Positive n)</span>
+<span class="hljs-type">bool</span> isPower2 = (n &gt; <span class="hljs-number">0</span>) &amp;&amp; !(n &amp; (n - <span class="hljs-number">1</span>));
+</code></pre>
+<h2 id="️-back-to-top-7"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="9-limits--constants">9. Limits &amp; Constants</h1>
+<p><strong>Header:</strong> <code>&lt;climits&gt;</code></p>
+<pre><code class="language-cpp">INT_MAX   <span class="hljs-comment">// Maximum value for 32-bit int (2147483647)</span>
+INT_MIN   <span class="hljs-comment">// Minimum value for 32-bit int (-2147483648)</span>
+LLONG_MAX <span class="hljs-comment">// Maximum value for 64-bit long long</span>
+</code></pre>
+<h2 id="️-back-to-top-8"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+
+            
+            
+        </body>
+        </html>
