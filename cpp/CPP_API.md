@@ -257,9 +257,27 @@ priority_queue<pair<int,int>, vector<pair<int,int>>, Comp> pq;
 sort(v.begin(), v.end());             // Ascending sort
 sort(v.rbegin(), v.rend());           // Descending sort
 
+// Custom Comparator (Lambda) - Descending
+sort(v.begin(), v.end(), [](int a, int b) {
+    return a > b; // Return true if 'a' should go before 'b'
+});
+
+// Sort Array of Pairs by Second Element (Common in Interviews)
+vector<pair<int, int>> pairs = {{1, 5}, {2, 3}};
+sort(pairs.begin(), pairs.end(), [](const auto& a, const auto& b) {
+    return a.second < b.second; // Ascending based on .second
+});
+
 // Binary Search (Returns iterator)
 // lower_bound: First element >= val
 auto it = lower_bound(v.begin(), v.end(), val);
+
+// ⚠️ Safety Check: Did we actually find it?
+// If it == v.end(), all elements are smaller than val.
+// If *it != val, we found a larger element (insertion point), but not val itself.
+if (it != v.end() && *it == val) {
+    int index = it - v.begin(); // Found exact match
+}
 
 // upper_bound: First element > val
 auto it = upper_bound(v.begin(), v.end(), val);
@@ -272,6 +290,8 @@ int index = it - v.begin();
 ```cpp
 reverse(v.begin(), v.end());          // In-place reverse O(N)
 max(a, b); / min(a, b);               // Return max/min
+max({a, b, c, d}); 
+min({a, b, c});
 swap(a, b);                           // Swap values
 abs(n);                               // Absolute value
 accumulate(v.begin(), v.end(), 0);    // Calculate sum O(N)
@@ -296,7 +316,7 @@ a << n;  // Left Shift (Multiply by 2^n)
 a >> n;  // Right Shift (Divide by 2^n)
 ```
 
-## Essential Tricks (Memorize these!)
+## Essential Tricks
 ```cpp
 // 1. Check if k-th bit is set
 bool isSet = (n >> k) & 1;
@@ -309,17 +329,6 @@ n &= ~(1 << k);
 
 // 4. Toggle k-th bit
 n ^= (1 << k);
-
-// 5. Remove the lowest set bit (Brian Kernighan's algorithm)
-// e.g., 10110 -> 10100
-n = n & (n - 1); 
-
-// 6. Get the lowest set bit (Lowbit)
-// e.g., 10110 -> 00010
-int lowbit = n & -n;
-
-// 7. Check if power of 2 (Positive n)
-bool isPower2 = (n > 0) && !(n & (n - 1));
 ```
 
 [⬆️ Back to Top](#table-of-contents)
