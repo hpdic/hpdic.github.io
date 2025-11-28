@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>1&period; Basics of Inheritance &amp; Class Structure</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 align="center">C++ OOP Design</h1>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#1-basics-of-inheritance--class-structure">1. Basics of Inheritance &amp; Class Structure</a></li>
+<li><a href="#2-runtime-polymorphism--v-table">2. Runtime Polymorphism &amp; V-Table</a></li>
+<li><a href="#3-resource-management--ownership">3. Resource Management &amp; Ownership</a></li>
+<li><a href="#4-design-contracts--safety">4. Design Contracts &amp; Safety</a></li>
+<li><a href="#5-advanced-inheritance-the-diamond-problem">5. Advanced Inheritance (The Diamond Problem)</a></li>
+<li><a href="#6-example-1-shape">6. Example 1: Shape</a></li>
+<li><a href="#7-example-2-file-system">7. Example 2: File System</a></li>
+<li><a href="#8-example-3-parking-lot">8. Example 3: Parking Lot</a></li>
+</ul>
+<hr>
+<h1 id="1-basics-of-inheritance--class-structure">1. Basics of Inheritance &amp; Class Structure</h1>
+<blockquote>
+<p><strong>Core Concept:</strong> Establishing relationships between classes (&quot;Is-A&quot;) and managing object lifecycles.</p>
+</blockquote>
+<h2 id="inheritance-syntax--access-specifiers">Inheritance Syntax &amp; Access Specifiers</h2>
+<p>Syntax: <code>class Derived : [Access] Base { ... };</code></p>
+<p>The <code>[Access]</code> keyword (public/protected/private) determines <strong>how the Base class's members are exposed</strong> in the Derived class.</p>
+<ul>
+<li><strong><code>public</code> Inheritance (Most Common)</strong>:
+<ul>
+<li><strong>Meaning</strong>: &quot;Is-A&quot; relationship.</li>
+<li><strong>Effect</strong>: Public members of Base remain <strong>Public</strong> in Derived. The outside world knows Derived is a Base.</li>
+<li><em>Example:</em> <code>class Car : public Vehicle</code> (A Car <em>is a</em> Vehicle).</li>
+</ul>
+</li>
+<li><strong><code>private</code> Inheritance (Default for <code>class</code>)</strong>:
+<ul>
+<li><strong>Meaning</strong>: &quot;Implemented-in-terms-of&quot; (similar to Composition).</li>
+<li><strong>Effect</strong>: Public/Protected members of Base become <strong>Private</strong> in Derived. The outside world <em>doesn't</em> know inheritance exists.</li>
+</ul>
+</li>
+<li><strong><code>protected</code> Inheritance</strong>: Rare. Public members become Protected.</li>
+</ul>
+<h2 id="member-access-control-inside-class">Member Access Control (Inside Class)</h2>
+<ul>
+<li><strong><code>public</code></strong>: Visible to everyone.</li>
+<li><strong><code>private</code></strong>: Visible <strong>only</strong> to the class itself (Derived classes cannot access).</li>
+<li><strong><code>protected</code></strong>: Visible to the class <strong>and its Derived classes</strong>, but hidden from the outside world.</li>
+</ul>
+<h2 id="lifecycle-construction--destruction-order">Lifecycle: Construction &amp; Destruction Order</h2>
+<p>When an object is created or destroyed, C++ follows a strict stack-like order:</p>
+<ol>
+<li><strong>Construction</strong>: <strong>Base First</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> <strong>Derived Last</strong>.
+<ul>
+<li><em>Why?</em> The Derived class relies on the Base class being initialized first (e.g., setting up vtables, initializing base members).</li>
+</ul>
+</li>
+<li><strong>Destruction</strong>: <strong>Derived First</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> <strong>Base Last</strong>.
+<ul>
+<li><em>Why?</em> (Stack Unwinding) The Derived part must be cleaned up before the Base part it depends on is destroyed.</li>
+</ul>
+</li>
+</ol>
+<h2 id="code-example">Code Example</h2>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Base</span>() { cout &lt;&lt; <span class="hljs-string">&quot;Base Constructed&quot;</span>; }
+    <span class="hljs-comment">// Destructor should be virtual in polymorphic base classes</span>
+    <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">Base</span>() { cout &lt;&lt; <span class="hljs-string">&quot;Base Destroyed&quot;</span>; }
+};
+
+<span class="hljs-comment">// &#x27;public&#x27; keeps Base&#x27;s public methods public in Derived</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Derived</span> : <span class="hljs-keyword">public</span> Base {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">// Base() is implicitly called before Derived body executes</span>
+    <span class="hljs-built_in">Derived</span>() { cout &lt;&lt; <span class="hljs-string">&quot;Derived Constructed&quot;</span>; }
+    ~<span class="hljs-built_in">Derived</span>() { cout &lt;&lt; <span class="hljs-string">&quot;Derived Destroyed&quot;</span>; }
+};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Derived d;
+    <span class="hljs-comment">// Output Order:</span>
+    <span class="hljs-comment">// 1. Base Constructed</span>
+    <span class="hljs-comment">// 2. Derived Constructed</span>
+    <span class="hljs-comment">// --- End of Scope ---</span>
+    <span class="hljs-comment">// 3. Derived Destroyed</span>
+    <span class="hljs-comment">// 4. Base Destroyed</span>
+}
+</code></pre>
+<h2 id="️-back-to-top"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="2-runtime-polymorphism--v-table">2. Runtime Polymorphism &amp; V-Table</h1>
+<ul>
+<li><strong>Core Concept:</strong> The ability to call derived class methods through a base class pointer or reference at runtime.</li>
+<li><strong>Mechanism:</strong> Implemented via <strong>Virtual Table (vtable)</strong> and <strong>Virtual Pointer (vptr)</strong>.</li>
+</ul>
+<h2 id="the-under-the-hood-mechanics">The &quot;Under the Hood&quot; Mechanics</h2>
+<p>How does <code>basePtr-&gt;draw()</code> know which function to call?</p>
+<ol>
+<li>
+<p><strong><code>vtable</code> (Static Table per Class)</strong>:</p>
+<ul>
+<li>Generated for <strong>ANY</strong> class (Base OR Derived) that is <strong>polymorphic</strong>.</li>
+<li><strong>Definition of Polymorphic:</strong> A class that <strong>declares</strong> a <code>virtual</code> function, or <strong>inherits</strong> from a class that has <code>virtual</code> functions.</li>
+<li>The compiler creates a <strong>unique</strong> static table for <em>each</em> of these classes, containing function pointers to the most specific implementations available to that class.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>vptr</code> (Hidden Pointer per Object)</strong>:</p>
+<ul>
+<li>Every object instance of a polymorphic class contains a hidden pointer (<code>vptr</code>).</li>
+<li><strong>Initialization:</strong> In the constructor, this pointer is set to point to the <code>vtable</code> of the <strong>actual class being constructed</strong> (e.g., a <code>Derived</code> object's <code>vptr</code> always points to <code>Derived::vtable</code>, even if assigned to a <code>Base*</code>).</li>
+</ul>
+</li>
+</ol>
+<h2 id="v-table-construction-logic-compile-time">V-Table Construction Logic (Compile Time)</h2>
+<p>How does the compiler build the <code>Derived</code> class's vtable? It follows a <strong>&quot;Copy &amp; Overwrite&quot;</strong> strategy:</p>
+<ol>
+<li><strong>Copy</strong>: It starts by copying the layout and function pointers from the <code>Base</code> class's vtable.</li>
+<li><strong>Overwrite (Override)</strong>: If the <code>Derived</code> class overrides a function (e.g., <code>func1</code>), the compiler updates that specific slot to point to the new implementation (<code>&amp;Derived::func1</code>).</li>
+<li><strong>Inherit</strong>: If a function is NOT overridden (e.g., <code>func2</code>), the slot remains unchanged, pointing to the original <code>Base</code> implementation (<code>&amp;Base::func2</code>).</li>
+<li><strong>Append</strong>: If <code>Derived</code> adds a <strong>new</strong> virtual function, it is added to the end of the table.</li>
+</ol>
+<h3 id="visualizing-the-tables">Visualizing the Tables</h3>
+<p>Assume <code>Base</code> has <code>virtual f1()</code> and <code>virtual f2()</code>. <code>Derived</code> overrides <code>f1()</code> but not <code>f2()</code>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Slot</th>
+<th style="text-align:left">Base::vtable</th>
+<th style="text-align:left">Derived::vtable</th>
+<th style="text-align:left">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left"><code>&amp;Base::f1</code></td>
+<td style="text-align:left"><strong><code>&amp;Derived::f1</code></strong></td>
+<td style="text-align:left"><strong>Overridden</strong> (Polymorphism works here)</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><code>&amp;Base::f2</code></td>
+<td style="text-align:left"><code>&amp;Base::f2</code></td>
+<td style="text-align:left"><strong>Inherited</strong> (Reuse Base implementation)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Runtime Flow:</strong></p>
+<ol>
+<li>Program sees <code>ptr-&gt;func()</code>.</li>
+<li>It follows <code>ptr</code> to the object in memory.</li>
+<li>It reads the hidden <code>vptr</code> to find the <code>vtable</code> address.</li>
+<li>It looks up the function address in the <code>vtable</code>.</li>
+<li>It jumps to that address and executes the code.</li>
+</ol>
+<h2 id="code-example-1">Code Example</h2>
+<pre><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">// &#x27;virtual&#x27; tells compiler to generate vtable entry</span>
+    <span class="hljs-comment">// You should ALWAYS add &#x27;virtual&#x27; if the function is to be overriden</span>
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{ cout &lt;&lt; <span class="hljs-string">&quot;Base impl&quot;</span> &lt;&lt; endl; }
+};
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Derived</span> : <span class="hljs-keyword">public</span> Base {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">// &#x27;override&#x27; ensures signature matches Base&#x27;s virtual function</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{ cout &lt;&lt; <span class="hljs-string">&quot;Derived impl&quot;</span> &lt;&lt; endl; } 
+};
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Base* ptr)</span> </span>{
+    <span class="hljs-comment">// Polymorphism happens here!</span>
+    <span class="hljs-comment">// Compiler doesn&#x27;t know if ptr is Base or Derived at compile time.</span>
+    <span class="hljs-comment">// It generates code to look at ptr-&gt;vptr-&gt;vtable[index_of_func]</span>
+    ptr-&gt;<span class="hljs-built_in">func</span>(); 
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Base b;
+    Derived d;
+    
+    <span class="hljs-built_in">execute</span>(&amp;b); <span class="hljs-comment">// Prints &quot;Base impl&quot;</span>
+    <span class="hljs-built_in">execute</span>(&amp;d); <span class="hljs-comment">// Prints &quot;Derived impl&quot; -&gt; Dynamic Binding</span>
+}
+</code></pre>
+<h2 id="additional-technical-details">Additional Technical Details</h2>
+<ul>
+<li><strong>Performance Overhead</strong>: Virtual function calls are slightly slower than regular calls due to pointer indirection (dereferencing <code>vptr</code> then <code>vtable</code>).</li>
+<li><strong>Space Overhead</strong>: Each object gets an extra pointer (<code>vptr</code>, usually 8 bytes on 64-bit systems), regardless of how many virtual functions it has.</li>
+<li><strong>Pure Virtual Function</strong>: <code>virtual void f() = 0;</code>. Makes the class <strong>Abstract</strong> (cannot be instantiated). Used to define Interfaces.</li>
+</ul>
+<h2 id="️-back-to-top-1"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="3-resource-management--ownership">3. Resource Management &amp; Ownership</h1>
+<ul>
+<li><strong>Core Concept:</strong> Managing object lifecycles and memory safety. In modern C++, this means <strong>RAII</strong> (Resource Acquisition Is Initialization) and <strong>Virtual Destructors</strong>.</li>
+</ul>
+<h2 id="virtual-destructor-the-must-have">Virtual Destructor (The &quot;Must-Have&quot;)</h2>
+<p><strong>The Golden Rule:</strong> If a class is intended to be used as a Base class (polymorphically), it <strong>MUST</strong> have a <code>virtual</code> destructor.</p>
+<h3 id="the-problem-memory-leak">The Problem: Memory Leak</h3>
+<p>If the Base destructor is <strong>not</strong> virtual, <code>delete basePtr</code> only calls <code>~Base()</code>. The Derived part of the object remains in memory (leak).</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">// ⚠️ DANGER: Non-virtual destructor</span>
+    ~<span class="hljs-built_in">Base</span>() { cout &lt;&lt; <span class="hljs-string">&quot;Base destroyed\n&quot;</span>; }
+};
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Derived</span> : <span class="hljs-keyword">public</span> Base {
+    <span class="hljs-type">int</span>* data;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Derived</span>() { data = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">100</span>]; }
+    ~<span class="hljs-built_in">Derived</span>() { 
+        <span class="hljs-keyword">delete</span>[] data; 
+        cout &lt;&lt; <span class="hljs-string">&quot;Derived destroyed (Memory Freed)\n&quot;</span>; 
+    }
+};
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>{
+    Base* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Derived</span>();
+    <span class="hljs-keyword">delete</span> p; 
+    <span class="hljs-comment">// Result: Only prints &quot;Base destroyed&quot;. </span>
+    <span class="hljs-comment">// ~Derived() is NEVER called. &#x27;data&#x27; array is LEAKED.</span>
+}
+</code></pre>
+<h3 id="the-fix">The Fix</h3>
+<p>Add <code>virtual</code> to the Base destructor.</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">// ✅ Safe: Ensures ~Derived() is called first</span>
+    <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">Base</span>() { cout &lt;&lt; <span class="hljs-string">&quot;Base destroyed\n&quot;</span>; }
+};
+</code></pre>
+<h2 id="smart-pointers-modern-c">Smart Pointers (Modern C++)</h2>
+<p><strong>Header:</strong> <code>&lt;memory&gt;</code></p>
+<p>In modern C++ (C++11+), manual <code>new</code> and <code>delete</code> are discouraged in OOD. We use Smart Pointers to express <strong>Ownership</strong>.</p>
+<h3 id="1-stdunique_ptr-exclusive-ownership">1. <code>std::unique_ptr</code> (Exclusive Ownership)</h3>
+<ul>
+<li><strong>Semantics:</strong> &quot;I own this object alone. When I die, it dies.&quot;</li>
+<li><strong>OOD Mapping:</strong> <strong>Composition</strong> (e.g., A <code>Car</code> owns an <code>Engine</code>).</li>
+<li><strong>Performance:</strong> Zero overhead (same as raw pointer).</li>
+<li><strong>Copying:</strong> <strong>Not allowed</strong> (Move-only).</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> {
+    <span class="hljs-comment">// Composition: Engine fits inside Car&#x27;s lifecycle</span>
+    unique_ptr&lt;Engine&gt; engine; 
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Car</span>() : <span class="hljs-built_in">engine</span>(<span class="hljs-built_in">make_unique</span>&lt;Engine&gt;()) {}
+};
+</code></pre>
+<h3 id="2-stdshared_ptr-shared-ownership">2. <code>std::shared_ptr</code> (Shared Ownership)</h3>
+<ul>
+<li><strong>Semantics:</strong> &quot;I share this object with others. It dies when the last owner dies.&quot;</li>
+<li><strong>OOD Mapping:</strong> <strong>Aggregation</strong> (e.g., Multiple <code>User</code> objects belong to a <code>Group</code>, but users exist independently).</li>
+<li><strong>Performance:</strong> Small overhead (Reference Counting).</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {
+    string name;
+};
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Group</span> {
+    <span class="hljs-comment">// Aggregation: Users can exist in multiple groups</span>
+    vector&lt;shared_ptr&lt;User&gt;&gt; members;
+};
+</code></pre>
+<h2 id="️-back-to-top-2"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="4-design-contracts--safety">4. Design Contracts &amp; Safety</h1>
+<blockquote>
+<p><strong>Core Concept:</strong> Writing code that explicitly communicates intent. This prevents misuse of your classes and allows the compiler to catch logic errors early.</p>
+</blockquote>
+<h2 id="the-virtual-contract">The &quot;Virtual&quot; Contract</h2>
+<p>In C++ Inheritance, the <code>virtual</code> keyword defines the nature of the relationship.</p>
+<ul>
+<li><strong>Virtual Function</strong>: &quot;I provide a default implementation, but you can customize it.&quot; (Interface + Default Implementation)</li>
+<li><strong>Pure Virtual Function (<code>= 0</code>)</strong>: &quot;I provide the interface, but YOU MUST implement it.&quot; (Interface Only)</li>
+<li><strong>Non-Virtual Function</strong>: &quot;This behavior is invariant. DO NOT change it.&quot; (Mandatory Implementation)</li>
+</ul>
+<ul>
+<li><strong>Golden Rule:</strong> Never redefine an inherited <strong>non-virtual</strong> function. It breaks polymorphism and causes inconsistent behavior based on pointer type.</li>
+</ul>
+<h2 id="implementation-specifiers--0-vs--default">Implementation Specifiers (<code>= 0</code> vs <code>= default</code>)</h2>
+<p>Defining the <em>nature</em> of a function's implementation.</p>
+<ul>
+<li>
+<p><strong>Pure Virtual (<code>= 0</code>)</strong>:</p>
+<ul>
+<li><strong>Meaning</strong>: &quot;I have <strong>NO</strong> implementation. Derived classes <strong>MUST</strong> provide one.&quot;</li>
+<li><strong>Consequence</strong>: The class becomes <strong>Abstract</strong> (cannot be instantiated).</li>
+<li><em>Usage:</em> Defining Interfaces.</li>
+</ul>
+</li>
+<li>
+<p><strong>Defaulted (<code>= default</code>)</strong> (C++11):</p>
+<ul>
+<li><strong>Meaning</strong>: &quot;I want the compiler-generated <strong>standard</strong> implementation.&quot;</li>
+<li><strong>Consequence</strong>: The compiler generates the default version (e.g., member-wise copy/move).</li>
+<li><em>Usage:</em> Bringing back default constructors after defining custom ones, or defining a virtual destructor without writing an empty body.</li>
+</ul>
+</li>
+</ul>
+<h3 id="quick-comparison">Quick Comparison</h3>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">// Abstract Interface: Children MUST implement draw</span>
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>; 
+    
+    <span class="hljs-comment">// Standard Behavior: Compiler generates standard destructor logic</span>
+    <span class="hljs-comment">// (Crucial for polymorphic base classes)</span>
+    <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">Base</span>() = <span class="hljs-keyword">default</span>; 
+};
+</code></pre>
+<h2 id="the-override-keyword-c11">The <code>override</code> Keyword (C++11)</h2>
+<p><strong>Best Practice:</strong> Always use <code>override</code> when you intend to rewrite a virtual function in a derived class.</p>
+<h3 id="why-safety">Why? (Safety)</h3>
+<p>If you make a typo (e.g., wrong parameter type or const-ness), the compiler will normally treat it as a <strong>new, separate function</strong> (Hiding), not an override.</p>
+<ul>
+<li><strong>With <code>override</code></strong>: Compiler throws an error: &quot;You said you wanted to override, but no matching base function found.&quot;</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span>;
+};
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Derived</span> : <span class="hljs-keyword">public</span> Base {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">// Error! Base takes &#x27;int&#x27;, this takes &#x27;float&#x27;.</span>
+    <span class="hljs-comment">// Without &#x27;override&#x27;, this compiles as a totally new function.</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-type">float</span> x)</span> <span class="hljs-keyword">override</span></span>; 
+};
+</code></pre>
+<h2 id="const-correctness">Const Correctness</h2>
+<p><strong>Definition:</strong> Appending <code>const</code> to a member function.
+<strong>Syntax:</strong> <code>int getArea() const { ... }</code></p>
+<h3 id="the-contract">The Contract</h3>
+<ul>
+<li><strong>Promise:</strong> &quot;Calling this function will NOT modify any member variables of this object.&quot;</li>
+<li><strong>Enforcement:</strong> The compiler will throw an error if you try to assign to <code>this-&gt;member</code> inside.</li>
+<li><strong>Usage:</strong> Getters, calculation methods, print methods.</li>
+</ul>
+<blockquote>
+<p><strong>Why it matters:</strong> You can only call <code>const</code> methods on a <code>const</code> object reference. If you forget <code>const</code> on <code>getArea()</code>, you can't calculate the area of a read-only Shape!</p>
+</blockquote>
+<h2 id="access-specifiers-encapsulation">Access Specifiers (Encapsulation)</h2>
+<ul>
+<li><strong><code>public</code></strong>: The external interface. &quot;Anyone can use this.&quot;</li>
+<li><strong><code>protected</code></strong>: The family secret. &quot;Only me and my children (derived classes) can use this.&quot; (Common for internal helpers in base classes).</li>
+<li><strong><code>private</code></strong>: The implementation detail. &quot;Only I can use this.&quot; (Children cannot access).</li>
+</ul>
+<h2 id="️-back-to-top-3"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="5-advanced-inheritance-the-diamond-problem">5. Advanced Inheritance (The Diamond Problem)</h1>
+<blockquote>
+<p><strong>Core Concept:</strong> Handling complexities arising from <strong>Multiple Inheritance</strong>. The most famous scenario is the &quot;Diamond Problem,&quot; where a class inherits from two classes that share a common base.</p>
+</blockquote>
+<h2 id="the-scenario-the-diamond">The Scenario: The Diamond</h2>
+<p>Imagine a hierarchy shaped like a diamond:</p>
+<ul>
+<li><strong><code>Asset</code></strong> (Root)</li>
+<li><strong><code>Stock</code></strong> inherits from <code>Asset</code></li>
+<li><strong><code>Bond</code></strong> inherits from <code>Asset</code></li>
+<li><strong><code>ETF</code></strong> (Exchange Traded Fund) inherits from <strong>BOTH</strong> <code>Stock</code> and <code>Bond</code></li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Asset</span> { <span class="hljs-keyword">public</span>: <span class="hljs-type">int</span> id; };
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Stock</span> : <span class="hljs-keyword">public</span> Asset {};
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Bond</span>  : <span class="hljs-keyword">public</span> Asset {};
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ETF</span>   : <span class="hljs-keyword">public</span> Stock, <span class="hljs-keyword">public</span> Bond {}; <span class="hljs-comment">// Multiple Inheritance</span>
+</code></pre>
+<h2 id="the-problem-ambiguity--redundancy">The Problem: Ambiguity &amp; Redundancy</h2>
+<p>If you create an <code>ETF</code> object, it contains:</p>
+<ol>
+<li>A <code>Stock</code> part (which has an <code>Asset</code>).</li>
+<li>A <code>Bond</code> part (which <em>also</em> has an <code>Asset</code>).</li>
+</ol>
+<p><strong>Consequences:</strong></p>
+<ul>
+<li><strong>Redundancy</strong>: The <code>ETF</code> object has <strong>TWO</strong> copies of <code>id</code> (one from Stock, one from Bond).</li>
+<li><strong>Ambiguity</strong>: If you call <code>etf.id</code>, the compiler errors out: &quot;Which <code>id</code> do you mean? <code>Stock::id</code> or <code>Bond::id</code>?&quot;</li>
+</ul>
+<h2 id="the-solution-virtual-inheritance">The Solution: Virtual Inheritance</h2>
+<p>To fix this, the intermediate classes (<code>Stock</code> and <code>Bond</code>) must inherit from <code>Asset</code> <strong>virtually</strong>. This tells the compiler: &quot;If any other class also inherits virtually from <code>Asset</code>, please merge them into a single shared instance.&quot;</p>
+<h2 id="code-example-2">Code Example</h2>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Asset</span> { 
+<span class="hljs-keyword">public</span>: 
+    <span class="hljs-type">int</span> id; 
+};
+
+<span class="hljs-comment">// Note the &#x27;virtual&#x27; keyword here</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Stock</span> : <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">public</span> Asset {};
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Bond</span>  : <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">public</span> Asset {};
+
+<span class="hljs-comment">// Now ETF only has ONE copy of Asset</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ETF</span> : <span class="hljs-keyword">public</span> Stock, <span class="hljs-keyword">public</span> Bond {};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    ETF myEtf;
+    
+    <span class="hljs-comment">// Now valid! No ambiguity.</span>
+    <span class="hljs-comment">// Takes the single shared &#x27;id&#x27; from the virtual base.</span>
+    myEtf.id = <span class="hljs-number">100</span>; 
+}
+</code></pre>
+<h2 id="additional-technical-details-1">Additional Technical Details</h2>
+<ul>
+<li><strong>Memory Layout</strong>: Virtual inheritance changes the object layout. It usually adds a pointer (similar to vptr) to track the offset of the shared base class in memory.</li>
+<li><strong>Initialization</strong>: In virtual inheritance, the <strong>most derived class</strong> (<code>ETF</code>) is responsible for initializing the virtual base (<code>Asset</code>). The constructors of intermediate classes (<code>Stock</code>/<code>Bond</code>) effectively ignore the virtual base initialization.</li>
+<li><strong>Best Proctice:</strong>: The &quot;Java Interface&quot; Style
+C++ allows full Multiple Inheritance (inheriting data from multiple parents), which leads to the Diamond Problem. Java prevents this by allowing only multiple <em>Interface</em> inheritance. To avoid complexity, mimic Java in C++: Inherit from <strong>at most one</strong> Concrete Base Class (Implementation), and <strong>multiple</strong> Pure Abstract Base Classes (Interfaces), as the following.<pre><code class="language-cpp"><span class="hljs-comment">// ✅ Safe Pattern: 1 Concrete Base + N Pure Interfaces</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Duck</span> : <span class="hljs-keyword">public</span> Animal,        <span class="hljs-comment">// Implementation (Data)</span>
+            <span class="hljs-keyword">public</span> IFlyable,      <span class="hljs-comment">// Interface (Behavior only)</span>
+            <span class="hljs-keyword">public</span> ISwimmable {   <span class="hljs-comment">// Interface (Behavior only)</span>
+    <span class="hljs-comment">// ...</span>
+};
+</code></pre>
+</li>
+</ul>
+<h2 id="️-back-to-top-4"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="6-example-1-shape">6. Example 1: Shape</h1>
+<h2 id="problem-descirption">Problem Descirption</h2>
+<p>Design a simple <strong>Graphics Drawing System</strong> using C++ Object-Oriented Programming (OOD) principles.</p>
+<p>The system should support the following:</p>
+<ol>
+<li>Define a generic <strong>Shape</strong> concept.</li>
+<li>Implement specific shapes: <strong>Circle</strong> (defined by radius) and <strong>Rectangle</strong> (defined by width and height).</li>
+<li>All shapes must provide the following behaviors:
+<ul>
+<li>Calculate their area (<code>getArea</code>).</li>
+<li>Draw themselves to the console (<code>draw</code>).</li>
+</ul>
+</li>
+<li>The client code should be able to store different types of shapes in a single container and operate on them <strong>polymorphically</strong> (i.e., without knowing their specific concrete types).</li>
+<li>Ensure proper memory management when deleting shapes via base class pointers.</li>
+</ol>
+<hr>
+<h2 id="key-ood-concepts--implementation-details">Key OOD Concepts &amp; Implementation Details</h2>
+<p>This example demonstrates the fundamental mechanism of <strong>Runtime Polymorphism</strong> in C++.</p>
+<h3 id="1-abstract-base-class--pure-virtual-functions--0">1. Abstract Base Class &amp; Pure Virtual Functions (<code>= 0</code>)</h3>
+<ul>
+<li><strong>Syntax:</strong> <code>virtual void draw() const = 0;</code></li>
+<li><strong>Concept:</strong> The <code>= 0</code> syntax declares a function as <strong>Pure Virtual</strong>.</li>
+<li><strong>Why:</strong>
+<ul>
+<li>It makes <code>Shape</code> an <strong>Abstract Class</strong>, meaning you cannot create an instance of <code>Shape</code> (e.g., <code>new Shape()</code> is illegal).</li>
+<li>It enforces a <strong>Contract (Interface)</strong>: Any concrete subclass (<code>Circle</code>, <code>Rectangle</code>) <strong>MUST</strong> implement these functions. If they don't, they remain abstract and cannot be instantiated.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-virtual-destructor-crucial">2. Virtual Destructor (Crucial!)</h3>
+<ul>
+<li><strong>Syntax:</strong> <code>virtual ~Shape() {}</code></li>
+<li><strong>Why:</strong> This is the most critical safety feature in C++ inheritance.
+<ul>
+<li>When we <code>delete shapePtr</code> (where <code>shapePtr</code> is a <code>Shape*</code> pointing to a <code>Circle</code> object), the compiler looks at the static type of the pointer.</li>
+<li><strong>Without <code>virtual</code></strong>: Only <code>~Shape()</code> is called. <code>~Circle()</code> is skipped, causing a <strong>Memory Leak</strong> (members of Circle are not cleaned up).</li>
+<li><strong>With <code>virtual</code></strong>: The deletion happens dynamically. <code>~Circle()</code> is called first, followed by <code>~Shape()</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-const-correctness-func-const">3. Const Correctness (<code>func() const</code>)</h3>
+<ul>
+<li><strong>Syntax:</strong> <code>double getArea() const { ... }</code></li>
+<li><strong>Why:</strong> The <code>const</code> after the function parameter list indicates that this function <strong>will not modify</strong> any member variables of the object.
+<ul>
+<li>It allows these functions to be called on <code>const</code> objects.</li>
+<li>It is a good engineering practice to mark &quot;read-only&quot; operations (like calculating area) as <code>const</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-the-override-keyword">4. The <code>override</code> Keyword</h3>
+<ul>
+<li><strong>Syntax:</strong> <code>void draw() const override { ... }</code></li>
+<li><strong>Why:</strong> (C++11 feature) It explicitly tells the compiler: &quot;I intend to rewrite a virtual function from the base class&quot;.
+<ul>
+<li><strong>Safety</strong>: If you make a typo in the function name or signature (e.g., <code>draw(int)</code> instead of <code>draw()</code>), the compiler will throw an error immediately, preventing bugs where a new function is created instead of overriding the existing one.</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-runtime-polymorphism-vptr--vtable">5. Runtime Polymorphism (vptr &amp; vtable)</h3>
+<ul>
+<li><strong>Mechanism</strong>: How does <code>shape-&gt;draw()</code> know to call <code>Circle::draw()</code>?
+<ul>
+<li>Every object of a class with virtual functions contains a hidden pointer called <strong>vptr</strong>.</li>
+<li><code>vptr</code> points to a <strong>vtable</strong> (Virtual Method Table), which stores the addresses of the actual functions for that specific class.</li>
+<li>At runtime, the program follows: <code>Object -&gt; vptr -&gt; vtable -&gt; Actual Function</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="example-implementation">Example Implementation</h2>
+<pre><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-comment">// 1. Abstract Base Class (抽象基类)</span>
+<span class="hljs-comment">// 相当于 Java 中的 Interface</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Shape</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">// 【关键点 1】虚析构函数 (Virtual Destructor)</span>
+    <span class="hljs-comment">// 如果不写 virtual，当 delete shapePtr 时，子类的析构函数不会被调用 -&gt; 内存泄漏</span>
+    <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">Shape</span>() {
+        cout &lt;&lt; <span class="hljs-string">&quot;Shape destructor called&quot;</span> &lt;&lt; endl;
+    }
+
+    <span class="hljs-comment">// 【关键点 2】纯虚函数 (Pure Virtual Function)</span>
+    <span class="hljs-comment">// = 0 表示这个类不能被实例化，强制子类必须实现这个函数</span>
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">double</span> <span class="hljs-title">getArea</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>= <span class="hljs-number">0</span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>= <span class="hljs-number">0</span>;
+};
+
+<span class="hljs-comment">// 2. Concrete Class (具体类)：圆形</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Circle</span> : <span class="hljs-keyword">public</span> Shape {
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-type">double</span> radius;
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Circle</span>(<span class="hljs-type">double</span> r) : <span class="hljs-built_in">radius</span>(r) {}
+
+    ~<span class="hljs-built_in">Circle</span>() <span class="hljs-keyword">override</span> { <span class="hljs-comment">// C++11 override 关键字，防止拼写错误</span>
+        cout &lt;&lt; <span class="hljs-string">&quot;Circle destructor called&quot;</span> &lt;&lt; endl;
+    }
+
+    <span class="hljs-comment">// 实现基类的接口</span>
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">getArea</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-number">3.14159</span> * radius * radius;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{
+        cout &lt;&lt; <span class="hljs-string">&quot;Drawing Circle with radius: &quot;</span> &lt;&lt; radius &lt;&lt; endl;
+    }
+};
+
+<span class="hljs-comment">// 3. Concrete Class (具体类)：矩形</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Rectangle</span> : <span class="hljs-keyword">public</span> Shape {
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-type">double</span> width, height;
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Rectangle</span>(<span class="hljs-type">double</span> w, <span class="hljs-type">double</span> h) : <span class="hljs-built_in">width</span>(w), <span class="hljs-built_in">height</span>(h) {}
+
+    ~<span class="hljs-built_in">Rectangle</span>() <span class="hljs-keyword">override</span> {
+        cout &lt;&lt; <span class="hljs-string">&quot;Rectangle destructor called&quot;</span> &lt;&lt; endl;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">getArea</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{
+        <span class="hljs-keyword">return</span> width * height;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{
+        cout &lt;&lt; <span class="hljs-string">&quot;Drawing Rectangle (&quot;</span> &lt;&lt; width &lt;&lt; <span class="hljs-string">&quot; x &quot;</span> &lt;&lt; height &lt;&lt; <span class="hljs-string">&quot;)&quot;</span> &lt;&lt; endl;
+    }
+};
+
+<span class="hljs-comment">// 4. Client Code (使用多态)</span>
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// 使用基类指针容器，存储不同类型的子类对象</span>
+    vector&lt;Shape*&gt; shapes;
+    
+    shapes.<span class="hljs-built_in">push_back</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Circle</span>(<span class="hljs-number">5.0</span>));
+    shapes.<span class="hljs-built_in">push_back</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Rectangle</span>(<span class="hljs-number">4.0</span>, <span class="hljs-number">6.0</span>));
+
+    <span class="hljs-keyword">for</span> (Shape* s : shapes) {
+        <span class="hljs-comment">// 【关键点 3】运行时多态 (Runtime Polymorphism)</span>
+        <span class="hljs-comment">// 编译器会查找 vptr -&gt; vtable，调用实际对象的 draw 方法</span>
+        s-&gt;<span class="hljs-built_in">draw</span>(); 
+        cout &lt;&lt; <span class="hljs-string">&quot;Area: &quot;</span> &lt;&lt; s-&gt;<span class="hljs-built_in">getArea</span>() &lt;&lt; endl;
+    }
+
+    <span class="hljs-comment">// 清理内存</span>
+    <span class="hljs-keyword">for</span> (Shape* s : shapes) {
+        <span class="hljs-keyword">delete</span> s; <span class="hljs-comment">// 这里会先调用子类析构，再调用基类析构</span>
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="️-back-to-top-5"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="7-example-2-file-system">7. Example 2: File System</h1>
+<h2 id="problem-description">Problem Description</h2>
+<p>Design an in-memory <strong>File System</strong> that supports the following:</p>
+<ol>
+<li><strong>Hierarchical Structure</strong>: The system consists of <strong>Files</strong> (leaf nodes) and <strong>Directories</strong> (container nodes).</li>
+<li><strong>Nesting</strong>: A Directory can contain Files and other sub-Directories.</li>
+<li><strong>Polymorphic Behavior</strong>: Treat Files and Directories uniformly.
+<ul>
+<li><code>getSize()</code>: For a File, return its data size. For a Directory, return the sum of sizes of all its contents (recursive).</li>
+<li><code>isDirectory()</code>: Identification helper.</li>
+</ul>
+</li>
+</ol>
+<h2 id="key-ood-concepts--pitfalls">Key OOD Concepts &amp; Pitfalls</h2>
+<h3 id="the-composite-pattern">The Composite Pattern</h3>
+<p>This is the textbook definition of the <strong>Composite Pattern</strong>:</p>
+<ul>
+<li><strong>Component</strong>: <code>FileSystemNode</code> (Abstract Base).</li>
+<li><strong>Leaf</strong>: <code>File</code>.</li>
+<li><strong>Composite</strong>: <code>Directory</code> (Contains a collection of <code>FileSystemNode*</code>).</li>
+<li><strong>Benefit</strong>: The client code (e.g., calculating total size) looks identical whether it's dealing with a single file or a complex folder structure.</li>
+</ul>
+<h3 id="polymorphic-containers-vectorbase">Polymorphic Containers (<code>vector&lt;Base*&gt;</code>)</h3>
+<ul>
+<li><strong>Pitfall</strong>: You cannot store objects (<code>vector&lt;FileSystemNode&gt;</code>) because <code>FileSystemNode</code> is abstract, and even if it weren't, it would cause <strong>Object Slicing</strong>.</li>
+<li><strong>Solution</strong>: You must store pointers: <code>vector&lt;FileSystemNode*&gt;</code>.</li>
+<li><strong>Modern C++</strong>: In production, use <code>vector&lt;unique_ptr&lt;FileSystemNode&gt;&gt;</code> for automatic memory management. For interviews, raw pointers are acceptable if you handle the destructor correctly.</li>
+</ul>
+<h3 id="recursive-destruction-memory-management">Recursive Destruction (Memory Management)</h3>
+<ul>
+<li><strong>Crucial Logic</strong>: Since <code>Directory</code> holds pointers to children, it &quot;owns&quot; them.</li>
+<li><strong>Destructor</strong>: The <code>~Directory()</code> destructor must iterate through its children and <code>delete</code> them. Without this, deleting the root node will orphan all children, causing a massive <strong>Memory Leak</strong>.</li>
+</ul>
+<h2 id="example-implementation-1">Example Implementation</h2>
+<pre><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-comment">// 1. 抽象组件：FileSystemNode</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">FileSystemNode</span> {
+<span class="hljs-keyword">protected</span>:
+    string name;
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">FileSystemNode</span>(string n) : <span class="hljs-built_in">name</span>(n) {}
+    <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">FileSystemNode</span>() = <span class="hljs-keyword">default</span>;
+
+    <span class="hljs-comment">// 通用接口</span>
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>= <span class="hljs-number">0</span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">bool</span> <span class="hljs-title">isDirectory</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>= <span class="hljs-number">0</span>;
+    
+    <span class="hljs-comment">// 打印路径结构（带缩进）</span>
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">int</span> indent = <span class="hljs-number">0</span>)</span> <span class="hljs-type">const</span> </span>{
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; indent; ++i) cout &lt;&lt; <span class="hljs-string">&quot;  &quot;</span>;
+        cout &lt;&lt; name &lt;&lt; <span class="hljs-string">&quot; (&quot;</span> &lt;&lt; <span class="hljs-built_in">getSize</span>() &lt;&lt; <span class="hljs-string">&quot; bytes)&quot;</span> &lt;&lt; endl;
+    }
+};
+
+<span class="hljs-comment">// 2. 叶子节点：File</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">File</span> : <span class="hljs-keyword">public</span> FileSystemNode {
+<span class="hljs-keyword">private</span>:
+    string content;
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">File</span>(string n, string c) : <span class="hljs-built_in">FileSystemNode</span>(n), <span class="hljs-built_in">content</span>(c) {}
+
+    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{
+        <span class="hljs-keyword">return</span> content.<span class="hljs-built_in">size</span>();
+    }
+
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isDirectory</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+};
+
+<span class="hljs-comment">// 3. 容器节点：Directory (包含其他 Node)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Directory</span> : <span class="hljs-keyword">public</span> FileSystemNode {
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-comment">// 【关键点】这里存的是基类指针，所以既能存 File 也能存 Directory</span>
+    vector&lt;FileSystemNode*&gt; children;
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Directory</span>(string n) : <span class="hljs-built_in">FileSystemNode</span>(n) {}
+
+    ~<span class="hljs-built_in">Directory</span>() {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> child : children) {
+            <span class="hljs-keyword">delete</span> child; <span class="hljs-comment">// 递归删除所有子节点</span>
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(FileSystemNode* node)</span> </span>{
+        children.<span class="hljs-built_in">push_back</span>(node);
+    }
+
+    <span class="hljs-comment">// 【关键点】递归计算大小</span>
+    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{
+        <span class="hljs-type">int</span> totalSize = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> child : children) {
+            totalSize += child-&gt;<span class="hljs-built_in">getSize</span>(); <span class="hljs-comment">// 多态调用</span>
+        }
+        <span class="hljs-keyword">return</span> totalSize;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isDirectory</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">int</span> indent = <span class="hljs-number">0</span>)</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{
+        FileSystemNode::<span class="hljs-built_in">print</span>(indent); <span class="hljs-comment">// 打印自己</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> child : children) {
+            child-&gt;<span class="hljs-built_in">print</span>(indent + <span class="hljs-number">1</span>); <span class="hljs-comment">// 递归打印孩子</span>
+        }
+    }
+};
+
+<span class="hljs-comment">// Client</span>
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Directory* root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Directory</span>(<span class="hljs-string">&quot;root&quot;</span>);
+    Directory* home = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Directory</span>(<span class="hljs-string">&quot;home&quot;</span>);
+    Directory* user = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Directory</span>(<span class="hljs-string">&quot;zacking&quot;</span>);
+    
+    File* f1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">File</span>(<span class="hljs-string">&quot;notes.txt&quot;</span>, <span class="hljs-string">&quot;Hello World&quot;</span>); <span class="hljs-comment">// size 11</span>
+    File* f2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">File</span>(<span class="hljs-string">&quot;config.xml&quot;</span>, <span class="hljs-string">&quot;&lt;xml&gt;&lt;/xml&gt;&quot;</span>); <span class="hljs-comment">// size 11</span>
+
+    root-&gt;<span class="hljs-built_in">add</span>(home);
+    home-&gt;<span class="hljs-built_in">add</span>(user);
+    user-&gt;<span class="hljs-built_in">add</span>(f1);
+    user-&gt;<span class="hljs-built_in">add</span>(f2);
+
+    <span class="hljs-comment">// 打印树状结构，并自动计算文件夹大小</span>
+    root-&gt;<span class="hljs-built_in">print</span>();
+    
+    <span class="hljs-comment">// 只要删除 root，整棵树都会被析构（因为 Directory 析构里处理了 children）</span>
+    <span class="hljs-keyword">delete</span> root; 
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="8-example-3-parking-lot">8. Example 3: Parking Lot</h1>
+<h2 id="problem-description-1">Problem Description</h2>
+<p>Design a <strong>Parking Lot</strong> management system.</p>
+<ol>
+<li><strong>Capacity</strong>: The parking lot has multiple <strong>Parking Spots</strong>.</li>
+<li><strong>Vehicle Types</strong>: It must accommodate different types of vehicles: <strong>Motorcycles</strong>, <strong>Cars</strong>, and <strong>Trucks</strong>.</li>
+<li><strong>Spot Types</strong>: Spots can be of different sizes (e.g., Compact, Large).
+<ul>
+<li><em>Rules</em>: A Motorcycle can park anywhere. A Car needs at least a Compact spot. A Truck needs a Large spot (or multiple spots).</li>
+</ul>
+</li>
+<li><strong>Operations</strong>: The system should support <code>parkVehicle(Vehicle* v)</code> (finding an available spot) and <code>removeVehicle()</code>.</li>
+</ol>
+<hr>
+<h2 id="key-ood-concepts--implementation-details-1">Key OOD Concepts &amp; Implementation Details</h2>
+<h3 id="strongly-typed-enums-enum-class">Strongly Typed Enums (<code>enum class</code>)</h3>
+<ul>
+<li><strong>Concept</strong>: Instead of using <code>int</code> constants or C-style <code>enum</code>, C++11 introduces <code>enum class</code>.</li>
+<li><strong>Benefit</strong>: Scoped and strongly typed. <code>VehicleType::CAR</code> cannot be implicitly converted to an integer or compared with <code>SpotType::COMPACT</code> without explicit casting, preventing logic errors.</li>
+</ul>
+<h3 id="operator-overloading-operator">Operator Overloading (<code>operator&lt;&lt;</code>)</h3>
+<ul>
+<li><strong>Concept</strong>: Customizing how objects/enums are printed to streams (<code>cout</code>).</li>
+<li><strong>Application</strong>: Since <code>enum class</code> does not print as a string by default, we overload the output stream operator to convert <code>VehicleType::CAR</code> into the string &quot;Car&quot; automatically. This creates very clean client code (<code>cout &lt;&lt; vehicle-&gt;getType()</code>).</li>
+</ul>
+<h3 id="abstract-base-class-for-polymorphism">Abstract Base Class for Polymorphism</h3>
+<ul>
+<li><strong>Structure</strong>: <code>Vehicle</code> is an abstract base class.</li>
+<li><strong>Polymorphism</strong>: The <code>getSpotsNeeded()</code> function is pure virtual. This allows the <code>ParkingLot</code> to treat all vehicles uniformly. It asks &quot;how much space do you need?&quot; without caring if it's a Truck or a Car.</li>
+</ul>
+<h3 id="relationship-management-association">Relationship Management (Association)</h3>
+<ul>
+<li><strong>Logic</strong>: The relationship between <code>Vehicle</code> and <code>ParkingSpot</code> is a &quot;Has-A&quot; (Aggregation) relationship during the parking duration.</li>
+<li><strong>Design</strong>: The <code>ParkingSpot</code> holds a pointer <code>Vehicle*</code>. When the vehicle leaves, we simply set the pointer to <code>nullptr</code>, but we do <strong>not</strong> <code>delete</code> the vehicle memory (the driver still owns the car, the spot just held it).</li>
+</ul>
+<h2 id="example-implementation-2">Example Implementation</h2>
+<pre><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-comment">// 车型枚举</span>
+<span class="hljs-keyword">enum class</span> <span class="hljs-title class_">VehicleType</span> {
+    MOTORCYCLE,
+    CAR,
+    TRUCK
+};
+
+<span class="hljs-comment">// 重载 &lt;&lt; 操作符，让 cout 知道怎么打印 Enum</span>
+ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(ostream&amp; os, VehicleType type) {
+    <span class="hljs-keyword">switch</span>(type) {
+        <span class="hljs-keyword">case</span> VehicleType::MOTORCYCLE: os &lt;&lt; <span class="hljs-string">&quot;Motorcycle&quot;</span>; <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> VehicleType::CAR:        os &lt;&lt; <span class="hljs-string">&quot;Car&quot;</span>; <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> VehicleType::TRUCK:      os &lt;&lt; <span class="hljs-string">&quot;Truck&quot;</span>; <span class="hljs-keyword">break</span>;
+    }
+    <span class="hljs-keyword">return</span> os;
+}
+
+<span class="hljs-comment">// 1. 车辆基类</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Vehicle</span> {
+<span class="hljs-keyword">protected</span>:
+    VehicleType type;
+    string licensePlate;
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Vehicle</span>(VehicleType t, string plate) : <span class="hljs-built_in">type</span>(t), <span class="hljs-built_in">licensePlate</span>(plate) {}
+    <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">Vehicle</span>() = <span class="hljs-keyword">default</span>;
+
+    <span class="hljs-function">VehicleType <span class="hljs-title">getType</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> type; }
+    
+    <span class="hljs-comment">// 不同车需要的车位大小 (1个单位或多个单位)</span>
+    <span class="hljs-comment">// 这是一个纯虚函数，或者是带有默认实现的虚函数</span>
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">getSpotsNeeded</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>= <span class="hljs-number">0</span>;
+};
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> : <span class="hljs-keyword">public</span> Vehicle {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Car</span>(string plate) : <span class="hljs-built_in">Vehicle</span>(VehicleType::CAR, plate) {}
+    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getSpotsNeeded</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>; }
+};
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Truck</span> : <span class="hljs-keyword">public</span> Vehicle {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Truck</span>(string plate) : <span class="hljs-built_in">Vehicle</span>(VehicleType::TRUCK, plate) {}
+    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getSpotsNeeded</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">override</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>; } <span class="hljs-comment">// 假设卡车需要5个连续车位</span>
+};
+
+<span class="hljs-comment">// 2. 车位类</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ParkingSpot</span> {
+<span class="hljs-keyword">private</span>:
+    VehicleType type; <span class="hljs-comment">// 这个车位适合停什么车</span>
+    Vehicle* vehicle; <span class="hljs-comment">// 当前停了谁 (nullptr 表示空)</span>
+    <span class="hljs-type">int</span> spotNumber;
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">ParkingSpot</span>(VehicleType t, <span class="hljs-type">int</span> n) : <span class="hljs-built_in">type</span>(t), <span class="hljs-built_in">spotNumber</span>(n), <span class="hljs-built_in">vehicle</span>(<span class="hljs-literal">nullptr</span>) {}
+
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isAvailable</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> vehicle == <span class="hljs-literal">nullptr</span>; }
+
+    <span class="hljs-comment">// 检查某辆车能不能停这个位子</span>
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">canFit</span><span class="hljs-params">(Vehicle* v)</span> </span>{
+        <span class="hljs-comment">// 简化逻辑：车位类型必须匹配或者是大型车位兼容小型车</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">isAvailable</span>() &amp;&amp; (type == v-&gt;<span class="hljs-built_in">getType</span>() || type == VehicleType::TRUCK);
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">park</span><span class="hljs-params">(Vehicle* v)</span> </span>{ vehicle = v; }
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">removeVehicle</span><span class="hljs-params">()</span> </span>{ vehicle = <span class="hljs-literal">nullptr</span>; }
+};
+
+<span class="hljs-comment">// 3. 停车场管理类 (Singleton 或者是 Manager)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ParkingLot</span> {
+<span class="hljs-keyword">private</span>:
+    vector&lt;ParkingSpot*&gt; spots;
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">ParkingLot</span>(<span class="hljs-type">int</span> numSpots) {
+        <span class="hljs-comment">// 初始化一些车位</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;numSpots; ++i) {
+            <span class="hljs-keyword">if</span> (i &lt; numSpots / <span class="hljs-number">2</span>) 
+                spots.<span class="hljs-built_in">push_back</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">ParkingSpot</span>(VehicleType::CAR, i));
+            <span class="hljs-keyword">else</span> 
+                spots.<span class="hljs-built_in">push_back</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">ParkingSpot</span>(VehicleType::TRUCK, i));
+        }
+    }
+
+    ~<span class="hljs-built_in">ParkingLot</span>() {
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> s : spots) <span class="hljs-keyword">delete</span> s;
+    }
+
+    <span class="hljs-comment">// 核心业务逻辑：停车</span>
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">parkVehicle</span><span class="hljs-params">(Vehicle* v)</span> </span>{
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> spot : spots) {
+            <span class="hljs-keyword">if</span> (spot-&gt;<span class="hljs-built_in">canFit</span>(v)) {
+                spot-&gt;<span class="hljs-built_in">park</span>(v);
+                cout &lt;&lt; <span class="hljs-string">&quot;Vehicle &quot;</span> &lt;&lt; v-&gt;<span class="hljs-built_in">getType</span>() &lt;&lt; <span class="hljs-string">&quot; parked at spot.&quot;</span> &lt;&lt; endl;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }
+        }
+        cout &lt;&lt; <span class="hljs-string">&quot;No spots available for this vehicle.&quot;</span> &lt;&lt; endl;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-function">ParkingLot <span class="hljs-title">lot</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>; <span class="hljs-comment">// 10个车位</span>
+    
+    Car* c1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Car</span>(<span class="hljs-string">&quot;CA-123&quot;</span>);
+    Truck* t1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Truck</span>(<span class="hljs-string">&quot;TR-999&quot;</span>);
+    
+    lot.<span class="hljs-built_in">parkVehicle</span>(c1);
+    lot.<span class="hljs-built_in">parkVehicle</span>(t1);
+    
+    <span class="hljs-keyword">delete</span> c1;
+    <span class="hljs-keyword">delete</span> t1;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="️-back-to-top-7"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
