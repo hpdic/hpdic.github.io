@@ -263,7 +263,7 @@ sort(v.begin(), v.end(), [](int a, int b) {
 });
 
 // Sort Array of Pairs by Second Element (Common in Interviews)
-vector<pair<int, int>> pairs = {{1, 5}, {2, 3}};
+vector<pair<int, int>> pairs = { {1, 5}, {2, 3} };
 sort(pairs.begin(), pairs.end(), [](const auto& a, const auto& b) {
     return a.second < b.second; // Ascending based on .second
 });
