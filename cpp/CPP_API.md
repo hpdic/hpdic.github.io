@@ -113,11 +113,23 @@ s += 'c';              // Append character
 s.push_back('c');      // Append character
 s.insert(0, 1, 'c');   // Insert 'c' at index 0 (1 count)
 s.substr(pos, len);    // Return substring starting at pos with length len
-s.find(str);           // Find first occurrence from beginning
-s.find(str, pos);      // Find first occurrence starting from index 'pos'
-s.rfind(str);          // Find substring from end
 s.size();              // Return length (Same as .length(), preferred for consistency)
 s.resize(n);           // Resize/Truncate to length n - O(N) or O(1) if shrinking
+```
+
+## Search & Check (Critical!)
+> **⚠️ Warning:** Always check against `string::npos` to handle "not found" cases. Do NOT compare with `-1`.
+
+```cpp
+size_t pos = s.find(str); // Find first occurrence
+// s.find(str, start_pos); // Find starting from index
+// s.rfind(str);           // Find last occurrence
+
+if (pos != string::npos) {
+    // Found! 'pos' is the valid index.
+} else {
+    // Not Found!
+}
 ```
 
 ## Type Conversions

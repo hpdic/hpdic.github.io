@@ -238,12 +238,22 @@ v.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</s
 s.<span class="hljs-built_in">push_back</span>(<span class="hljs-string">&#x27;c&#x27;</span>);      <span class="hljs-comment">// Append character</span>
 s.<span class="hljs-built_in">insert</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;c&#x27;</span>);   <span class="hljs-comment">// Insert &#x27;c&#x27; at index 0 (1 count)</span>
 s.<span class="hljs-built_in">substr</span>(pos, len);    <span class="hljs-comment">// Return substring starting at pos with length len</span>
-s.<span class="hljs-built_in">find</span>(str);           <span class="hljs-comment">// Find first occurrence from beginning</span>
-s.<span class="hljs-built_in">find</span>(str, pos);      <span class="hljs-comment">// Find first occurrence starting from index &#x27;pos&#x27;</span>
-s.<span class="hljs-built_in">rfind</span>(str);          <span class="hljs-comment">// Find last occurrence</span>
-s.<span class="hljs-built_in">rfind</span>(str);          <span class="hljs-comment">// Find substring from end</span>
 s.<span class="hljs-built_in">size</span>();              <span class="hljs-comment">// Return length (Same as .length(), preferred for consistency)</span>
 s.<span class="hljs-built_in">resize</span>(n);           <span class="hljs-comment">// Resize/Truncate to length n - O(N) or O(1) if shrinking</span>
+</code></pre>
+<h2 id="search--check-critical">Search &amp; Check (Critical!)</h2>
+<blockquote>
+<p><strong>⚠️ Warning:</strong> Always check against <code>string::npos</code> to handle &quot;not found&quot; cases. Do NOT compare with <code>-1</code>.</p>
+</blockquote>
+<pre><code class="language-cpp"><span class="hljs-type">size_t</span> pos = s.<span class="hljs-built_in">find</span>(str); <span class="hljs-comment">// Find first occurrence</span>
+<span class="hljs-comment">// s.find(str, start_pos); // Find starting from index</span>
+<span class="hljs-comment">// s.rfind(str);           // Find last occurrence</span>
+
+<span class="hljs-keyword">if</span> (pos != string::npos) {
+    <span class="hljs-comment">// Found! &#x27;pos&#x27; is the valid index.</span>
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// Not Found!</span>
+}
 </code></pre>
 <h2 id="type-conversions">Type Conversions</h2>
 <pre><code class="language-cpp"><span class="hljs-type">int</span> n = <span class="hljs-built_in">stoi</span>(s);         <span class="hljs-comment">// Convert string to int</span>
