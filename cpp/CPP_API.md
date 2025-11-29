@@ -148,8 +148,8 @@ isdigit(c); // Check if digit (0-9)
 isalpha(c); // Check if alphabetic character
 islower(c); // Check if lowercase char
 isupper(c); // Check if uppercase char
-tolower(c); // Convert char to lowercase
-toupper(c); // Convert char to uppercase
+tolower(c); // Convert char to lowercase; return c if isalpha(c) == false
+toupper(c); // Convert char to uppercase; return c if isalpha(c) == false
 ```
 
 [⬆️ Back to Top](#table-of-contents)
