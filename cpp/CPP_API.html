@@ -241,6 +241,7 @@ s.<span class="hljs-built_in">substr</span>(pos, len);    <span class="hljs-comm
 s.<span class="hljs-built_in">find</span>(str);           <span class="hljs-comment">// Find substring, returns index or string::npos</span>
 s.<span class="hljs-built_in">rfind</span>(str);          <span class="hljs-comment">// Find substring from end</span>
 s.<span class="hljs-built_in">size</span>();              <span class="hljs-comment">// Return length (Same as .length(), preferred for consistency)</span>
+s.<span class="hljs-built_in">resize</span>(n);           <span class="hljs-comment">// Resize/Truncate to length n - O(N) or O(1) if shrinking</span>
 </code></pre>
 <h2 id="type-conversions">Type Conversions</h2>
 <pre><code class="language-cpp"><span class="hljs-type">int</span> n = <span class="hljs-built_in">stoi</span>(s);         <span class="hljs-comment">// Convert string to int</span>

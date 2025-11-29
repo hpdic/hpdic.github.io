@@ -116,6 +116,7 @@ s.substr(pos, len);    // Return substring starting at pos with length len
 s.find(str);           // Find substring, returns index or string::npos
 s.rfind(str);          // Find substring from end
 s.size();              // Return length (Same as .length(), preferred for consistency)
+s.resize(n);           // Resize/Truncate to length n - O(N) or O(1) if shrinking
 ```
 
 ## Type Conversions
