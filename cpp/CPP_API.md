@@ -113,7 +113,8 @@ s += 'c';              // Append character
 s.push_back('c');      // Append character
 s.insert(0, 1, 'c');   // Insert 'c' at index 0 (1 count)
 s.substr(pos, len);    // Return substring starting at pos with length len
-s.find(str);           // Find substring, returns index or string::npos
+s.find(str);           // Find first occurrence from beginning
+s.find(str, pos);      // Find first occurrence starting from index 'pos'
 s.rfind(str);          // Find substring from end
 s.size();              // Return length (Same as .length(), preferred for consistency)
 s.resize(n);           // Resize/Truncate to length n - O(N) or O(1) if shrinking
