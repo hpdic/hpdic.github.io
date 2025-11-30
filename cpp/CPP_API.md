@@ -6,7 +6,7 @@
 - [2. Dynamic Array (std::vector)](#2-dynamic-array-stdvector)
 - [3. String Manipulation (std::string)](#3-string-manipulation-stdstring)
 - [4. Associative Containers (Hash Maps \& Sets)](#4-associative-containers-hash-maps--sets)
-- [5. Container Adaptors (Stack, Queue, Deque)](#5-container-adaptors-stack-queue-deque)
+- [5. Container Adaptors (Stack, Queue, Deque, List)](#5-container-adaptors-stack-queue-deque-list)
 - [6. Priority Queue (Heap)](#6-priority-queue-heap)
 - [7. Algorithms](#7-algorithms)
 - [8. Bit Manipulation](#8-bit-manipulation)
@@ -251,8 +251,8 @@ for (auto& [key, val] : mp) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 5. Container Adaptors (Stack, Queue, Deque)
-**Header:** `<stack>`, `<queue>`, `<deque>`
+# 5. Container Adaptors (Stack, Queue, Deque, List)
+**Header:** `<stack>`, `<queue>`, `<deque>`, `<list>`
 
 ## Stack (LIFO - Last In First Out)
 - **Use Case:** DFS, Backtracking, Monotonic Stack.
@@ -286,6 +286,39 @@ dq.pop_back();      // Remove from back
 dq.pop_front();     // Remove from front
 dq.front();         // Access front
 dq.back();          // Access back
+```
+
+## List (Doubly Linked List)
+- **Use Case:** **LRU Cache** (via `splice`), frequent insertion/deletion at arbitrary positions where iterators must remain valid.
+- **Key Difference:** Unlike Vector/Deque, inserting/erasing at **arbitrary positions** is **O(1)** (given an iterator). Iterators remain valid after insertion/deletion.
+
+```cpp
+list<int> lst;
+
+// 1. Basic Ops (Same as Deque)
+lst.push_back(1);
+lst.push_front(2);
+lst.pop_back();
+lst.pop_front();
+lst.front();         
+lst.back();          
+
+// 2. 🌟 O(1) Insert/Erase at Iterator (The Real Power)
+auto it = lst.begin();
+lst.insert(it, 10);  // Insert 10 BEFORE iterator -> O(1)
+lst.erase(it);       // Remove element AT iterator -> O(1)
+
+// 3. 🌟 Splice (Transfer Nodes without Copying)
+// Moves element at 'sourceIt' from 'lst2' to 'lst1' (before 'pos')
+lst1.splice(pos, lst2, sourceIt); 
+
+// 4. Sorting (Special!)
+// std::sort(lst.begin(), lst.end()) will CRASH (No random access).
+lst.sort();          // O(N log N)
+lst.reverse();       // O(N)
+
+// 5. Remove specific values
+lst.remove(5);       // Remove ALL elements equal to 5 -> O(N)
 ```
 
 [⬆️ Back to Top](#table-of-contents)
@@ -373,6 +406,23 @@ swap(a, b);                           // Swap values
 abs(n);                               // Absolute value
 accumulate(v.begin(), v.end(), 0);    // Calculate sum O(N)
 gcd(a, b);                            // Greatest Common Divisor (C++17)
+```
+
+## Iterator Operations (Header: `<iterator>`)
+> **Crucial for:** `std::list`, `std::set`, `std::map` where arithmetic (`it + 1`) is not allowed.
+
+```cpp
+auto it = myContainer.begin();
+
+// Return a NEW iterator (Original 'it' stays same)
+auto nextIt = next(it, 1);     // Move forward by 1 (default) or n
+auto prevIt = prev(it, 1);     // Move backward by 1 (default) or n
+
+// Modify the iterator IN-PLACE
+advance(it, 2);                // Move 'it' forward by 2 steps
+
+// Calculate distance
+int dist = distance(first, last); // O(N) for list/set, O(1) for vector
 ```
 
 [⬆️ Back to Top](#table-of-contents)

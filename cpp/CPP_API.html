@@ -145,7 +145,7 @@
 <li><a href="#2-dynamic-array-stdvector">2. Dynamic Array (std::vector)</a></li>
 <li><a href="#3-string-manipulation-stdstring">3. String Manipulation (std::string)</a></li>
 <li><a href="#4-associative-containers-hash-maps--sets">4. Associative Containers (Hash Maps &amp; Sets)</a></li>
-<li><a href="#5-container-adaptors-stack-queue-deque">5. Container Adaptors (Stack, Queue, Deque)</a></li>
+<li><a href="#5-container-adaptors-stack-queue-deque-list">5. Container Adaptors (Stack, Queue, Deque, List)</a></li>
 <li><a href="#6-priority-queue-heap">6. Priority Queue (Heap)</a></li>
 <li><a href="#7-algorithms">7. Algorithms</a></li>
 <li><a href="#8-bit-manipulation">8. Bit Manipulation</a></li>
@@ -359,8 +359,8 @@ mp.<span class="hljs-built_in">erase</span>(it);          <span class="hljs-comm
 }
 </code></pre>
 <h2 id="️-back-to-top-3"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="5-container-adaptors-stack-queue-deque">5. Container Adaptors (Stack, Queue, Deque)</h1>
-<p><strong>Header:</strong> <code>&lt;stack&gt;</code>, <code>&lt;queue&gt;</code>, <code>&lt;deque&gt;</code></p>
+<h1 id="5-container-adaptors-stack-queue-deque-list">5. Container Adaptors (Stack, Queue, Deque, List)</h1>
+<p><strong>Header:</strong> <code>&lt;stack&gt;</code>, <code>&lt;queue&gt;</code>, <code>&lt;deque&gt;</code>, <code>&lt;list&gt;</code></p>
 <h2 id="stack-lifo---last-in-first-out">Stack (LIFO - Last In First Out)</h2>
 <ul>
 <li><strong>Use Case:</strong> DFS, Backtracking, Monotonic Stack.</li>
@@ -391,6 +391,38 @@ dq.<span class="hljs-built_in">pop_back</span>();      <span class="hljs-comment
 dq.<span class="hljs-built_in">pop_front</span>();     <span class="hljs-comment">// Remove from front</span>
 dq.<span class="hljs-built_in">front</span>();         <span class="hljs-comment">// Access front</span>
 dq.<span class="hljs-built_in">back</span>();          <span class="hljs-comment">// Access back</span>
+</code></pre>
+<h2 id="list-doubly-linked-list">List (Doubly Linked List)</h2>
+<ul>
+<li><strong>Use Case:</strong> <strong>LRU Cache</strong> (via <code>splice</code>), frequent insertion/deletion at arbitrary positions where iterators must remain valid.</li>
+<li><strong>Key Difference:</strong> Unlike Vector/Deque, inserting/erasing at <strong>arbitrary positions</strong> is <strong>O(1)</strong> (given an iterator). Iterators remain valid after insertion/deletion.</li>
+</ul>
+<pre><code class="language-cpp">list&lt;<span class="hljs-type">int</span>&gt; lst;
+
+<span class="hljs-comment">// 1. Basic Ops (Same as Deque)</span>
+lst.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1</span>);
+lst.<span class="hljs-built_in">push_front</span>(<span class="hljs-number">2</span>);
+lst.<span class="hljs-built_in">pop_back</span>();
+lst.<span class="hljs-built_in">pop_front</span>();
+lst.<span class="hljs-built_in">front</span>();         
+lst.<span class="hljs-built_in">back</span>();          
+
+<span class="hljs-comment">// 2. 🌟 O(1) Insert/Erase at Iterator (The Real Power)</span>
+<span class="hljs-keyword">auto</span> it = lst.<span class="hljs-built_in">begin</span>();
+lst.<span class="hljs-built_in">insert</span>(it, <span class="hljs-number">10</span>);  <span class="hljs-comment">// Insert 10 BEFORE iterator -&gt; O(1)</span>
+lst.<span class="hljs-built_in">erase</span>(it);       <span class="hljs-comment">// Remove element AT iterator -&gt; O(1)</span>
+
+<span class="hljs-comment">// 3. 🌟 Splice (Transfer Nodes without Copying)</span>
+<span class="hljs-comment">// Moves element at &#x27;sourceIt&#x27; from &#x27;lst2&#x27; to &#x27;lst1&#x27; (before &#x27;pos&#x27;)</span>
+lst1.<span class="hljs-built_in">splice</span>(pos, lst2, sourceIt); 
+
+<span class="hljs-comment">// 4. Sorting (Special!)</span>
+<span class="hljs-comment">// std::sort(lst.begin(), lst.end()) will CRASH (No random access).</span>
+lst.<span class="hljs-built_in">sort</span>();          <span class="hljs-comment">// O(N log N)</span>
+lst.<span class="hljs-built_in">reverse</span>();       <span class="hljs-comment">// O(N)</span>
+
+<span class="hljs-comment">// 5. Remove specific values</span>
+lst.<span class="hljs-built_in">remove</span>(<span class="hljs-number">5</span>);       <span class="hljs-comment">// Remove ALL elements equal to 5 -&gt; O(N)</span>
 </code></pre>
 <h2 id="️-back-to-top-4"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
 <h1 id="6-priority-queue-heap">6. Priority Queue (Heap)</h1>
@@ -464,6 +496,22 @@ vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">in
 <span class="hljs-built_in">abs</span>(n);                               <span class="hljs-comment">// Absolute value</span>
 <span class="hljs-built_in">accumulate</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);    <span class="hljs-comment">// Calculate sum O(N)</span>
 <span class="hljs-built_in">gcd</span>(a, b);                            <span class="hljs-comment">// Greatest Common Divisor (C++17)</span>
+</code></pre>
+<h2 id="iterator-operations-header-iterator">Iterator Operations (Header: <code>&lt;iterator&gt;</code>)</h2>
+<blockquote>
+<p><strong>Crucial for:</strong> <code>std::list</code>, <code>std::set</code>, <code>std::map</code> where arithmetic (<code>it + 1</code>) is not allowed.</p>
+</blockquote>
+<pre><code class="language-cpp"><span class="hljs-keyword">auto</span> it = myContainer.<span class="hljs-built_in">begin</span>();
+
+<span class="hljs-comment">// Return a NEW iterator (Original &#x27;it&#x27; stays same)</span>
+<span class="hljs-keyword">auto</span> nextIt = <span class="hljs-built_in">next</span>(it, <span class="hljs-number">1</span>);     <span class="hljs-comment">// Move forward by 1 (default) or n</span>
+<span class="hljs-keyword">auto</span> prevIt = <span class="hljs-built_in">prev</span>(it, <span class="hljs-number">1</span>);     <span class="hljs-comment">// Move backward by 1 (default) or n</span>
+
+<span class="hljs-comment">// Modify the iterator IN-PLACE</span>
+<span class="hljs-built_in">advance</span>(it, <span class="hljs-number">2</span>);                <span class="hljs-comment">// Move &#x27;it&#x27; forward by 2 steps</span>
+
+<span class="hljs-comment">// Calculate distance</span>
+<span class="hljs-type">int</span> dist = <span class="hljs-built_in">distance</span>(first, last); <span class="hljs-comment">// O(N) for list/set, O(1) for vector</span>
 </code></pre>
 <h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
 <h1 id="8-bit-manipulation">8. Bit Manipulation</h1>
