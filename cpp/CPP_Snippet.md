@@ -3,12 +3,14 @@
 <h1 id="table-of-contents">Table of Contents</h1>
 
 - [1. Reverse a Linked List](#1-reverse-a-linked-list)
-- [2. Monotonic Stack](#2-monotonic-stack)
-- [3. Trie (Prefix Tree)](#3-trie-prefix-tree)
-- [4. Non-Recursive In-Order Tree Traversal](#4-non-recursive-in-order-tree-traversal)
-- [5. Breadth-First Search (BFS) - Graph/Matrix](#5-breadth-first-search-bfs---graphmatrix)
-- [6. DFS Backtrack](#6-dfs-backtrack)
-- [7. Dynamic Programming](#7-dynamic-programming)
+- [2. Finding the Middle of a Linked List](#2-finding-the-middle-of-a-linked-list)
+- [3. Fast \& Slow Pointers (Floyd's Cycle Detection)](#3-fast--slow-pointers-floyds-cycle-detection)
+- [4. Monotonic Stack](#4-monotonic-stack)
+- [5. Trie (Prefix Tree)](#5-trie-prefix-tree)
+- [6. Non-Recursive In-Order Tree Traversal](#6-non-recursive-in-order-tree-traversal)
+- [7. Breadth-First Search (BFS) - Graph/Matrix](#7-breadth-first-search-bfs---graphmatrix)
+- [8. DFS Backtrack](#8-dfs-backtrack)
+- [9. Dynamic Programming](#9-dynamic-programming)
 
 ---
 
@@ -36,7 +38,79 @@ ListNode* reverseList(ListNode* head) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 2. Monotonic Stack
+# 2. Finding the Middle of a Linked List
+**Pattern:** Fast & Slow Pointers
+- **Time:** O(N)
+- **Space:** O(1)
+- **Usage:** Splitting list for Merge Sort, Palindrome Check.
+
+## Template: Find First Middle (Splitting Strategy)
+Initialize `fast = head->next`. This ensures that for even lengths, `slow` stops at the **end of the first half** (Pre-middle), which allows proper splitting.
+
+```cpp
+ListNode* findMiddle(ListNode* head) {
+    // Safety check needed because we access head->next immediately
+    if (head == nullptr || head->next == nullptr) return head;
+
+    ListNode* slow = head;
+    ListNode* fast = head->next; // ⚡️ Key Difference: Fast starts ahead
+
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    
+    return slow; 
+    // Even length [1,2,3,4] -> Returns 2.
+    // Odd length  [1,2,3]   -> Returns 2.
+}
+```
+
+[⬆️ Back to Top](#table-of-contents)
+---
+
+# 3. Fast & Slow Pointers (Floyd's Cycle Detection)
+**Pattern:** Two pointers moving at different speeds to detect cycles or find midpoints.
+- **Time:** O(N)
+- **Space:** O(1)
+- **Usage:** Detect cycle, Find cycle start, Find middle node, Happy Number.
+
+## Template: Find Cycle Start Node
+**Logic:**
+1.  **Phase 1:** `Slow` moves 1 step, `Fast` moves 2 steps. If they meet, a cycle exists.
+2.  **Phase 2:** Reset `Slow` to `Head`. Keep `Fast` at meeting point. Both move 1 step. They meet at the entry.
+
+```cpp
+ListNode* detectCycle(ListNode* head) {
+    auto slow = head, fast = slow;
+
+    // Phase 1: Determine if a cycle exists
+    while (true) {
+        // If fast hits the end, there is no cycle
+        if (!fast || !fast->next) return nullptr;
+        
+        slow = slow->next;       // Move 1 step
+        fast = fast->next->next; // Move 2 steps
+        
+        if (slow == fast) break; // Collision detected
+    }
+
+    // Phase 2: Find the entry point
+    // Reset slow to head, move both at same speed
+    slow = head;
+    while (slow != fast) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+    
+    return slow; // They meet at the cycle entry
+}
+```
+
+[⬆️ Back to Top](#table-of-contents)
+---
+
+# 4. Monotonic Stack
 **Pattern:** Maintain a sorted stack to find the "First Greater/Smaller Element".
 - **Time:** O(N) (Each element pushed & popped max once), **Space:** O(N).
 - **Usage:** Next Greater Element, Daily Temperatures, Largest Rectangle in Histogram.
@@ -67,7 +141,7 @@ vector<int> nextGreaterElements(vector<int>& nums) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 3. Trie (Prefix Tree)
+# 5. Trie (Prefix Tree)
 - **Header:** None (Must implement manually)
 - **Time Complexity:** Insert/Search are **O(L)** where L is word length.
 - **Usage:** Autocomplete, Spell Checker, String Search.
@@ -129,7 +203,7 @@ public:
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 4. Non-Recursive In-Order Tree Traversal
+# 6. Non-Recursive In-Order Tree Traversal
 **Pattern:** Iterative DFS using Stack
 - **Time Complexity:** **O(N)** (Each node is pushed and popped exactly once).
 - **Space Complexity:** **O(H)** (Where H is tree height, for the stack).
@@ -176,7 +250,7 @@ vector<int> inorderTraversal(TreeNode* root) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 5. Breadth-First Search (BFS) - Graph/Matrix
+# 7. Breadth-First Search (BFS) - Graph/Matrix
 **Pattern:** Queue + Visited Set + Level Loop
 - **Time:** O(V + E) or O(N*M), **Space:** O(V) or O(N*M)
 - **Usage:** Shortest path in unweighted graphs, level-order traversal.
@@ -216,7 +290,7 @@ void bfs(int startNode, int n, vector<vector<int>>& adj) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 6. DFS Backtrack
+# 8. DFS Backtrack
 **Pattern:** Recursion + State Reset (Choose -> Explore -> Unchoose)
 - **Time:** O(N!) (Factorial complexity)
 - **Space:** O(N) (Recursion stack + Visited array)
@@ -286,7 +360,7 @@ void backtrack(vector<int>& nums, int start, vector<vector<int>>& res) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 7. Dynamic Programming
+# 9. Dynamic Programming
 **Pattern:** 2D Grid / State Transition
 - **Time:** O(N*M)
 - **Space:** O(N*M) (Can be optimized to O(N) using rolling array)
