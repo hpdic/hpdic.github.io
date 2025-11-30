@@ -2,7 +2,7 @@
         <html>
         <head>
             <meta charset="UTF-8">
-            <title>1&period; Reverse a Linked List</title>
+            <title>1&period; Linked Lists</title>
             <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -141,18 +141,61 @@
             <h1 align="center">C++ Coding Snippets</h1>
 <h1 id="table-of-contents">Table of Contents</h1>
 <ul>
-<li><a href="#1-reverse-a-linked-list">1. Reverse a Linked List</a></li>
-<li><a href="#2-finding-the-middle-of-a-linked-list">2. Finding the Middle of a Linked List</a></li>
-<li><a href="#3-fast--slow-pointers-floyds-cycle-detection">3. Fast &amp; Slow Pointers (Floyd's Cycle Detection)</a></li>
-<li><a href="#4-monotonic-stack">4. Monotonic Stack</a></li>
-<li><a href="#5-trie-prefix-tree">5. Trie (Prefix Tree)</a></li>
-<li><a href="#6-non-recursive-in-order-tree-traversal">6. Non-Recursive In-Order Tree Traversal</a></li>
-<li><a href="#7-breadth-first-search-bfs---graphmatrix">7. Breadth-First Search (BFS) - Graph/Matrix</a></li>
-<li><a href="#8-dfs-backtrack">8. DFS Backtrack</a></li>
-<li><a href="#9-dynamic-programming">9. Dynamic Programming</a></li>
+<li><a href="#1-linked-lists">1. Linked Lists</a></li>
+<li><a href="#2-monotonic-stack">2. Monotonic Stack</a></li>
+<li><a href="#3-trie-prefix-tree">3. Trie (Prefix Tree)</a></li>
+<li><a href="#4-non-recursive-in-order-tree-traversal">4. Non-Recursive In-Order Tree Traversal</a></li>
+<li><a href="#5-breadth-first-search-bfs---graphmatrix">5. Breadth-First Search (BFS) - Graph/Matrix</a></li>
+<li><a href="#6-dfs-backtrack">6. DFS Backtrack</a></li>
+<li><a href="#7-dynamic-programming">7. Dynamic Programming</a></li>
 </ul>
 <hr>
-<h1 id="1-reverse-a-linked-list">1. Reverse a Linked List</h1>
+<h1 id="1-linked-lists">1. Linked Lists</h1>
+<h2 id="dummy-node-strategy">Dummy Node Strategy</h2>
+<p><strong>Pattern:</strong> Creating a temporary &quot;pre-head&quot; node to simplify boundary conditions.</p>
+<ul>
+<li><strong>Time:</strong> O(1) overhead</li>
+<li><strong>Space:</strong> O(1)</li>
+<li><strong>Core Benefit:</strong> Eliminates the need to check <code>if (head == nullptr)</code> or handle head changes separately.</li>
+</ul>
+<blockquote>
+<p>When to Use? (The 3 Golden Rules)
+Use a Dummy Node whenever the <strong>head of the list might change</strong>:</p>
+</blockquote>
+<ol>
+<li><strong>Constructing a New List</strong>: When building a list from scratch (e.g., <em>Merge Two Lists</em>, <em>Add Two Numbers</em>), you don't know the first node yet.</li>
+<li><strong>Deleting Nodes</strong>: When the head node itself might be removed (e.g., <em>Remove Nth Node</em>, <em>Remove Elements</em>).</li>
+<li><strong>Reordering / Swapping</strong>: When the structure changes significantly, and the new head could be any node (e.g., <em>Swap Pairs</em>, <em>Reverse Nodes in k-Group</em>).</li>
+</ol>
+<blockquote>
+<p>Universal Template
+This pattern works for 90% of linked list modification problems.</p>
+</blockquote>
+<pre><code class="language-cpp"><span class="hljs-function">ListNode* <span class="hljs-title">solve</span><span class="hljs-params">(ListNode* head)</span> </span>{
+    <span class="hljs-comment">// 1. Create Dummy pointing to head</span>
+    ListNode* dummy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);
+    dummy-&gt;next = head;
+    
+    <span class="hljs-comment">// 2. Initialize current pointer at Dummy (Points to &quot;Before Head&quot;)</span>
+    ListNode* curr = dummy;
+    
+    <span class="hljs-comment">// 3. Perform Operations (Insert / Delete / Swap)</span>
+    <span class="hljs-comment">// Example: Deleting the next node</span>
+    <span class="hljs-comment">// while (curr-&gt;next != nullptr) {</span>
+    <span class="hljs-comment">//     if (shouldDelete(curr-&gt;next)) {</span>
+    <span class="hljs-comment">//         curr-&gt;next = curr-&gt;next-&gt;next;</span>
+    <span class="hljs-comment">//     } else {</span>
+    <span class="hljs-comment">//         curr = curr-&gt;next;</span>
+    <span class="hljs-comment">//     }</span>
+    <span class="hljs-comment">// }</span>
+    
+    <span class="hljs-comment">// 4. Return the new head (Skip Dummy)</span>
+    ListNode* newHead = dummy-&gt;next;
+    <span class="hljs-keyword">delete</span> dummy; <span class="hljs-comment">// Good practice to prevent memory leak</span>
+    <span class="hljs-keyword">return</span> newHead;
+}
+</code></pre>
+<h2 id="reverse-a-linked-list">Reverse a Linked List</h2>
 <p><strong>Pattern:</strong> Iterative Pointer Manipulation</p>
 <ul>
 <li><strong>Time:</strong> O(N), <strong>Space:</strong> O(1)</li>
@@ -172,16 +215,17 @@
     <span class="hljs-keyword">return</span> prev; <span class="hljs-comment">// New head</span>
 }
 </code></pre>
-<h2 id="️-back-to-top"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="2-finding-the-middle-of-a-linked-list">2. Finding the Middle of a Linked List</h1>
+<h2 id="finding-the-middle-of-a-linked-list">Finding the Middle of a Linked List</h2>
 <p><strong>Pattern:</strong> Fast &amp; Slow Pointers</p>
 <ul>
 <li><strong>Time:</strong> O(N)</li>
 <li><strong>Space:</strong> O(1)</li>
 <li><strong>Usage:</strong> Splitting list for Merge Sort, Palindrome Check.</li>
 </ul>
-<h2 id="template-find-first-middle-splitting-strategy">Template: Find First Middle (Splitting Strategy)</h2>
-<p>Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths, <code>slow</code> stops at the <strong>end of the first half</strong> (Pre-middle), which allows proper splitting.</p>
+<blockquote>
+<p>Template: Find First Middle (Splitting Strategy)
+Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths, <code>slow</code> stops at the <strong>end of the first half</strong> (Pre-middle), which allows proper splitting.</p>
+</blockquote>
 <pre><code class="language-cpp"><span class="hljs-function">ListNode* <span class="hljs-title">findMiddle</span><span class="hljs-params">(ListNode* head)</span> </span>{
     <span class="hljs-comment">// Safety check needed because we access head-&gt;next immediately</span>
     <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">nullptr</span> || head-&gt;next == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span> head;
@@ -199,16 +243,17 @@
     <span class="hljs-comment">// Odd length  [1,2,3]   -&gt; Returns 2.</span>
 }
 </code></pre>
-<h2 id="️-back-to-top-1"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="3-fast--slow-pointers-floyds-cycle-detection">3. Fast &amp; Slow Pointers (Floyd's Cycle Detection)</h1>
+<h2 id="fast--slow-pointers-floyds-cycle-detection">Fast &amp; Slow Pointers (Floyd's Cycle Detection)</h2>
 <p><strong>Pattern:</strong> Two pointers moving at different speeds to detect cycles or find midpoints.</p>
 <ul>
 <li><strong>Time:</strong> O(N)</li>
 <li><strong>Space:</strong> O(1)</li>
 <li><strong>Usage:</strong> Detect cycle, Find cycle start, Find middle node, Happy Number.</li>
 </ul>
-<h2 id="template-find-cycle-start-node">Template: Find Cycle Start Node</h2>
-<p><strong>Logic:</strong></p>
+<blockquote>
+<p>Template: Find Cycle Start Node
+<strong>Logic:</strong></p>
+</blockquote>
 <ol>
 <li><strong>Phase 1:</strong> <code>Slow</code> moves 1 step, <code>Fast</code> moves 2 steps. If they meet, a cycle exists.</li>
 <li><strong>Phase 2:</strong> Reset <code>Slow</code> to <code>Head</code>. Keep <code>Fast</code> at meeting point. Both move 1 step. They meet at the entry.</li>
@@ -238,8 +283,8 @@
     <span class="hljs-keyword">return</span> slow; <span class="hljs-comment">// They meet at the cycle entry</span>
 }
 </code></pre>
-<h2 id="️-back-to-top-2"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="4-monotonic-stack">4. Monotonic Stack</h1>
+<h2 id="️-back-to-top"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="2-monotonic-stack">2. Monotonic Stack</h1>
 <p><strong>Pattern:</strong> Maintain a sorted stack to find the &quot;First Greater/Smaller Element&quot;.</p>
 <ul>
 <li><strong>Time:</strong> O(N) (Each element pushed &amp; popped max once), <strong>Space:</strong> O(N).</li>
@@ -265,8 +310,8 @@
     <span class="hljs-keyword">return</span> res;
 }
 </code></pre>
-<h2 id="️-back-to-top-3"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="5-trie-prefix-tree">5. Trie (Prefix Tree)</h1>
+<h2 id="️-back-to-top-1"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="3-trie-prefix-tree">3. Trie (Prefix Tree)</h1>
 <ul>
 <li><strong>Header:</strong> None (Must implement manually)</li>
 <li><strong>Time Complexity:</strong> Insert/Search are <strong>O(L)</strong> where L is word length.</li>
@@ -323,8 +368,8 @@
     }
 };
 </code></pre>
-<h2 id="️-back-to-top-4"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="6-non-recursive-in-order-tree-traversal">6. Non-Recursive In-Order Tree Traversal</h1>
+<h2 id="️-back-to-top-2"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="4-non-recursive-in-order-tree-traversal">4. Non-Recursive In-Order Tree Traversal</h1>
 <p><strong>Pattern:</strong> Iterative DFS using Stack</p>
 <ul>
 <li><strong>Time Complexity:</strong> <strong>O(N)</strong> (Each node is pushed and popped exactly once).</li>
@@ -366,8 +411,8 @@
     <span class="hljs-keyword">return</span> result;
 }
 </code></pre>
-<h2 id="️-back-to-top-5"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="7-breadth-first-search-bfs---graphmatrix">7. Breadth-First Search (BFS) - Graph/Matrix</h1>
+<h2 id="️-back-to-top-3"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="5-breadth-first-search-bfs---graphmatrix">5. Breadth-First Search (BFS) - Graph/Matrix</h1>
 <p><strong>Pattern:</strong> Queue + Visited Set + Level Loop</p>
 <ul>
 <li><strong>Time:</strong> O(V + E) or O(N<em>M), <strong>Space:</strong> O(V) or O(N</em>M)</li>
@@ -403,8 +448,8 @@
     }
 }
 </code></pre>
-<h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="8-dfs-backtrack">8. DFS Backtrack</h1>
+<h2 id="️-back-to-top-4"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="6-dfs-backtrack">6. DFS Backtrack</h1>
 <p><strong>Pattern:</strong> Recursion + State Reset (Choose -&gt; Explore -&gt; Unchoose)</p>
 <ul>
 <li><strong>Time:</strong> O(N!) (Factorial complexity)</li>
@@ -468,8 +513,8 @@
     }
 }
 </code></pre>
-<h2 id="️-back-to-top-7"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="9-dynamic-programming">9. Dynamic Programming</h1>
+<h2 id="️-back-to-top-5"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="7-dynamic-programming">7. Dynamic Programming</h1>
 <p><strong>Pattern:</strong> 2D Grid / State Transition</p>
 <ul>
 <li><strong>Time:</strong> O(N*M)</li>
@@ -522,7 +567,7 @@
     <span class="hljs-keyword">return</span> dp[W];
 }
 </code></pre>
-<h2 id="️-back-to-top-8"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
 
             
             
