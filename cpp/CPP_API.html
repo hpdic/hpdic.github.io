@@ -305,16 +305,42 @@ ss.<span class="hljs-built_in">str</span>(<span class="hljs-string">&quot;&quot;
 s.<span class="hljs-built_in">insert</span>(val);         <span class="hljs-comment">// Insert element</span>
 s.<span class="hljs-built_in">erase</span>(val);          <span class="hljs-comment">// Remove element</span>
 s.<span class="hljs-built_in">count</span>(val);          <span class="hljs-comment">// Return 1 if present, 0 otherwise</span>
+
 <span class="hljs-comment">// Initialization from vector (De-duplication)</span>
 <span class="hljs-function">unordered_set&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">s</span><span class="hljs-params">(vec.begin(), vec.end())</span></span>;
+
+<span class="hljs-comment">// Find (Returns iterator)</span>
+<span class="hljs-keyword">auto</span> it = s.<span class="hljs-built_in">find</span>(val);
+<span class="hljs-keyword">if</span> (it != s.<span class="hljs-built_in">end</span>()) {
+    <span class="hljs-comment">// Found! *it is the value</span>
+}
 </code></pre>
 <h2 id="unordered-map-key-value-pairs">Unordered Map (Key-Value Pairs)</h2>
 <pre><code class="language-cpp">unordered_map&lt;string, <span class="hljs-type">int</span>&gt; mp;
-mp[<span class="hljs-string">&quot;key&quot;</span>] = <span class="hljs-number">1</span>;         <span class="hljs-comment">// Insert or update</span>
-mp.<span class="hljs-built_in">count</span>(<span class="hljs-string">&quot;key&quot;</span>);       <span class="hljs-comment">// Check existence (Preferred over find() for boolean checks)</span>
-mp.<span class="hljs-built_in">erase</span>(<span class="hljs-string">&quot;key&quot;</span>);       <span class="hljs-comment">// Remove key</span>
 
-<span class="hljs-comment">// Iteration (C++17 Structured Binding)</span>
+<span class="hljs-comment">// 1. Insert / Update</span>
+mp[<span class="hljs-string">&quot;apple&quot;</span>] = <span class="hljs-number">1</span>;       <span class="hljs-comment">// Simple but allows default creation</span>
+mp.<span class="hljs-built_in">insert</span>({<span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-number">2</span>});
+
+<span class="hljs-comment">// 2. Check Existence (Two Ways)</span>
+<span class="hljs-comment">// Way A: Simple Check (Double Hash Calculation if accessing later)</span>
+<span class="hljs-keyword">if</span> (mp.<span class="hljs-built_in">count</span>(<span class="hljs-string">&quot;apple&quot;</span>)) { 
+    <span class="hljs-type">int</span> val = mp[<span class="hljs-string">&quot;apple&quot;</span>]; 
+}
+
+<span class="hljs-comment">// Way B: Find &amp; Use (Single Hash Calculation - Best Performance)</span>
+<span class="hljs-keyword">auto</span> it = mp.<span class="hljs-built_in">find</span>(<span class="hljs-string">&quot;apple&quot;</span>);
+<span class="hljs-keyword">if</span> (it != mp.<span class="hljs-built_in">end</span>()) {
+    <span class="hljs-comment">// Found!</span>
+    string key = it-&gt;first;  <span class="hljs-comment">// Access Key</span>
+    <span class="hljs-type">int</span> val = it-&gt;second;    <span class="hljs-comment">// Access Value</span>
+}
+
+<span class="hljs-comment">// 3. Erase</span>
+mp.<span class="hljs-built_in">erase</span>(<span class="hljs-string">&quot;apple&quot;</span>);     <span class="hljs-comment">// Erase by key</span>
+mp.<span class="hljs-built_in">erase</span>(it);          <span class="hljs-comment">// Erase by iterator (O(1))</span>
+
+<span class="hljs-comment">// 4. Iteration (C++17 Structured Binding)</span>
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; [key, val] : mp) {
     <span class="hljs-comment">// Process key and value</span>
 }

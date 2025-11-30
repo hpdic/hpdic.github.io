@@ -191,18 +191,44 @@ unordered_set<int> s;
 s.insert(val);         // Insert element
 s.erase(val);          // Remove element
 s.count(val);          // Return 1 if present, 0 otherwise
+
 // Initialization from vector (De-duplication)
 unordered_set<int> s(vec.begin(), vec.end());
+
+// Find (Returns iterator)
+auto it = s.find(val);
+if (it != s.end()) {
+    // Found! *it is the value
+}
 ```
 
 ## Unordered Map (Key-Value Pairs)
 ```cpp
 unordered_map<string, int> mp;
-mp["key"] = 1;         // Insert or update
-mp.count("key");       // Check existence (Preferred over find() for boolean checks)
-mp.erase("key");       // Remove key
 
-// Iteration (C++17 Structured Binding)
+// 1. Insert / Update
+mp["apple"] = 1;       // Simple but allows default creation
+mp.insert({"banana", 2});
+
+// 2. Check Existence (Two Ways)
+// Way A: Simple Check (Double Hash Calculation if accessing later)
+if (mp.count("apple")) { 
+    int val = mp["apple"]; 
+}
+
+// Way B: Find & Use (Single Hash Calculation - Best Performance)
+auto it = mp.find("apple");
+if (it != mp.end()) {
+    // Found!
+    string key = it->first;  // Access Key
+    int val = it->second;    // Access Value
+}
+
+// 3. Erase
+mp.erase("apple");     // Erase by key
+mp.erase(it);          // Erase by iterator (O(1))
+
+// 4. Iteration (C++17 Structured Binding)
 for (auto& [key, val] : mp) {
     // Process key and value
 }
