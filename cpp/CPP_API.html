@@ -249,7 +249,8 @@ v.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</s
 <pre><code class="language-cpp">s += <span class="hljs-string">&#x27;c&#x27;</span>;              <span class="hljs-comment">// Append character</span>
 s.<span class="hljs-built_in">push_back</span>(<span class="hljs-string">&#x27;c&#x27;</span>);      <span class="hljs-comment">// Append character</span>
 s.<span class="hljs-built_in">insert</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;c&#x27;</span>);   <span class="hljs-comment">// Insert &#x27;c&#x27; at index 0 (1 count)</span>
-s.<span class="hljs-built_in">substr</span>(pos, len);    <span class="hljs-comment">// Return substring starting at pos with length len</span>
+s.<span class="hljs-built_in">substr</span>(pos, len);    <span class="hljs-comment">// Return substring [pos, pos + len)</span>
+s.<span class="hljs-built_in">substr</span>(pos);         <span class="hljs-comment">// Return substring [pos, end) (Default len is npos)</span>
 s.<span class="hljs-built_in">size</span>();              <span class="hljs-comment">// Return length (Same as .length(), preferred for consistency)</span>
 s.<span class="hljs-built_in">resize</span>(n);           <span class="hljs-comment">// Resize/Truncate to length n - O(N) or O(1) if shrinking</span>
 </code></pre>

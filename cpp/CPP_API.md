@@ -125,7 +125,8 @@ v.erase(remove(v.begin(), v.end(), val), v.end());
 s += 'c';              // Append character
 s.push_back('c');      // Append character
 s.insert(0, 1, 'c');   // Insert 'c' at index 0 (1 count)
-s.substr(pos, len);    // Return substring starting at pos with length len
+s.substr(pos, len);    // Return substring [pos, pos + len)
+s.substr(pos);         // Return substring [pos, end) (Default len is npos)
 s.size();              // Return length (Same as .length(), preferred for consistency)
 s.resize(n);           // Resize/Truncate to length n - O(N) or O(1) if shrinking
 ```
