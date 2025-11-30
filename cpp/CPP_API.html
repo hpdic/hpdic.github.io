@@ -191,6 +191,18 @@
 vector&lt;<span class="hljs-type">int</span>&gt; v = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};      <span class="hljs-comment">// Initializer list</span>
 vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">grid</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>)); <span class="hljs-comment">// m x n Matrix initialized to 0</span>
 </code></pre>
+<h2 id="capacity--performance-crucial-for-optimization">Capacity &amp; Performance (Crucial for Optimization)</h2>
+<blockquote>
+<p><strong>Difference:</strong> <code>resize</code> changes logical size (adds elements). <code>reserve</code> changes capacity (pre-allocates memory) to prevent reallocation.</p>
+</blockquote>
+<pre><code class="language-cpp">v.<span class="hljs-built_in">reserve</span>(<span class="hljs-number">100</span>);   <span class="hljs-comment">// Allocates memory for 100 ints. Size is still 0.</span>
+                  <span class="hljs-comment">// Use this before a loop of push_back() to boost speed.</span>
+
+v.<span class="hljs-built_in">resize</span>(<span class="hljs-number">100</span>);    <span class="hljs-comment">// Resizes array to 100. New elements are 0. Size is 100.</span>
+
+v.<span class="hljs-built_in">capacity</span>();     <span class="hljs-comment">// Current allocated capacity</span>
+v.<span class="hljs-built_in">shrink_to_fit</span>(); <span class="hljs-comment">// Frees unused memory (Capacity -&gt; Size)</span>
+</code></pre>
 <h2 id="core-operations-o1">Core Operations (O(1))</h2>
 <ul>
 <li><strong>Performance:</strong> These are amortized <strong>O(1)</strong>. Use them whenever possible.</li>

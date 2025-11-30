@@ -61,6 +61,19 @@ vector<int> v = {1, 2, 3};      // Initializer list
 vector<vector<int>> grid(m, vector<int>(n, 0)); // m x n Matrix initialized to 0
 ```
 
+## Capacity & Performance (Crucial for Optimization)
+> **Difference:** `resize` changes logical size (adds elements). `reserve` changes capacity (pre-allocates memory) to prevent reallocation.
+
+```cpp
+v.reserve(100);   // Allocates memory for 100 ints. Size is still 0.
+                  // Use this before a loop of push_back() to boost speed.
+
+v.resize(100);    // Resizes array to 100. New elements are 0. Size is 100.
+
+v.capacity();     // Current allocated capacity
+v.shrink_to_fit(); // Frees unused memory (Capacity -> Size)
+```
+
 ## Core Operations (O(1))
 - **Performance:** These are amortized **O(1)**. Use them whenever possible.
 
