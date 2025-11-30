@@ -270,6 +270,28 @@ string s = <span class="hljs-built_in">to_string</span>(n); <span class="hljs-co
 <span class="hljs-built_in">tolower</span>(c); <span class="hljs-comment">// Convert char to lowercase; return c if isalpha(c) == false</span>
 <span class="hljs-built_in">toupper</span>(c); <span class="hljs-comment">// Convert char to uppercase; return c if isalpha(c) == false</span>
 </code></pre>
+<h2 id="string-stream-stdstringstream">String Stream (std::stringstream)</h2>
+<p><strong>Header:</strong> <code>&lt;sstream&gt;</code></p>
+<blockquote>
+<p><strong>Usage:</strong> Most efficient way for string splitting, type parsing, and formatting.</p>
+</blockquote>
+<pre><code class="language-cpp"><span class="hljs-function">stringstream <span class="hljs-title">ss</span><span class="hljs-params">(s)</span></span>;       <span class="hljs-comment">// Initialize stream with string s</span>
+string word;
+
+ss &gt;&gt; word;               <span class="hljs-comment">// Extract next word (skips spaces/tabs/newlines)</span>
+ss &lt;&lt; val;                <span class="hljs-comment">// Insert value (int/string/etc) into stream</span>
+ss.<span class="hljs-built_in">str</span>();                 <span class="hljs-comment">// Return the underlying string</span>
+<span class="hljs-built_in">getline</span>(ss, word, <span class="hljs-string">&#x27;,&#x27;</span>);   <span class="hljs-comment">// Read into &#x27;word&#x27; until delimiter &#x27;,&#x27;</span>
+
+<span class="hljs-comment">// Pattern 1: Split by space (Loop)</span>
+<span class="hljs-keyword">while</span> (ss &gt;&gt; word) { ... }
+
+<span class="hljs-comment">// Pattern 2: Split by specific delimiter (Loop)</span>
+<span class="hljs-keyword">while</span> (<span class="hljs-built_in">getline</span>(ss, word, <span class="hljs-string">&#x27;,&#x27;</span>)) { ... }
+
+<span class="hljs-comment">// Pattern 3: Reset stream for reuse</span>
+ss.<span class="hljs-built_in">str</span>(<span class="hljs-string">&quot;&quot;</span>); ss.<span class="hljs-built_in">clear</span>();   <span class="hljs-comment">// Must clear content AND error flags</span>
+</code></pre>
 <h2 id="️-back-to-top-2"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
 <h1 id="4-associative-containers-hash-maps--sets">4. Associative Containers (Hash Maps &amp; Sets)</h1>
 <p><strong>Header:</strong> <code>&lt;unordered_map&gt;</code>, <code>&lt;unordered_set&gt;</code></p>

@@ -152,6 +152,29 @@ tolower(c); // Convert char to lowercase; return c if isalpha(c) == false
 toupper(c); // Convert char to uppercase; return c if isalpha(c) == false
 ```
 
+## String Stream (std::stringstream)
+**Header:** `<sstream>`
+> **Usage:** Most efficient way for string splitting, type parsing, and formatting.
+
+```cpp
+stringstream ss(s);       // Initialize stream with string s
+string word;
+
+ss >> word;               // Extract next word (skips spaces/tabs/newlines)
+ss << val;                // Insert value (int/string/etc) into stream
+ss.str();                 // Return the underlying string
+getline(ss, word, ',');   // Read into 'word' until delimiter ','
+
+// Pattern 1: Split by space (Loop)
+while (ss >> word) { ... }
+
+// Pattern 2: Split by specific delimiter (Loop)
+while (getline(ss, word, ',')) { ... }
+
+// Pattern 3: Reset stream for reuse
+ss.str(""); ss.clear();   // Must clear content AND error flags
+```
+
 [⬆️ Back to Top](#table-of-contents)
 ---
 
