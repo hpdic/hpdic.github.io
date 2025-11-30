@@ -31,27 +31,20 @@ This pattern works for 90% of linked list modification problems.
 
 ```cpp
 ListNode* solve(ListNode* head) {
-    // 1. Create Dummy pointing to head
-    ListNode* dummy = new ListNode(0);
-    dummy->next = head;
+    // 1. Create Dummy on Stack (Zero Overhead, Auto-cleanup)
+    ListNode dummy(0);
+    dummy.next = head;
     
-    // 2. Initialize current pointer at Dummy (Points to "Before Head")
-    ListNode* curr = dummy;
+    // 2. Initialize pointer to address of dummy
+    ListNode* curr = &dummy;
     
-    // 3. Perform Operations (Insert / Delete / Swap)
-    // Example: Deleting the next node
-    // while (curr->next != nullptr) {
-    //     if (shouldDelete(curr->next)) {
-    //         curr->next = curr->next->next;
-    //     } else {
-    //         curr = curr->next;
-    //     }
-    // }
+    // 3. Perform Operations
+    // Example: Iterate or Modify
+    // while (curr->next) { ... }
     
-    // 4. Return the new head (Skip Dummy)
-    ListNode* newHead = dummy->next;
-    delete dummy; // Good practice to prevent memory leak
-    return newHead;
+    // 4. Return new head
+    // 'dummy' is destroyed automatically, but 'dummy.next' points to the valid heap node.
+    return dummy.next;
 }
 ```
 

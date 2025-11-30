@@ -172,27 +172,20 @@ Use a Dummy Node whenever the <strong>head of the list might change</strong>:</p
 This pattern works for 90% of linked list modification problems.</p>
 </blockquote>
 <pre><code class="language-cpp"><span class="hljs-function">ListNode* <span class="hljs-title">solve</span><span class="hljs-params">(ListNode* head)</span> </span>{
-    <span class="hljs-comment">// 1. Create Dummy pointing to head</span>
-    ListNode* dummy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);
-    dummy-&gt;next = head;
+    <span class="hljs-comment">// 1. Create Dummy on Stack (Zero Overhead, Auto-cleanup)</span>
+    <span class="hljs-function">ListNode <span class="hljs-title">dummy</span><span class="hljs-params">(<span class="hljs-number">0</span>)</span></span>;
+    dummy.next = head;
     
-    <span class="hljs-comment">// 2. Initialize current pointer at Dummy (Points to &quot;Before Head&quot;)</span>
-    ListNode* curr = dummy;
+    <span class="hljs-comment">// 2. Initialize pointer to address of dummy</span>
+    ListNode* curr = &amp;dummy;
     
-    <span class="hljs-comment">// 3. Perform Operations (Insert / Delete / Swap)</span>
-    <span class="hljs-comment">// Example: Deleting the next node</span>
-    <span class="hljs-comment">// while (curr-&gt;next != nullptr) {</span>
-    <span class="hljs-comment">//     if (shouldDelete(curr-&gt;next)) {</span>
-    <span class="hljs-comment">//         curr-&gt;next = curr-&gt;next-&gt;next;</span>
-    <span class="hljs-comment">//     } else {</span>
-    <span class="hljs-comment">//         curr = curr-&gt;next;</span>
-    <span class="hljs-comment">//     }</span>
-    <span class="hljs-comment">// }</span>
+    <span class="hljs-comment">// 3. Perform Operations</span>
+    <span class="hljs-comment">// Example: Iterate or Modify</span>
+    <span class="hljs-comment">// while (curr-&gt;next) { ... }</span>
     
-    <span class="hljs-comment">// 4. Return the new head (Skip Dummy)</span>
-    ListNode* newHead = dummy-&gt;next;
-    <span class="hljs-keyword">delete</span> dummy; <span class="hljs-comment">// Good practice to prevent memory leak</span>
-    <span class="hljs-keyword">return</span> newHead;
+    <span class="hljs-comment">// 4. Return new head</span>
+    <span class="hljs-comment">// &#x27;dummy&#x27; is destroyed automatically, but &#x27;dummy.next&#x27; points to the valid heap node.</span>
+    <span class="hljs-keyword">return</span> dummy.next;
 }
 </code></pre>
 <h2 id="reverse-a-linked-list">Reverse a Linked List</h2>
