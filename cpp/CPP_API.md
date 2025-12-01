@@ -31,9 +31,6 @@ int grid[100][100];      // 2D Array (Use global/static if size is huge to avoid
 ```cpp
 arr[i] = 5;              // Access/Modify O(1)
 
-// Get Size (Old C style)
-int len = sizeof(arr) / sizeof(arr[0]); 
-
 // Get Size (C++17 style - Recommended)
 int len = std::size(arr);
 
@@ -41,11 +38,6 @@ int len = std::size(arr);
 // Works for ANY value (e.g., 5, nullptr). Requires <algorithm>.
 fill(begin(arr), end(arr), 5); 
 fill(begin(arr), end(arr), nullptr);
-
-// Set memory (C-Style: Byte-wise; fast reset to 0 or -1)
-// Requires <cstring>
-memset(arr, 0, sizeof(arr)); 
-memset(arr, -1, sizeof(arr)); 
 ```
 
 ## ⚠️ Interview Pitfalls
