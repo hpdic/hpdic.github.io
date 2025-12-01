@@ -376,14 +376,26 @@ int index = it - v.begin();
 
 ## Numerical & Modification
 ```cpp
+// Basic Math (<cmath>)
+pow(2, 10);        // 2^10 = 1024.0 (double)
+sqrt(16);          // 4.0 (double)
+abs(n);            // Absolute value (int/double)
+
+// Rounding (<cmath>)
+ceil(2.3);         // 3.0 (Round UP)
+floor(2.7);        // 2.0 (Round DOWN)
+round(2.5);        // 3.0 (Round to nearest)
+
+// Modification (<algorithm>)
 reverse(v.begin(), v.end());          // In-place reverse O(N)
-max(a, b); / min(a, b);               // Return max/min
-max({a, b, c, d}); 
-min({a, b, c});
 swap(a, b);                           // Swap values
-abs(n);                               // Absolute value
-accumulate(v.begin(), v.end(), 0);    // Calculate sum O(N)
+max(a, b); / min(a, b);               // Basic
+max({a, b, c}); / min({a, b, c});     // Initializer list (C++11)
+
+// Aggregation (<numeric>)
+accumulate(v.begin(), v.end(), 0);    // Sum (Initial value is 0)
 gcd(a, b);                            // Greatest Common Divisor (C++17)
+lcm(a, b);                            // Least Common Multiple (C++17)
 ```
 
 ## Iterator Operations (Header: `<iterator>`)

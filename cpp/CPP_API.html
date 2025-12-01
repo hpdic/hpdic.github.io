@@ -467,14 +467,26 @@ vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">in
 <span class="hljs-type">int</span> index = it - v.<span class="hljs-built_in">begin</span>();
 </code></pre>
 <h2 id="numerical--modification">Numerical &amp; Modification</h2>
-<pre><code class="language-cpp"><span class="hljs-built_in">reverse</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>());          <span class="hljs-comment">// In-place reverse O(N)</span>
-<span class="hljs-built_in">max</span>(a, b); / <span class="hljs-built_in">min</span>(a, b);               <span class="hljs-comment">// Return max/min</span>
-<span class="hljs-built_in">max</span>({a, b, c, d}); 
-<span class="hljs-built_in">min</span>({a, b, c});
+<pre><code class="language-cpp"><span class="hljs-comment">// Basic Math (&lt;cmath&gt;)</span>
+<span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, <span class="hljs-number">10</span>);        <span class="hljs-comment">// 2^10 = 1024.0 (double)</span>
+<span class="hljs-built_in">sqrt</span>(<span class="hljs-number">16</span>);          <span class="hljs-comment">// 4.0 (double)</span>
+<span class="hljs-built_in">abs</span>(n);            <span class="hljs-comment">// Absolute value (int/double)</span>
+
+<span class="hljs-comment">// Rounding (&lt;cmath&gt;)</span>
+<span class="hljs-built_in">ceil</span>(<span class="hljs-number">2.3</span>);         <span class="hljs-comment">// 3.0 (Round UP)</span>
+<span class="hljs-built_in">floor</span>(<span class="hljs-number">2.7</span>);        <span class="hljs-comment">// 2.0 (Round DOWN)</span>
+<span class="hljs-built_in">round</span>(<span class="hljs-number">2.5</span>);        <span class="hljs-comment">// 3.0 (Round to nearest)</span>
+
+<span class="hljs-comment">// Modification (&lt;algorithm&gt;)</span>
+<span class="hljs-built_in">reverse</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>());          <span class="hljs-comment">// In-place reverse O(N)</span>
 <span class="hljs-built_in">swap</span>(a, b);                           <span class="hljs-comment">// Swap values</span>
-<span class="hljs-built_in">abs</span>(n);                               <span class="hljs-comment">// Absolute value</span>
-<span class="hljs-built_in">accumulate</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);    <span class="hljs-comment">// Calculate sum O(N)</span>
+<span class="hljs-built_in">max</span>(a, b); / <span class="hljs-built_in">min</span>(a, b);               <span class="hljs-comment">// Basic</span>
+<span class="hljs-built_in">max</span>({a, b, c}); / <span class="hljs-built_in">min</span>({a, b, c});     <span class="hljs-comment">// Initializer list (C++11)</span>
+
+<span class="hljs-comment">// Aggregation (&lt;numeric&gt;)</span>
+<span class="hljs-built_in">accumulate</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);    <span class="hljs-comment">// Sum (Initial value is 0)</span>
 <span class="hljs-built_in">gcd</span>(a, b);                            <span class="hljs-comment">// Greatest Common Divisor (C++17)</span>
+<span class="hljs-built_in">lcm</span>(a, b);                            <span class="hljs-comment">// Least Common Multiple (C++17)</span>
 </code></pre>
 <h2 id="iterator-operations-header-iterator">Iterator Operations (Header: <code>&lt;iterator&gt;</code>)</h2>
 <blockquote>
