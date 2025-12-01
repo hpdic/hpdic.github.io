@@ -2,7 +2,7 @@
 
 <h1 id="table-of-contents">Table of Contents</h1>
 
-- [1. Linked Lists](#1-linked-lists)
+- [1. Linked List](#1-linked-list)
 - [2. Monotonic Stack](#2-monotonic-stack)
 - [3. Trie (Prefix Tree)](#3-trie-prefix-tree)
 - [4. Non-Recursive In-Order Tree Traversal](#4-non-recursive-in-order-tree-traversal)
@@ -13,7 +13,7 @@
 
 ---
 
-# 1. Linked Lists
+# 1. Linked List
 
 ## Dummy Node Strategy
 **Pattern:** Creating a temporary "pre-head" node to simplify boundary conditions.
@@ -46,6 +46,29 @@ ListNode* solve(ListNode* head) {
     // 4. Return new head
     // 'dummy' is destroyed automatically, but 'dummy.next' points to the valid heap node.
     return dummy.next;
+}
+```
+
+## Merge Two Sorted Lists (Recursive)
+**Pattern:** Recursion / Divide & Conquer
+- **Time:** O(N + M), **Space:** O(N + M) (Recursion Stack)
+- **Core Logic:** Pick Smaller Head -> Recurse for Rest -> Link & Return.
+
+```cpp
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    // 1. Base Cases: If one list is empty, return the other
+    if (!l1) return l2;
+    if (!l2) return l1;
+
+    // 2. Recursive Step: Pick the smaller node as the new head
+    if (l1->val < l2->val) {
+        // "My next node is the result of merging the rest"
+        l1->next = mergeTwoLists(l1->next, l2);
+        return l1;
+    } else {
+        l2->next = mergeTwoLists(l1, l2->next);
+        return l2;
+    }
 }
 ```
 

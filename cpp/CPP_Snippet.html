@@ -2,7 +2,7 @@
         <html>
         <head>
             <meta charset="UTF-8">
-            <title>1&period; Linked Lists</title>
+            <title>1&period; Linked List</title>
             <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@
             <h1 align="center">C++ Coding Snippets</h1>
 <h1 id="table-of-contents">Table of Contents</h1>
 <ul>
-<li><a href="#1-linked-lists">1. Linked Lists</a></li>
+<li><a href="#1-linked-list">1. Linked List</a></li>
 <li><a href="#2-monotonic-stack">2. Monotonic Stack</a></li>
 <li><a href="#3-trie-prefix-tree">3. Trie (Prefix Tree)</a></li>
 <li><a href="#4-non-recursive-in-order-tree-traversal">4. Non-Recursive In-Order Tree Traversal</a></li>
@@ -151,7 +151,7 @@
 <li><a href="#8-dynamic-programming">8. Dynamic Programming</a></li>
 </ul>
 <hr>
-<h1 id="1-linked-lists">1. Linked Lists</h1>
+<h1 id="1-linked-list">1. Linked List</h1>
 <h2 id="dummy-node-strategy">Dummy Node Strategy</h2>
 <p><strong>Pattern:</strong> Creating a temporary &quot;pre-head&quot; node to simplify boundary conditions.</p>
 <ul>
@@ -187,6 +187,28 @@ This pattern works for 90% of linked list modification problems.</p>
     <span class="hljs-comment">// 4. Return new head</span>
     <span class="hljs-comment">// &#x27;dummy&#x27; is destroyed automatically, but &#x27;dummy.next&#x27; points to the valid heap node.</span>
     <span class="hljs-keyword">return</span> dummy.next;
+}
+</code></pre>
+<h2 id="merge-two-sorted-lists-recursive">Merge Two Sorted Lists (Recursive)</h2>
+<p><strong>Pattern:</strong> Recursion / Divide &amp; Conquer</p>
+<ul>
+<li><strong>Time:</strong> O(N + M), <strong>Space:</strong> O(N + M) (Recursion Stack)</li>
+<li><strong>Core Logic:</strong> Pick Smaller Head -&gt; Recurse for Rest -&gt; Link &amp; Return.</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-function">ListNode* <span class="hljs-title">mergeTwoLists</span><span class="hljs-params">(ListNode* l1, ListNode* l2)</span> </span>{
+    <span class="hljs-comment">// 1. Base Cases: If one list is empty, return the other</span>
+    <span class="hljs-keyword">if</span> (!l1) <span class="hljs-keyword">return</span> l2;
+    <span class="hljs-keyword">if</span> (!l2) <span class="hljs-keyword">return</span> l1;
+
+    <span class="hljs-comment">// 2. Recursive Step: Pick the smaller node as the new head</span>
+    <span class="hljs-keyword">if</span> (l1-&gt;val &lt; l2-&gt;val) {
+        <span class="hljs-comment">// &quot;My next node is the result of merging the rest&quot;</span>
+        l1-&gt;next = <span class="hljs-built_in">mergeTwoLists</span>(l1-&gt;next, l2);
+        <span class="hljs-keyword">return</span> l1;
+    } <span class="hljs-keyword">else</span> {
+        l2-&gt;next = <span class="hljs-built_in">mergeTwoLists</span>(l1, l2-&gt;next);
+        <span class="hljs-keyword">return</span> l2;
+    }
 }
 </code></pre>
 <h2 id="reverse-a-linked-list">Reverse a Linked List</h2>
