@@ -75,14 +75,15 @@ v.shrink_to_fit(); // Frees unused memory (Capacity -> Size)
 - **Performance:** These are amortized **O(1)**. Use them whenever possible.
 
 ```cpp
-v.push_back(val);      // Append element to end
-v.pop_back();          // Remove last element
-v.back();              // Access last element reference (v[n-1])
-v.front();             // Access first element reference (v[0])
-v.size();              // Return number of elements (size_t)
-v.empty();             // Check if vector is empty (bool)
-v.resize(n);           // Resize container (fills default values if growing)
-v.clear();             // Remove all elements (Capacity remains)
+v.push_back(val);           // Append element to end
+v.emplace_back(key, val);   // equivalent to but faster than v.push_back({key, val});
+v.pop_back();               // Remove last element
+v.back();                   // Access last element reference (v[n-1])
+v.front();                  // Access first element reference (v[0])
+v.size();                   // Return number of elements (size_t)
+v.empty();                  // Check if vector is empty (bool)
+v.resize(n);                // Resize container (fills default values if growing)
+v.clear();                  // Remove all elements (Capacity remains)
 ```
 
 ## Insert & Erase (O(N))

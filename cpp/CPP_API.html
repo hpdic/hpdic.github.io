@@ -204,14 +204,15 @@ v.<span class="hljs-built_in">shrink_to_fit</span>(); <span class="hljs-comment"
 <ul>
 <li><strong>Performance:</strong> These are amortized <strong>O(1)</strong>. Use them whenever possible.</li>
 </ul>
-<pre><code class="language-cpp">v.<span class="hljs-built_in">push_back</span>(val);      <span class="hljs-comment">// Append element to end</span>
-v.<span class="hljs-built_in">pop_back</span>();          <span class="hljs-comment">// Remove last element</span>
-v.<span class="hljs-built_in">back</span>();              <span class="hljs-comment">// Access last element reference (v[n-1])</span>
-v.<span class="hljs-built_in">front</span>();             <span class="hljs-comment">// Access first element reference (v[0])</span>
-v.<span class="hljs-built_in">size</span>();              <span class="hljs-comment">// Return number of elements (size_t)</span>
-v.<span class="hljs-built_in">empty</span>();             <span class="hljs-comment">// Check if vector is empty (bool)</span>
-v.<span class="hljs-built_in">resize</span>(n);           <span class="hljs-comment">// Resize container (fills default values if growing)</span>
-v.<span class="hljs-built_in">clear</span>();             <span class="hljs-comment">// Remove all elements (Capacity remains)</span>
+<pre><code class="language-cpp">v.<span class="hljs-built_in">push_back</span>(val);           <span class="hljs-comment">// Append element to end</span>
+v.<span class="hljs-built_in">emplace_back</span>(key, val);   <span class="hljs-comment">// equivalent to but faster than v.push_back({key, val});</span>
+v.<span class="hljs-built_in">pop_back</span>();               <span class="hljs-comment">// Remove last element</span>
+v.<span class="hljs-built_in">back</span>();                   <span class="hljs-comment">// Access last element reference (v[n-1])</span>
+v.<span class="hljs-built_in">front</span>();                  <span class="hljs-comment">// Access first element reference (v[0])</span>
+v.<span class="hljs-built_in">size</span>();                   <span class="hljs-comment">// Return number of elements (size_t)</span>
+v.<span class="hljs-built_in">empty</span>();                  <span class="hljs-comment">// Check if vector is empty (bool)</span>
+v.<span class="hljs-built_in">resize</span>(n);                <span class="hljs-comment">// Resize container (fills default values if growing)</span>
+v.<span class="hljs-built_in">clear</span>();                  <span class="hljs-comment">// Remove all elements (Capacity remains)</span>
 </code></pre>
 <h2 id="insert--erase-on">Insert &amp; Erase (O(N))</h2>
 <ul>
