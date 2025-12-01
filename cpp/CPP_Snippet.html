@@ -146,8 +146,9 @@
 <li><a href="#3-trie-prefix-tree">3. Trie (Prefix Tree)</a></li>
 <li><a href="#4-non-recursive-in-order-tree-traversal">4. Non-Recursive In-Order Tree Traversal</a></li>
 <li><a href="#5-breadth-first-search-bfs---graphmatrix">5. Breadth-First Search (BFS) - Graph/Matrix</a></li>
-<li><a href="#6-dfs-backtrack">6. DFS Backtrack</a></li>
-<li><a href="#7-dynamic-programming">7. Dynamic Programming</a></li>
+<li><a href="#6-graph-cycle-detection">6. Graph Cycle Detection</a></li>
+<li><a href="#7-dfs-backtrack">7. DFS Backtrack</a></li>
+<li><a href="#8-dynamic-programming">8. Dynamic Programming</a></li>
 </ul>
 <hr>
 <h1 id="1-linked-lists">1. Linked Lists</h1>
@@ -442,7 +443,41 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
 }
 </code></pre>
 <h2 id="️-back-to-top-4"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="6-dfs-backtrack">6. DFS Backtrack</h1>
+<h1 id="6-graph-cycle-detection">6. Graph Cycle Detection</h1>
+<p><strong>Pattern:</strong> Differentiate between Directed and Undirected graphs strategies.</p>
+<ul>
+<li><strong>Time:</strong> O(V + E) for both.</li>
+<li><strong>Space:</strong> O(V) for both.</li>
+</ul>
+<h2 id="template-dfs-three-coloring-on-directed-graphs">Template: DFS Three-Coloring on Directed Graphs</h2>
+<p><strong>Logic:</strong> Use 3 states to detect back-edges (pointing to an ancestor in the current recursion stack).</p>
+<ul>
+<li><code>0</code>: Unvisited</li>
+<li><code>1</code>: Visiting (Current Path) -&gt; <strong>Cycle found if met</strong></li>
+<li><code>2</code>: Visited (Safe)</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-comment">// Returns true if a cycle exists</span>
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">hasCycle</span><span class="hljs-params">(<span class="hljs-type">int</span> curr, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; adj, vector&lt;<span class="hljs-type">int</span>&gt;&amp; state)</span> </span>{
+    <span class="hljs-comment">// 1. Found a node in the current recursion stack -&gt; Cycle!</span>
+    <span class="hljs-keyword">if</span> (state[curr] == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    
+    <span class="hljs-comment">// 2. Found a processed safe node -&gt; No cycle here, prune.</span>
+    <span class="hljs-keyword">if</span> (state[curr] == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    
+    <span class="hljs-comment">// 3. Mark as &quot;Visiting&quot;</span>
+    state[curr] = <span class="hljs-number">1</span>;
+    
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> next : adj[curr]) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">hasCycle</span>(next, adj, state)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    
+    <span class="hljs-comment">// 4. Backtrack: Mark as &quot;Visited&quot; (Safe)</span>
+    state[curr] = <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+</code></pre>
+<h2 id="️-back-to-top-5"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="7-dfs-backtrack">7. DFS Backtrack</h1>
 <p><strong>Pattern:</strong> Recursion + State Reset (Choose -&gt; Explore -&gt; Unchoose)</p>
 <ul>
 <li><strong>Time:</strong> O(N!) (Factorial complexity)</li>
@@ -506,8 +541,8 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     }
 }
 </code></pre>
-<h2 id="️-back-to-top-5"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="7-dynamic-programming">7. Dynamic Programming</h1>
+<h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="8-dynamic-programming">8. Dynamic Programming</h1>
 <p><strong>Pattern:</strong> 2D Grid / State Transition</p>
 <ul>
 <li><strong>Time:</strong> O(N*M)</li>
@@ -560,7 +595,7 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     <span class="hljs-keyword">return</span> dp[W];
 }
 </code></pre>
-<h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h2 id="️-back-to-top-7"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
 
             
             

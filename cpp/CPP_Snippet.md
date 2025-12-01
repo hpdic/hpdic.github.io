@@ -7,8 +7,9 @@
 - [3. Trie (Prefix Tree)](#3-trie-prefix-tree)
 - [4. Non-Recursive In-Order Tree Traversal](#4-non-recursive-in-order-tree-traversal)
 - [5. Breadth-First Search (BFS) - Graph/Matrix](#5-breadth-first-search-bfs---graphmatrix)
-- [6. DFS Backtrack](#6-dfs-backtrack)
-- [7. Dynamic Programming](#7-dynamic-programming)
+- [6. Graph Cycle Detection](#6-graph-cycle-detection)
+- [7. DFS Backtrack](#7-dfs-backtrack)
+- [8. Dynamic Programming](#8-dynamic-programming)
 
 ---
 
@@ -318,7 +319,43 @@ void bfs(int startNode, int n, vector<vector<int>>& adj) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 6. DFS Backtrack
+# 6. Graph Cycle Detection
+**Pattern:** Differentiate between Directed and Undirected graphs strategies.
+- **Time:** O(V + E) for both.
+- **Space:** O(V) for both.
+
+## Template: DFS Three-Coloring on Directed Graphs
+**Logic:** Use 3 states to detect back-edges (pointing to an ancestor in the current recursion stack).
+* `0`: Unvisited
+* `1`: Visiting (Current Path) -> **Cycle found if met**
+* `2`: Visited (Safe)
+
+```cpp
+// Returns true if a cycle exists
+bool hasCycle(int curr, vector<vector<int>>& adj, vector<int>& state) {
+    // 1. Found a node in the current recursion stack -> Cycle!
+    if (state[curr] == 1) return true;
+    
+    // 2. Found a processed safe node -> No cycle here, prune.
+    if (state[curr] == 2) return false;
+    
+    // 3. Mark as "Visiting"
+    state[curr] = 1;
+    
+    for (int next : adj[curr]) {
+        if (hasCycle(next, adj, state)) return true;
+    }
+    
+    // 4. Backtrack: Mark as "Visited" (Safe)
+    state[curr] = 2;
+    return false;
+}
+```
+
+[⬆️ Back to Top](#table-of-contents)
+---
+
+# 7. DFS Backtrack
 **Pattern:** Recursion + State Reset (Choose -> Explore -> Unchoose)
 - **Time:** O(N!) (Factorial complexity)
 - **Space:** O(N) (Recursion stack + Visited array)
@@ -388,7 +425,7 @@ void backtrack(vector<int>& nums, int start, vector<vector<int>>& res) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 7. Dynamic Programming
+# 8. Dynamic Programming
 **Pattern:** 2D Grid / State Transition
 - **Time:** O(N*M)
 - **Space:** O(N*M) (Can be optimized to O(N) using rolling array)
