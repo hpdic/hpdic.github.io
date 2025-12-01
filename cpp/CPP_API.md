@@ -84,30 +84,10 @@ v.size();                   // Return number of elements (size_t)
 v.empty();                  // Check if vector is empty (bool)
 v.resize(n);                // Resize container (fills default values if growing)
 v.clear();                  // Remove all elements (Capacity remains)
-```
 
-## Insert & Erase (O(N))
-- **⚠️ Warning:** These operations shift elements. Avoid using inside loops if possible.
-- **Note:** Vector `insert` requires iterators, NOT index.
-
-```cpp
-// Insert val at index i
-v.insert(v.begin() + i, val);
-
-// Insert n copies of val at index i
-v.insert(v.begin() + i, n, val); 
-
-// Insert a range from another vector
-v.insert(v.end(), v2.begin(), v2.end()); 
-
-// Erase element at index i
-v.erase(v.begin() + i);
-
-// Erase range [start, end)
-v.erase(v.begin() + i, v.begin() + j);
-
-// Remove specific value (Erase-Remove Idiom)
-v.erase(remove(v.begin(), v.end(), val), v.end());
+// Insert & Erase (O(N)), they shift elements; avoid using inside loops
+v.insert(v.begin() + i, val);   // Insert val at index i, slow
+v.erase(v.begin() + i);         // Erase element at index i
 ```
 
 [⬆️ Back to Top](#table-of-contents)

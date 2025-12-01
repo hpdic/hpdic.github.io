@@ -213,29 +213,10 @@ v.<span class="hljs-built_in">size</span>();                   <span class="hljs
 v.<span class="hljs-built_in">empty</span>();                  <span class="hljs-comment">// Check if vector is empty (bool)</span>
 v.<span class="hljs-built_in">resize</span>(n);                <span class="hljs-comment">// Resize container (fills default values if growing)</span>
 v.<span class="hljs-built_in">clear</span>();                  <span class="hljs-comment">// Remove all elements (Capacity remains)</span>
-</code></pre>
-<h2 id="insert--erase-on">Insert &amp; Erase (O(N))</h2>
-<ul>
-<li><strong>⚠️ Warning:</strong> These operations shift elements. Avoid using inside loops if possible.</li>
-<li><strong>Note:</strong> Vector <code>insert</code> requires iterators, NOT index.</li>
-</ul>
-<pre><code class="language-cpp"><span class="hljs-comment">// Insert val at index i</span>
-v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">begin</span>() + i, val);
 
-<span class="hljs-comment">// Insert n copies of val at index i</span>
-v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">begin</span>() + i, n, val); 
-
-<span class="hljs-comment">// Insert a range from another vector</span>
-v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">end</span>(), v2.<span class="hljs-built_in">begin</span>(), v2.<span class="hljs-built_in">end</span>()); 
-
-<span class="hljs-comment">// Erase element at index i</span>
-v.<span class="hljs-built_in">erase</span>(v.<span class="hljs-built_in">begin</span>() + i);
-
-<span class="hljs-comment">// Erase range [start, end)</span>
-v.<span class="hljs-built_in">erase</span>(v.<span class="hljs-built_in">begin</span>() + i, v.<span class="hljs-built_in">begin</span>() + j);
-
-<span class="hljs-comment">// Remove specific value (Erase-Remove Idiom)</span>
-v.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), val), v.<span class="hljs-built_in">end</span>());
+<span class="hljs-comment">// Insert &amp; Erase (O(N)), they shift elements; avoid using inside loops</span>
+v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">begin</span>() + i, val);   <span class="hljs-comment">// Insert val at index i, slow</span>
+v.<span class="hljs-built_in">erase</span>(v.<span class="hljs-built_in">begin</span>() + i);         <span class="hljs-comment">// Erase element at index i</span>
 </code></pre>
 <h2 id="️-back-to-top-1"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
 <h1 id="3-string-manipulation-stdstring">3. String Manipulation (std::string)</h1>
