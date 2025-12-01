@@ -37,7 +37,12 @@ int len = sizeof(arr) / sizeof(arr[0]);
 // Get Size (C++17 style - Recommended)
 int len = std::size(arr);
 
-// Set memory (fast reset to 0 or -1)
+// Set memory (C++ Style: Element-wise)
+// Works for ANY value (e.g., 5, nullptr). Requires <algorithm>.
+fill(begin(arr), end(arr), 5); 
+fill(begin(arr), end(arr), nullptr);
+
+// Set memory (C-Style: Byte-wise; fast reset to 0 or -1)
 // Requires <cstring>
 memset(arr, 0, sizeof(arr)); 
 memset(arr, -1, sizeof(arr)); 

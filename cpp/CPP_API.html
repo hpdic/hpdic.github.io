@@ -172,7 +172,12 @@
 <span class="hljs-comment">// Get Size (C++17 style - Recommended)</span>
 <span class="hljs-type">int</span> len = std::<span class="hljs-built_in">size</span>(arr);
 
-<span class="hljs-comment">// Set memory (fast reset to 0 or -1)</span>
+<span class="hljs-comment">// Set memory (C++ Style: Element-wise)</span>
+<span class="hljs-comment">// Works for ANY value (e.g., 5, nullptr). Requires &lt;algorithm&gt;.</span>
+<span class="hljs-built_in">fill</span>(<span class="hljs-built_in">begin</span>(arr), <span class="hljs-built_in">end</span>(arr), <span class="hljs-number">5</span>); 
+<span class="hljs-built_in">fill</span>(<span class="hljs-built_in">begin</span>(arr), <span class="hljs-built_in">end</span>(arr), <span class="hljs-literal">nullptr</span>);
+
+<span class="hljs-comment">// Set memory (C-Style: Byte-wise; fast reset to 0 or -1)</span>
 <span class="hljs-comment">// Requires &lt;cstring&gt;</span>
 <span class="hljs-built_in">memset</span>(arr, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(arr)); 
 <span class="hljs-built_in">memset</span>(arr, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(arr)); 
