@@ -473,6 +473,8 @@ vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">in
 <span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, <span class="hljs-number">10</span>);        <span class="hljs-comment">// 2^10 = 1024.0 (double)</span>
 <span class="hljs-built_in">sqrt</span>(<span class="hljs-number">16</span>);          <span class="hljs-comment">// 4.0 (double)</span>
 <span class="hljs-built_in">abs</span>(n);            <span class="hljs-comment">// Absolute value (int/double)</span>
+<span class="hljs-built_in">gcd</span>(a, b);         <span class="hljs-comment">// Greatest Common Divisor (C++17)</span>
+<span class="hljs-built_in">lcm</span>(a, b);         <span class="hljs-comment">// Least Common Multiple (C++17)</span>
 
 <span class="hljs-comment">// Rounding (&lt;cmath&gt;)</span>
 <span class="hljs-built_in">ceil</span>(<span class="hljs-number">2.3</span>);         <span class="hljs-comment">// 3.0 (Round UP)</span>
@@ -487,8 +489,11 @@ vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">in
 
 <span class="hljs-comment">// Aggregation (&lt;numeric&gt;)</span>
 <span class="hljs-built_in">accumulate</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);    <span class="hljs-comment">// Sum (Initial value is 0)</span>
-<span class="hljs-built_in">gcd</span>(a, b);                            <span class="hljs-comment">// Greatest Common Divisor (C++17)</span>
-<span class="hljs-built_in">lcm</span>(a, b);                            <span class="hljs-comment">// Least Common Multiple (C++17)</span>
+
+<span class="hljs-comment">// Find Max/Min Element in Vector O(N)</span>
+<span class="hljs-comment">// Note: Returns an iterator, so use * to get value</span>
+<span class="hljs-type">int</span> maxVal = *<span class="hljs-built_in">max_element</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>()); 
+<span class="hljs-type">int</span> minVal = *<span class="hljs-built_in">min_element</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>());
 </code></pre>
 <h2 id="iterator-operations-header-iterator">Iterator Operations (Header: <code>&lt;iterator&gt;</code>)</h2>
 <blockquote>

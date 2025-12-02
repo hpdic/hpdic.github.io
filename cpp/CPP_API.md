@@ -382,6 +382,8 @@ int index = it - v.begin();
 pow(2, 10);        // 2^10 = 1024.0 (double)
 sqrt(16);          // 4.0 (double)
 abs(n);            // Absolute value (int/double)
+gcd(a, b);         // Greatest Common Divisor (C++17)
+lcm(a, b);         // Least Common Multiple (C++17)
 
 // Rounding (<cmath>)
 ceil(2.3);         // 3.0 (Round UP)
@@ -396,8 +398,11 @@ max({a, b, c}); / min({a, b, c});     // Initializer list (C++11)
 
 // Aggregation (<numeric>)
 accumulate(v.begin(), v.end(), 0);    // Sum (Initial value is 0)
-gcd(a, b);                            // Greatest Common Divisor (C++17)
-lcm(a, b);                            // Least Common Multiple (C++17)
+
+// Find Max/Min Element in Vector O(N)
+// Note: Returns an iterator, so use * to get value
+int maxVal = *max_element(v.begin(), v.end()); 
+int minVal = *min_element(v.begin(), v.end());
 ```
 
 ## Iterator Operations (Header: `<iterator>`)
