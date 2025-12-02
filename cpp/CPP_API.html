@@ -187,6 +187,8 @@
 <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">v</span><span class="hljs-params">(n, <span class="hljs-number">-1</span>)</span></span>;           <span class="hljs-comment">// Size n, initialized to -1</span>
 vector&lt;<span class="hljs-type">int</span>&gt; v = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};      <span class="hljs-comment">// Initializer list</span>
 vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">grid</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>)); <span class="hljs-comment">// m x n Matrix initialized to 0</span>
+<span class="hljs-built_in">fill</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">-1</span>);   <span class="hljs-comment">// Fill range with value -1</span>
+<span class="hljs-built_in">iota</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);    <span class="hljs-comment">// Fill range with 0, 1, 2... (Sequential)</span>
 </code></pre>
 <h2 id="capacity--performance-crucial-for-optimization">Capacity &amp; Performance (Crucial for Optimization)</h2>
 <blockquote>

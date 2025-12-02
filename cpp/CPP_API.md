@@ -56,6 +56,8 @@ vector<int> v;                  // Default initialization (empty)
 vector<int> v(n, -1);           // Size n, initialized to -1
 vector<int> v = {1, 2, 3};      // Initializer list
 vector<vector<int>> grid(m, vector<int>(n, 0)); // m x n Matrix initialized to 0
+fill(v.begin(), v.end(), -1);   // Fill range with value -1
+iota(v.begin(), v.end(), 0);    // Fill range with 0, 1, 2... (Sequential)
 ```
 
 ## Capacity & Performance (Crucial for Optimization)
