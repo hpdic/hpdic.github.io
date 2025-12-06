@@ -181,7 +181,7 @@ ss.str(""); ss.clear();   // Must clear content AND error flags
 
 ## Unordered Set (Unique Keys)
 ```cpp
-unordered_set<int> s;
+unordered_set<int> s = {1, 2, 3};
 s.insert(val);         // Insert element
 s.erase(val);          // Remove element
 s.count(val);          // Return 1 if present, 0 otherwise
