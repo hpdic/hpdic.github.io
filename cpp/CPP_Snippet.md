@@ -2,18 +2,118 @@
 
 <h1 id="table-of-contents">Table of Contents</h1>
 
-- [1. Linked List](#1-linked-list)
-- [2. Monotonic Stack](#2-monotonic-stack)
-- [3. Trie (Prefix Tree)](#3-trie-prefix-tree)
-- [4. Non-Recursive In-Order Tree Traversal](#4-non-recursive-in-order-tree-traversal)
-- [5. Breadth-First Search (BFS) - Graph/Matrix](#5-breadth-first-search-bfs---graphmatrix)
-- [6. Graph Cycle Detection](#6-graph-cycle-detection)
-- [7. DFS Backtrack](#7-dfs-backtrack)
-- [8. Dynamic Programming](#8-dynamic-programming)
+- [1. Intervals](#1-intervals)
+- [2. Linked List](#2-linked-list)
+- [3. Monotonic Stack](#3-monotonic-stack)
+- [4. Trie (Prefix Tree)](#4-trie-prefix-tree)
+- [5. Non-Recursive In-Order Tree Traversal](#5-non-recursive-in-order-tree-traversal)
+- [6. Breadth-First Search (BFS) - Graph/Matrix](#6-breadth-first-search-bfs---graphmatrix)
+- [7. Graph Cycle Detection](#7-graph-cycle-detection)
+- [8. DFS Backtrack](#8-dfs-backtrack)
+- [9. Dynamic Programming](#9-dynamic-programming)
 
 ---
 
-# 1. Linked List
+# 1. Intervals
+
+## Classification Rule
+
+The key to solving Interval problems is the sorting strategy. Depending on the goal, there are two main approaches:
+
+* Problem asks for **Maximum Non-overlapping Count** or **Minimum Removal**: Sort by **End Time**.
+* Problem asks for **Merging**, **Coverage**, or **Resource Allocation**: Sort by **Start Time**.
+
+## Type 1: Greedy Selection (Sort by End Time)
+
+This usually falls under the "Activity Selection Problem" category.
+
+* **Goal**: Select as many non conflicting intervals as possible within a limited timeframe.
+* **Logic**: Greedy strategy. We want the selected interval to finish as early as possible. Finishing early leaves more space for subsequent intervals, maximizing the total count.
+* **Sorting Syntax**:
+    ```cpp
+    auto cmp = [](const auto& a, const auto& b) { return a[1] < b[1]; };
+    sort(intervals.begin(), intervals.end(), cmp);
+    ```
+* **Typical Problems**:
+    * 435 Non overlapping Intervals (Find min removal = Find max non overlapping)
+    * 452 Minimum Number of Arrows to Burst Balloons
+
+## Type 2: Physical Merging (Sort by Start Time)
+
+This is the general approach for handling timeline relationships.
+
+* **Goal**: Merge intervals, calculate total coverage, insert new intervals, or arrange meeting rooms.
+* **Logic**: Process events in chronological order. We must know who starts first to determine if they overlap with the previous interval or if a new resource is needed.
+* **Sorting Syntax**:
+    ```cpp
+    sort(intervals.begin(), intervals.end()); // Default sorts by Start Time
+    ```
+* **Typical Problems**:
+    * 56 Merge Intervals
+    * 57 Insert Interval
+    * 252 Meeting Rooms
+    * 253 Meeting Rooms II (Sweep Line)
+
+## Code Templates
+
+**Template 1: Greedy (Sort by End Time)**
+> The problem asks us to remove the minimum number of intervals to ensure the remaining ones are non-overlapping. This is equivalent to finding the maximum number of non-overlapping intervals, which we solve by sorting by end time and greedily keeping the ones that finish earliest.
+```cpp
+int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+    if (intervals.empty()) return 0;
+    
+    // 1. Sort by End Time
+    sort(intervals.begin(), intervals.end(), [](const auto& a, const auto& b) {
+        return a[1] < b[1];
+    });
+
+    int count = 0; // Count removals
+    int end = intervals[0][1]; // Current valid end boundary
+
+    for (int i = 1; i < intervals.size(); ++i) {
+        // If current start < previous end, we have a conflict
+        if (intervals[i][0] < end) {
+            count++; // Remove current (Greedy: keep the one that ends earlier)
+        } else {
+            end = intervals[i][1]; // No conflict, update boundary
+        }
+    }
+    return count;
+}
+```
+
+**Template 2: Merging (Sort by Start Time)**
+
+> The goal is to merge all overlapping intervals to produce a list of non-overlapping intervals that cover the entire range. This is solved by sorting the intervals by start time and extending the end time of the last merged interval whenever the current interval overlaps with it.
+
+```cpp
+vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    if (intervals.empty()) return {};
+    
+    // 1. Sort by Start Time
+    sort(intervals.begin(), intervals.end());
+
+    vector<vector<int>> merged;
+    merged.push_back(intervals[0]);
+
+    for (int i = 1; i < intervals.size(); ++i) {
+        // 2. Compare: End of last merged interval vs Start of current
+        if (merged.back()[1] >= intervals[i][0]) {
+            // Overlap detected: Merge (Update End to the max of both)
+            merged.back()[1] = max(merged.back()[1], intervals[i][1]);
+        } else {
+            // No overlap: Push current interval as is
+            merged.push_back(intervals[i]);
+        }
+    }
+    return merged;
+}
+```
+
+[⬆️ Back to Top](#table-of-contents)
+---
+
+# 2. Linked List
 
 ## Dummy Node Strategy
 **Pattern:** Creating a temporary "pre-head" node to simplify boundary conditions.
@@ -162,7 +262,7 @@ ListNode* detectCycle(ListNode* head) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 2. Monotonic Stack
+# 3. Monotonic Stack
 **Pattern:** Maintain a sorted stack to find the "First Greater/Smaller Element".
 - **Time:** O(N) (Each element pushed & popped max once), **Space:** O(N).
 - **Usage:** Next Greater Element, Daily Temperatures, Largest Rectangle in Histogram.
@@ -193,7 +293,7 @@ vector<int> nextGreaterElements(vector<int>& nums) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 3. Trie (Prefix Tree)
+# 4. Trie (Prefix Tree)
 - **Header:** None (Must implement manually)
 - **Time Complexity:** Insert/Search are **O(L)** where L is word length.
 - **Usage:** Autocomplete, Spell Checker, String Search.
@@ -255,7 +355,7 @@ public:
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 4. Non-Recursive In-Order Tree Traversal
+# 5. Non-Recursive In-Order Tree Traversal
 **Pattern:** Iterative DFS using Stack
 - **Time Complexity:** **O(N)** (Each node is pushed and popped exactly once).
 - **Space Complexity:** **O(H)** (Where H is tree height, for the stack).
@@ -302,7 +402,7 @@ vector<int> inorderTraversal(TreeNode* root) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 5. Breadth-First Search (BFS) - Graph/Matrix
+# 6. Breadth-First Search (BFS) - Graph/Matrix
 **Pattern:** Queue + Visited Set + Level Loop
 - **Time:** O(V + E) or O(N*M), **Space:** O(V) or O(N*M)
 - **Usage:** Shortest path in unweighted graphs, level-order traversal.
@@ -342,7 +442,7 @@ void bfs(int startNode, int n, vector<vector<int>>& adj) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 6. Graph Cycle Detection
+# 7. Graph Cycle Detection
 **Pattern:** Differentiate between Directed and Undirected graphs strategies.
 - **Time:** O(V + E) for both.
 - **Space:** O(V) for both.
@@ -378,7 +478,7 @@ bool hasCycle(int curr, vector<vector<int>>& adj, vector<int>& state) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 7. DFS Backtrack
+# 8. DFS Backtrack
 **Pattern:** Recursion + State Reset (Choose -> Explore -> Unchoose)
 - **Time:** O(N!) (Factorial complexity)
 - **Space:** O(N) (Recursion stack + Visited array)
@@ -448,7 +548,7 @@ void backtrack(vector<int>& nums, int start, vector<vector<int>>& res) {
 [⬆️ Back to Top](#table-of-contents)
 ---
 
-# 8. Dynamic Programming
+# 9. Dynamic Programming
 **Pattern:** 2D Grid / State Transition
 - **Time:** O(N*M)
 - **Space:** O(N*M) (Can be optimized to O(N) using rolling array)

@@ -2,7 +2,7 @@
         <html>
         <head>
             <meta charset="UTF-8">
-            <title>1&period; Linked List</title>
+            <title>1&period; Intervals</title>
             <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -141,17 +141,112 @@
             <h1 align="center">C++ Coding Snippets</h1>
 <h1 id="table-of-contents">Table of Contents</h1>
 <ul>
-<li><a href="#1-linked-list">1. Linked List</a></li>
-<li><a href="#2-monotonic-stack">2. Monotonic Stack</a></li>
-<li><a href="#3-trie-prefix-tree">3. Trie (Prefix Tree)</a></li>
-<li><a href="#4-non-recursive-in-order-tree-traversal">4. Non-Recursive In-Order Tree Traversal</a></li>
-<li><a href="#5-breadth-first-search-bfs---graphmatrix">5. Breadth-First Search (BFS) - Graph/Matrix</a></li>
-<li><a href="#6-graph-cycle-detection">6. Graph Cycle Detection</a></li>
-<li><a href="#7-dfs-backtrack">7. DFS Backtrack</a></li>
-<li><a href="#8-dynamic-programming">8. Dynamic Programming</a></li>
+<li><a href="#1-intervals">1. Intervals</a></li>
+<li><a href="#2-linked-list">2. Linked List</a></li>
+<li><a href="#3-monotonic-stack">3. Monotonic Stack</a></li>
+<li><a href="#4-trie-prefix-tree">4. Trie (Prefix Tree)</a></li>
+<li><a href="#5-non-recursive-in-order-tree-traversal">5. Non-Recursive In-Order Tree Traversal</a></li>
+<li><a href="#6-breadth-first-search-bfs---graphmatrix">6. Breadth-First Search (BFS) - Graph/Matrix</a></li>
+<li><a href="#7-graph-cycle-detection">7. Graph Cycle Detection</a></li>
+<li><a href="#8-dfs-backtrack">8. DFS Backtrack</a></li>
+<li><a href="#9-dynamic-programming">9. Dynamic Programming</a></li>
 </ul>
 <hr>
-<h1 id="1-linked-list">1. Linked List</h1>
+<h1 id="1-intervals">1. Intervals</h1>
+<h2 id="classification-rule">Classification Rule</h2>
+<p>The key to solving Interval problems is the sorting strategy. Depending on the goal, there are two main approaches:</p>
+<ul>
+<li>Problem asks for <strong>Maximum Non-overlapping Count</strong> or <strong>Minimum Removal</strong>: Sort by <strong>End Time</strong>.</li>
+<li>Problem asks for <strong>Merging</strong>, <strong>Coverage</strong>, or <strong>Resource Allocation</strong>: Sort by <strong>Start Time</strong>.</li>
+</ul>
+<h2 id="type-1-greedy-selection-sort-by-end-time">Type 1: Greedy Selection (Sort by End Time)</h2>
+<p>This usually falls under the &quot;Activity Selection Problem&quot; category.</p>
+<ul>
+<li><strong>Goal</strong>: Select as many non conflicting intervals as possible within a limited timeframe.</li>
+<li><strong>Logic</strong>: Greedy strategy. We want the selected interval to finish as early as possible. Finishing early leaves more space for subsequent intervals, maximizing the total count.</li>
+<li><strong>Sorting Syntax</strong>:<pre><code class="language-cpp"><span class="hljs-keyword">auto</span> cmp = [](<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; a, <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; b) { <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>]; };
+<span class="hljs-built_in">sort</span>(intervals.<span class="hljs-built_in">begin</span>(), intervals.<span class="hljs-built_in">end</span>(), cmp);
+</code></pre>
+</li>
+<li><strong>Typical Problems</strong>:
+<ul>
+<li>435 Non overlapping Intervals (Find min removal = Find max non overlapping)</li>
+<li>452 Minimum Number of Arrows to Burst Balloons</li>
+</ul>
+</li>
+</ul>
+<h2 id="type-2-physical-merging-sort-by-start-time">Type 2: Physical Merging (Sort by Start Time)</h2>
+<p>This is the general approach for handling timeline relationships.</p>
+<ul>
+<li><strong>Goal</strong>: Merge intervals, calculate total coverage, insert new intervals, or arrange meeting rooms.</li>
+<li><strong>Logic</strong>: Process events in chronological order. We must know who starts first to determine if they overlap with the previous interval or if a new resource is needed.</li>
+<li><strong>Sorting Syntax</strong>:<pre><code class="language-cpp"><span class="hljs-built_in">sort</span>(intervals.<span class="hljs-built_in">begin</span>(), intervals.<span class="hljs-built_in">end</span>()); <span class="hljs-comment">// Default sorts by Start Time</span>
+</code></pre>
+</li>
+<li><strong>Typical Problems</strong>:
+<ul>
+<li>56 Merge Intervals</li>
+<li>57 Insert Interval</li>
+<li>252 Meeting Rooms</li>
+<li>253 Meeting Rooms II (Sweep Line)</li>
+</ul>
+</li>
+</ul>
+<h2 id="code-templates">Code Templates</h2>
+<p><strong>Template 1: Greedy (Sort by End Time)</strong></p>
+<blockquote>
+<p>The problem asks us to remove the minimum number of intervals to ensure the remaining ones are non-overlapping. This is equivalent to finding the maximum number of non-overlapping intervals, which we solve by sorting by end time and greedily keeping the ones that finish earliest.</p>
+</blockquote>
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">eraseOverlapIntervals</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; intervals)</span> </span>{
+    <span class="hljs-keyword">if</span> (intervals.<span class="hljs-built_in">empty</span>()) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    
+    <span class="hljs-comment">// 1. Sort by End Time</span>
+    <span class="hljs-built_in">sort</span>(intervals.<span class="hljs-built_in">begin</span>(), intervals.<span class="hljs-built_in">end</span>(), [](<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; a, <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; b) {
+        <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>];
+    });
+
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>; <span class="hljs-comment">// Count removals</span>
+    <span class="hljs-type">int</span> end = intervals[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]; <span class="hljs-comment">// Current valid end boundary</span>
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; intervals.<span class="hljs-built_in">size</span>(); ++i) {
+        <span class="hljs-comment">// If current start &lt; previous end, we have a conflict</span>
+        <span class="hljs-keyword">if</span> (intervals[i][<span class="hljs-number">0</span>] &lt; end) {
+            count++; <span class="hljs-comment">// Remove current (Greedy: keep the one that ends earlier)</span>
+        } <span class="hljs-keyword">else</span> {
+            end = intervals[i][<span class="hljs-number">1</span>]; <span class="hljs-comment">// No conflict, update boundary</span>
+        }
+    }
+    <span class="hljs-keyword">return</span> count;
+}
+</code></pre>
+<p><strong>Template 2: Merging (Sort by Start Time)</strong></p>
+<blockquote>
+<p>The goal is to merge all overlapping intervals to produce a list of non-overlapping intervals that cover the entire range. This is solved by sorting the intervals by start time and extending the end time of the last merged interval whenever the current interval overlaps with it.</p>
+</blockquote>
+<pre><code class="language-cpp">vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">merge</span>(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; intervals) {
+    <span class="hljs-keyword">if</span> (intervals.<span class="hljs-built_in">empty</span>()) <span class="hljs-keyword">return</span> {};
+    
+    <span class="hljs-comment">// 1. Sort by Start Time</span>
+    <span class="hljs-built_in">sort</span>(intervals.<span class="hljs-built_in">begin</span>(), intervals.<span class="hljs-built_in">end</span>());
+
+    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; merged;
+    merged.<span class="hljs-built_in">push_back</span>(intervals[<span class="hljs-number">0</span>]);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; intervals.<span class="hljs-built_in">size</span>(); ++i) {
+        <span class="hljs-comment">// 2. Compare: End of last merged interval vs Start of current</span>
+        <span class="hljs-keyword">if</span> (merged.<span class="hljs-built_in">back</span>()[<span class="hljs-number">1</span>] &gt;= intervals[i][<span class="hljs-number">0</span>]) {
+            <span class="hljs-comment">// Overlap detected: Merge (Update End to the max of both)</span>
+            merged.<span class="hljs-built_in">back</span>()[<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(merged.<span class="hljs-built_in">back</span>()[<span class="hljs-number">1</span>], intervals[i][<span class="hljs-number">1</span>]);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// No overlap: Push current interval as is</span>
+            merged.<span class="hljs-built_in">push_back</span>(intervals[i]);
+        }
+    }
+    <span class="hljs-keyword">return</span> merged;
+}
+</code></pre>
+<h2 id="️-back-to-top"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="2-linked-list">2. Linked List</h1>
 <h2 id="dummy-node-strategy">Dummy Node Strategy</h2>
 <p><strong>Pattern:</strong> Creating a temporary &quot;pre-head&quot; node to simplify boundary conditions.</p>
 <ul>
@@ -299,8 +394,8 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     <span class="hljs-keyword">return</span> slow; <span class="hljs-comment">// They meet at the cycle entry</span>
 }
 </code></pre>
-<h2 id="️-back-to-top"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="2-monotonic-stack">2. Monotonic Stack</h1>
+<h2 id="️-back-to-top-1"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="3-monotonic-stack">3. Monotonic Stack</h1>
 <p><strong>Pattern:</strong> Maintain a sorted stack to find the &quot;First Greater/Smaller Element&quot;.</p>
 <ul>
 <li><strong>Time:</strong> O(N) (Each element pushed &amp; popped max once), <strong>Space:</strong> O(N).</li>
@@ -326,8 +421,8 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     <span class="hljs-keyword">return</span> res;
 }
 </code></pre>
-<h2 id="️-back-to-top-1"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="3-trie-prefix-tree">3. Trie (Prefix Tree)</h1>
+<h2 id="️-back-to-top-2"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="4-trie-prefix-tree">4. Trie (Prefix Tree)</h1>
 <ul>
 <li><strong>Header:</strong> None (Must implement manually)</li>
 <li><strong>Time Complexity:</strong> Insert/Search are <strong>O(L)</strong> where L is word length.</li>
@@ -384,8 +479,8 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     }
 };
 </code></pre>
-<h2 id="️-back-to-top-2"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="4-non-recursive-in-order-tree-traversal">4. Non-Recursive In-Order Tree Traversal</h1>
+<h2 id="️-back-to-top-3"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="5-non-recursive-in-order-tree-traversal">5. Non-Recursive In-Order Tree Traversal</h1>
 <p><strong>Pattern:</strong> Iterative DFS using Stack</p>
 <ul>
 <li><strong>Time Complexity:</strong> <strong>O(N)</strong> (Each node is pushed and popped exactly once).</li>
@@ -427,8 +522,8 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     <span class="hljs-keyword">return</span> result;
 }
 </code></pre>
-<h2 id="️-back-to-top-3"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="5-breadth-first-search-bfs---graphmatrix">5. Breadth-First Search (BFS) - Graph/Matrix</h1>
+<h2 id="️-back-to-top-4"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="6-breadth-first-search-bfs---graphmatrix">6. Breadth-First Search (BFS) - Graph/Matrix</h1>
 <p><strong>Pattern:</strong> Queue + Visited Set + Level Loop</p>
 <ul>
 <li><strong>Time:</strong> O(V + E) or O(N<em>M), <strong>Space:</strong> O(V) or O(N</em>M)</li>
@@ -464,8 +559,8 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     }
 }
 </code></pre>
-<h2 id="️-back-to-top-4"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="6-graph-cycle-detection">6. Graph Cycle Detection</h1>
+<h2 id="️-back-to-top-5"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="7-graph-cycle-detection">7. Graph Cycle Detection</h1>
 <p><strong>Pattern:</strong> Differentiate between Directed and Undirected graphs strategies.</p>
 <ul>
 <li><strong>Time:</strong> O(V + E) for both.</li>
@@ -498,8 +593,8 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 }
 </code></pre>
-<h2 id="️-back-to-top-5"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="7-dfs-backtrack">7. DFS Backtrack</h1>
+<h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="8-dfs-backtrack">8. DFS Backtrack</h1>
 <p><strong>Pattern:</strong> Recursion + State Reset (Choose -&gt; Explore -&gt; Unchoose)</p>
 <ul>
 <li><strong>Time:</strong> O(N!) (Factorial complexity)</li>
@@ -563,8 +658,8 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     }
 }
 </code></pre>
-<h2 id="️-back-to-top-6"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
-<h1 id="8-dynamic-programming">8. Dynamic Programming</h1>
+<h2 id="️-back-to-top-7"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h1 id="9-dynamic-programming">9. Dynamic Programming</h1>
 <p><strong>Pattern:</strong> 2D Grid / State Transition</p>
 <ul>
 <li><strong>Time:</strong> O(N*M)</li>
@@ -617,7 +712,7 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
     <span class="hljs-keyword">return</span> dp[W];
 }
 </code></pre>
-<h2 id="️-back-to-top-7"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
+<h2 id="️-back-to-top-8"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
 
             
             
