@@ -189,6 +189,10 @@ vector&lt;<span class="hljs-type">int</span>&gt; v = {<span class="hljs-number">
 vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">grid</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>)); <span class="hljs-comment">// m x n Matrix initialized to 0</span>
 <span class="hljs-built_in">fill</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">-1</span>);   <span class="hljs-comment">// Fill range with value -1</span>
 <span class="hljs-built_in">iota</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);    <span class="hljs-comment">// Fill range with 0, 1, 2... (Sequential)</span>
+
+<span class="hljs-comment">// Re-initialization (Reset)</span>
+v.<span class="hljs-built_in">assign</span>(n, <span class="hljs-number">0</span>);                 <span class="hljs-comment">// 清空并重置为 n 个 0 (可能会重用内存)</span>
+v = <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>);          <span class="hljs-comment">// 创建新 vector 并覆盖 (彻底替换)</span>
 </code></pre>
 <h2 id="capacity--performance-crucial-for-optimization">Capacity &amp; Performance (Crucial for Optimization)</h2>
 <blockquote>
@@ -235,7 +239,7 @@ s.<span class="hljs-built_in">substr</span>(pos);         <span class="hljs-comm
 s.<span class="hljs-built_in">size</span>();              <span class="hljs-comment">// Return length (Same as .length(), preferred for consistency)</span>
 s.<span class="hljs-built_in">resize</span>(n);           <span class="hljs-comment">// Resize/Truncate to length n - O(N) or O(1) if shrinking</span>
 </code></pre>
-<h2 id="search--check-critical">Search &amp; Check (Critical!)</h2>
+<h2 id="search--check">Search &amp; Check</h2>
 <blockquote>
 <p><strong>⚠️ Warning:</strong> Always check against <code>string::npos</code> to handle &quot;not found&quot; cases. Do NOT compare with <code>-1</code>.</p>
 </blockquote>

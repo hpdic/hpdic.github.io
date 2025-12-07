@@ -58,6 +58,10 @@ vector<int> v = {1, 2, 3};      // Initializer list
 vector<vector<int>> grid(m, vector<int>(n, 0)); // m x n Matrix initialized to 0
 fill(v.begin(), v.end(), -1);   // Fill range with value -1
 iota(v.begin(), v.end(), 0);    // Fill range with 0, 1, 2... (Sequential)
+
+// Re-initialization (Reset)
+v.assign(n, 0);                 // 清空并重置为 n 个 0 (可能会重用内存)
+v = vector<int>(n, 0);          // 创建新 vector 并覆盖 (彻底替换)
 ```
 
 ## Capacity & Performance (Crucial for Optimization)
@@ -111,7 +115,7 @@ s.size();              // Return length (Same as .length(), preferred for consis
 s.resize(n);           // Resize/Truncate to length n - O(N) or O(1) if shrinking
 ```
 
-## Search & Check (Critical!)
+## Search & Check
 > **⚠️ Warning:** Always check against `string::npos` to handle "not found" cases. Do NOT compare with `-1`.
 
 ```cpp
