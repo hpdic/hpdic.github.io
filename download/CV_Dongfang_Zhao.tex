@@ -1,0 +1,706 @@
+\documentclass[11pt,]{scrartcl}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+% \defaultfontfeatures{Scale=MatchLowercase,Ligatures={TeX}}
+% \setmainfont{Liberation Serif}
+% \setsansfont{Liberation Serif}
+% \setmonofont[SmallCapsFont={Liberation Serif}]{Liberation Serif}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{xcolor}
+\definecolor{cvlinkcolor}{RGB}{6,125,233}
+\hypersetup{colorlinks,linkcolor=cvlinkcolor,citecolor=cvlinkcolor,urlcolor=cvlinkcolor,bookmarksnumbered,bookmarks=false,pdfinfo={Title={Curriculum Vitae},Author={Lighton Phiri},Creator={Lighton Phiri},Subject={Curriculum Vitae},Keywords={Curriculum Vitae},CreationDate={D:20150513232724}}}
+\renewcommand\labelenumi{[\theenumi]}
+
+\newcommand{\arygap}{.9}
+
+\newcommand{\don}[1]{\textcolor{magenta}{Dongfang: #1}}
+
+\date{}
+
+\begin{document}
+
+\begin{table}[h]
+%%%\centering
+{\def\arraystretch{\arygap}\tabcolsep=0pt
+\begin{tabular}{p{0.15\linewidth}p{0.7\linewidth}}
+
+  \multirow{1}{*}{\LARGE \textbf{Dongfang Zhao, Ph.D.}} & \\
+  & \\
+  % Citizenship: & United States\\  
+  % Position: & Assistant Professor, Computer Science and Engineering, University of Nevada, Reno\\
+  % Nationality: & United States \\
+  % \multirow{1}{*}{Assistant Professor, University of Washington, Tacoma School of Engineering and Technology} \\  
+  
+  % \multirow{1}{*}{Assistant Professor, University of Washington, Tacoma School of Engineering and Technology}\\
+%   \multirow{1}{*}{Tacoma School of Engineering and Technology}\\
+  % \multirow{1}{*}{University of Washington Tacoma Campus}\\
+%   \multirow{1}{*}{Tacoma, WA 98402, United States}\\
+  % \multirow{1}{*}{Email: dzhao@uw.edu}\\
+  % \multirow{1}{*}{Homepage: \href{https://hpdic.github.io}{hpdic.github.io}}\\
+  Nationality: & United States\\
+  Homepage: & \href{https://faculty.washington.edu/dzhao}{https://faculty.washington.edu/dzhao} \\
+  Email: & \href{mailto:dzhao@uw.edu}{dzhao@uw.edu} \\
+% %   & Last updated: 12/16/2022
+%   Status: & US citizen, male, married with two children
+  
+  % Department of Computer Science and Engineering & \multicolumn{1}{r}{Email:\;\;} &\multicolumn{1}{l}{\href{dzhao@unr.edu}{dzhao@unr.edu}}  \\
+  
+  % University of Nevada, Reno & \multicolumn{1}{r}{Web:\;\;} &
+  %  \multicolumn{1}{l}{\url{https://hpdic.github.io}} \\\\
+  
+%   Private Bag X3, Rondebosch 7701& \multicolumn{1}{r}{Home:\;\;} & \multicolumn{1}{l}{\url{http://people.cs.uct.ac.za/~lphiri}} \\
+  
+%   Reno, United States & \multicolumn{1}{r}{Web:\;\;} &
+%   \multicolumn{1}{l}{\url{https://hpdic.github.io}} \\
+%   \multicolumn{1}{l}{\href{http://orcid.org/0000-0003-3582-9866}{orcid.org/0000-0003-3582-9866}} \\
+
+\end{tabular}%
+}
+\end{table}
+
+% \subsection{Status}\label{status}
+% U.S. citizen
+
+% \subsection{Research Areas}\label{areas}
+% High-performance computing, databases, artificial intelligence, computer security
+
+
+\subsection{Education}\label{education}
+
+% \textbf{\textsuperscript{†}} \emph{Indicates expected}
+
+% \begin{table}[h]
+% %%%\centering
+% {\def\arraystretch{1.5}\tabcolsep=0pt
+% \begin{tabular}{p{0.10\linewidth}p{0.80\linewidth}}
+
+%   \multirow{2}{*}[0.85em]
+%   2003 &
+%   B.Eng., Computer Science, Northeastern University \\  
+  
+%   2005 &
+%   M.Sc., Statistics, Katholieke Universiteit Leuven \\
+
+%   2008 & 
+%   M.Sc., Computer Science, Emory University \\  
+% %   {2015--2017 \textsuperscript{\textbf{\textdagger}}} 
+ 
+% %   & 
+% %   Advisor: Magdalena Balazinska \\
+% %   & Supervisors: Hussein Suleman and Christoph Meinel \\
+  
+%   2015 & 
+%   Ph.D., Computer Science, Illinois Institute of Technology \\
+  
+% %   &
+% %   Advisor: Ioan Raicu\\
+
+%   2017 &
+%   Postdoc, Computer Science, University of Washington \\
+
+% \end{tabular}%
+% }
+% \end{table}
+
+\begin{table}[!h]
+%%%\centering
+{\def\arraystretch{\arygap}\tabcolsep=0pt
+\begin{tabular}{p{0.48\linewidth}p{0.4\linewidth}p{0.06\linewidth}}
+
+% Northeastern University
+% & B.Eng., Computer Science
+% & 2003
+% \\
+
+% 
+% & Diploma, Statistics
+% & 2005
+% \\
+
+% Northeastern University
+% & China
+% & Computer Science
+% & \multicolumn{1}{r}{BE, 2003}
+% \\
+
+University of Washington, Seattle
+& Computer Science, PostDoc
+% & PostDoc
+& \multicolumn{1}{r}{2017}
+\\
+
+Illinois Institute of Technology, Chicago
+& Computer Science, PhD
+% & PhD
+& \multicolumn{1}{r}{2015}
+\\
+
+Emory University, Atlanta, GA
+& Computer Science, MS
+% & MS
+& \multicolumn{1}{r}{2008}
+\\
+
+Katholieke Universiteit Leuven, Belgium
+% KU Leuven, Belgium
+& Statistics, Diploma
+& \multicolumn{1}{r}{2005}
+
+
+
+% Pacific Northwest National Laboratory
+% & Seattle, WA
+% & Applied Cryptography
+% & \multicolumn{1}{r}{PostDoc, 2016}\\
+
+
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Employment}\label{appointments}
+
+\begin{table}[h]
+%%%\centering
+{\def\arraystretch{\arygap}\tabcolsep=0pt
+\begin{tabular}{p{0.17\linewidth}p{0.83\linewidth}}
+
+% 2023--present & Founder and CTO, YiZDB LLC, Seattle, WA\\ 
+2023--present & University of Washington\\ 
+    & \quad $\circ$ Adjunct Assistant Professor, Allen School of Computer Science \& Engineering\\    
+    & \quad $\circ$ Affiliate Faculty of Data Science, eScience Institute\\    & \quad $\circ$ Tenure-track Assistant Professor, Tacoma School of Engineering \& Technology\\
+
+
+2018--2023 & Affiliate Faculty, University of California, Davis \\
+2018--2023 & Tenure-track Assistant Professor, University of Nevada, Reno (UNR) \\ 
+
+
+  % 2016--2017 & Research Associate, University of Washington, Seattle\\
+  2015 & Research Intern, IBM Almaden Research Center, San Jose, CA \\
+  2014 & Research Intern, Argonne National Laboratory, Chicago, IL \\
+  2013 & Research Intern, Pacific Northwest National Laboratory, Seattle, WA\\
+  % 2012--2015 & Research Assistant, Illinois Institute of Technology, Chicago\\
+   2009--2011 & Software Developer (full-time), Epic Systems Corporation, Madison, WI\\
+   2008--2009 & Software Developer (full-time), IDMI Systems, Atlanta, GA\\   
+  % 2006--2007 & Research Intern, Centers for Disease Control and Prevention (CDC), Atlanta, GA\\
+  % 2003--2004 & Research Intern, Interuniversity Microelectronics Centre (IMEC), Leuven, Belgium
+  
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Awards}
+
+\begin{table}[!h]
+%%%\centering
+{\def\arraystretch{\arygap5}\tabcolsep=0pt
+\begin{tabular}{p{0.07\linewidth}p{0.95\linewidth}}
+
+  % 2025 & Research Grant, Microsoft Azure, \$10,000 \\
+  
+  % 2025 & Research Grant, Pacific Northwest National Laboratory, stipend for one PhD-year \\  
+  
+  % 2024 & Research Grant, Microsoft Azure, \$10,000 \\
+  
+  2022 & Federal Research Grant, UNR PI, NSF 2112345, \$255,916 \\
+    & ``A DLT Machine Learning Platform for Blockchain Warehousing'' \\
+    
+  2020 & Federal Research Grant, UNR PI, DOE SC0020455, \$200,000 \\
+    & ``HPChain: Energy-Efficient Scalable Blockchains for HPC Systems'' \\
+    
+  2019 & Best Paper Award, International Conference on Cloud Computing \\
+    & ``BlockLite: Toward Accurate and Efficient Emulation of Public Blockchains in the Cloud'' \\
+
+  % 2019 & Research Grant, Amazon Web Services, \$30,000 \\ 
+  % 2019 & Research Grant, Google Cloud Platform, \$15,000 \\ 
+    
+  2018 & Best Student Paper Award, IEEE International Conference on Cloud Computing \\
+    & ``Toward Cost-Effective Memory Scaling in Clouds: Symbiosis of Virtual and Physical Memory'' \\    
+    
+  % 2017 & Research Grant, Microsoft Azure, \$20,000 \\
+  % 2017 & Research Grant, Amazon Web Services, \$10,000 \\   
+   2016 & Postdoctoral Fellowship, Sloan Foundation, \$155,000\\
+%   2006 & Graduate Fellowship, Oak Ridge Institute for Science and Education, \$85,000
+\end{tabular}%
+}
+\end{table}
+
+% \newpage
+
+
+
+% \newpage
+
+\subsection{Expertise}\label{services}
+\begin{table}[!h]
+%%%\centering
+{\def\arraystretch{\arygap}\tabcolsep=0pt
+\begin{tabular}{p{0.25\linewidth}p{0.77\linewidth}}
+
+    \textit{Research Areas:} & Artificial intelligence, databases, distributed computing, applied cryptography\\
+  
+  \textit{Software Development:} & Cloud environments (e.g., AWS), Linux, VS Code, C++, Java, Python, Bash\\
+  
+  \textit{Current Project:} & AdaDisk: A distributed agentic system for adaptive ingestion-query scheduling of DiskANN in Large Language Model (LLM) serving\\
+  & Github: \url{https://github.com/hpdic/DiskANN}\\
+
+  \textit{Recent Project:} & Hermes: A MySQL plug-in for high-performance homomorphic encryption of vector databases in retrieval-augmented generation\\
+  & Github: \url{https://github.com/hpdic/hermes}\\
+
+  % 2023--2024 & Search Committee & Associate Professor of Artificial Intelligence\\
+
+%   2022--present & Program Committee & AAAI, ACM KDD, IEEE Big Data \\
+
+    % 2018--present  & Grant Review Panels    & NSF IIS, NSF OAC, DOE ASCR, DOE EPSCOR \\
+  % 2025  & Search Committee & One Assistant Professor of AI and Security, UWT\\  
+  % 2022  & Search Committee & One Associate Professor of Databases, UNR\\
+  % 2022  & Search Committee & One Assistant Professor of Artificial Intelligence, UNR\\  
+  % 2021  & Search Committee  & Two Assistant Professors of Cybersecurity, UNR\\  
+
+  % 2022  & Grant Review Panel    & National Science Foundation: CISE IIS \\  
+
+  % 2019  & Organizing Committee    & ACM International Middleware Conference, UC Davis\\
+  % 2018  & Grant Review Panels    & DOE ASCR, NSF CISE IIS \\
+  % 2018  & Grant Review Panel    & National Science Foundation: CISE IIS
+
+
+\end{tabular}%
+}
+\end{table}
+
+% \subsection{Teaching}\label{teaching}
+
+% \begin{table}[!h]
+% %%%\centering
+% {\def\arraystretch{\arygap}\tabcolsep=0pt
+% \begin{tabular}{p{0.5\linewidth}p{0.35\linewidth}p{0.15\linewidth}}
+
+% TCSS 590: Vector Databases
+% & UW Tacoma
+% & 2025
+% \\
+
+% TCSS 558: Distributed Computing
+% & UW Tacoma
+% & 2025
+% \\
+
+% TCSS 342: Data Structures
+% & UW Tacoma
+% & 2025
+% \\
+
+% TCSS 590: Database Encryption
+% & UW Tacoma 
+% & 2024
+% \\
+
+% TCSS 143: Object-Oriented Programming
+% & UW Tacoma 
+% & 2023--2024
+% \\
+
+% CS 705: Cryptography and Blockchain
+% & University of Nevada, Reno
+% & 2022--2023
+% \\
+
+% CS 791: Distributed Computing
+% & University of Nevada, Reno
+% & 2020--2022
+% \\
+
+% CS 457: Database Management Systems
+% & University of Nevada, Reno
+% & 2018--2023
+% \\
+
+
+% \end{tabular}%
+% }
+% \end{table}
+
+
+% \subsection{Doctoral Students (name, graduation year, first employment)}\label{students}
+
+% \begin{table}[!h]
+% %%%\centering
+% {\def\arraystretch{\arygap}\tabcolsep=0pt
+% \begin{tabular}{p{0.32\linewidth}p{0.15\linewidth}p{0.6\linewidth}}
+
+% Baiqiang Wang
+% & ongoing 
+% & (started in 2025)
+% \\
+
+% Shubing Yang
+% & ongoing 
+% & (started in 2024)
+% \\
+
+% Solmaz Monir
+% & ongoing 
+% & (started in 2023)
+% \\
+
+% % Muhammad Jahanzeb Khan
+% % & ongoing 
+% % & Placement TBD
+% % \\
+
+% Olamide Timothy Tawose
+% & 2023 
+% & Assistant Professor, Lincoln University, PA
+% \\
+
+% Abdullah Al-Mamun
+% & 2022 
+% & Assistant Professor, Augusta University, GA
+% \\
+
+% Xinying Wang
+% & 2022 
+% & PostDoc, Oak Ridge National Laboratory, TN
+% \\
+
+% Jiayao Wang
+% & 2021 
+% & Assistant Professor, Yangzhou University, China
+% \\
+
+% \end{tabular}%
+% }
+% \end{table}
+
+% % \subsection{Status}\label{personal}
+
+% % U.S. citizen (naturalized in Sacramento, California), married with two children
+
+% % \textit{Last update: July 2023}
+
+
+
+\subsection{Selected Publications
+(Dongfang Zhao was/is the $^\star$student's academic advisor)}
+\label{publications}
+
+% (\textbf{Dongfang Zhao} is the $^\star$student's academic advisor
+% % , $^\dagger$thesis committee member
+% % or $^\ddagger$postdoc co-author
+% )
+
+% \emph{Preprint URLs available at
+% \url{http://orcid.org/0000-0003-3582-9866}}\\
+
+% \subsubsection{Book chapters}\label{bookchapters}
+
+% \begin{enumerate}
+% \leftskip-0.13in % for numbers
+%     \item \textbf{Dongfang Zhao}:
+%     Cross-Blockchain Transactions: Systems, Protocols, and Topological Theory.
+%     Handbook on Blockchain, Springer Optimization and its Applications. 2022.
+
+%     \item \textbf{Dongfang Zhao}, Akash Mahakode, Sandip Lakshminarasaiah, Ioan Raicu:
+% High-Performance Storage Support for Scientific Big Data Applications on the Cloud. Resource Management for Big Data Platforms 2016: 147-170
+% \end{enumerate}
+
+% \subsubsection{Journals}\label{journals}
+
+% % ($^\dagger$Student advised by \textbf{Dongfang Zhao}) 
+
+% \begin{enumerate}
+%   %%%%%\leftskip-0.25in % for bullets
+% \leftskip-0.13in % for numbers
+
+% \item $^\star$Xinying Wang, Cong Xu, Ke Wang, Feng Yan, \textbf{Dongfang Zhao}: 
+% Memory Scaling of Cloud-based Big Data Systems: A Hybrid Approach.
+% IEEE Transactions on Big Data. IEEE Transactions on Big Data. 8(5): 1259-1272 (2022)
+
+% \item \textbf{Dongfang Zhao}, Mohamed Mohamed, Heiko Ludwig:
+% Locality-Aware Scheduling for Containers in Cloud Computing. IEEE Transactions on Cloud Computing. 8(2): 635-646 (2020)
+    
+% \item \textbf{Dongfang Zhao}, Kan Qiao, Zhou Zhou, Tonglin Li, Zhihan Lu, Xiaohua Xu:
+% Toward Efficient and Flexible Metadata Indexing of Big Data Systems. IEEE Transactions on Big Data. 3(1): 107-117 (2017)
+
+% % \item 	Tonglin Li, Xiaobing Zhou, Ke Wang, \textbf{Dongfang Zhao}, Iman Sadooghi, Zhao Zhang, Ioan Raicu:
+% % A convergence of key-value storage systems from clouds to supercomputers. Concurrency and Computation: Practice and Experience. 28(1): 44-69 (2016)
+
+% \item \textbf{Dongfang Zhao}, Kan Qiao, Zhou Zhou, Tonglin Li, Xiaobing Zhou, Ioan Raicu:
+% Exploiting multi-cores for efficient interchange of large messages in distributed systems. Concurrency and Computation: Practice and Experience. 28(13): 3568-3585 (2016)
+
+% \item \textbf{Dongfang Zhao}, Ke Wang, Kan Qiao, Tonglin Li, Iman Sadooghi, Ioan Raicu:
+% Toward high-performance key-value stores through GPU encoding and locality-aware encoding. Journal of Parallel and Distributed Computing. 96: 27-37 (2016)
+
+% % \item Zhou Zhou, Xu Yang, \textbf{Dongfang Zhao}, Paul Rich, Wei Tang, Jia Wang, Zhiling Lan:
+% % I/O-aware bandwidth allocation for petascale computing systems. Parallel Computing. 58: 107-116 (2016)
+
+% \item \textbf{Dongfang Zhao}, Ning Liu, Dries Kimpe, Robert B. Ross, Xian-He Sun, Ioan Raicu:
+% Towards Exploring Data-Intensive Scientific Applications at Extreme Scales through Systems and Simulations. IEEE Transactions on Parallel and Distributed Systems. 27(6): 1824-1837 (2016)
+
+% \item \textbf{Dongfang Zhao}, Kan Qiao, Jian Yin, Ioan Raicu:
+% Dynamic Virtual Chunks: On Supporting Efficient Accesses to Compressed Scientific Data. IEEE Transactions on Service Computing 9(1): 96-109 (2016)
+
+% \item \textbf{Dongfang Zhao}, Li Yang:
+% Incremental Isometric Embedding of High-Dimensional Data Using Connected Neighborhood Graphs. IEEE Transactions on Pattern Analysis and Machine Intelligence. 31(1): 86-98 (2009)
+    
+% \end{enumerate}
+
+% \subsubsection{Conferences}\label{conferences}
+
+% ($^\dagger$Student advised by \textbf{Dongfang Zhao}) 
+
+\begin{enumerate}
+  %%%%%\leftskip-0.25in % for bullets
+  \leftskip-0.13in % for numbers
+
+\item 	$^\star$Chengyu Gong, $^\star$Gefei Shen, Luanzheng Guo, Nathan Tallent, \textbf{Dongfang Zhao}.
+Order-Preserving Dimension Reduction for Multimodal Semantic Embedding. 
+The 40th Annual AAAI Conference on Artificial Intelligence (AAAI), 2026.
+
+\item 	$^\star$Jiuzhou Fu, Luanzheng Guo, Nathan Tallent, \textbf{Dongfang Zhao}.
+ProHD: Projection-Based Hausdorff Distance Approximation. 
+IEEE International Conference on Data Mining (ICDM), 2025.
+
+\item 	$^\star$Jiayao Wang, \dots, \textbf{Dongfang Zhao}.
+IPBA: Imperceptible Perturbation Backdoor Attack in Federated Self-Supervised Learning. 
+European Conference on Artificial Intelligence (ECAI), 2025.
+
+\item 	$^\star$Abdullah Al-Mamun, \textbf{Dongfang Zhao}, et al.
+ZTP: A Scalable and Lightweight Privacy-Preserving Blockchain via Scale-Free Quorums and Geometric Fragmentation. 
+International Conference on Parallel Processing (ICPP), 2025.
+
+\item 	$^\star$Gefei Shen, \textbf{Dongfang Zhao}.
+Towards Nonparametric Topological Layers in Neural Networks. 
+The 28th Pacific-Asia Conference on Knowledge Discovery and Data Mining (PAKDD), 2024.
+
+\item $^\star$Muhammad Jahanzeb Khan, \dots, \textbf{Dongfang Zhao}.
+Privacy-Preserving Artificial Intelligence on Edge Devices: A Homomorphic Encryption Approach. IEEE International Conference on Web Services (ICWS) 2024: 395-405.
+
+\item $^\star$Chunyu Yuan, \textbf{Dongfang Zhao}, Sos S. Agaian.
+UCM-Net: A lightweight and efficient solution for skin lesion segmentation using MLP and CNN.
+Biomedical Signal Processing and Control, Volume 96, Part B, 17 pages, 2024.
+
+% \item $^\dagger$Runjie Jin, Robert Cordingly, \textbf{Dongfang Zhao}, Wes Lloyd:
+% GraphQL vs. REST: A Performance and Cost Investigation for Serverless Applications. 
+% WOSC@Middleware 2024: 37-42.
+
+% \item $^\star$Ramasoumya Naraparaju, Tianyu Zhao, Yanting Hu, \textbf{Dongfang Zhao}, Luanzheng Guo, Nathan R. Tallent.
+% Shifting Between Compute and Memory Bounds: A Compression-Enabled Roofline Model. SC Workshops 2024: 309-316.
+
+% \item $^\star$Solmaz Seyed Monir, \textbf{Dongfang Zhao}.
+% Efficient Feature Extraction for Image Analysis through Adaptive Caching in Vector Databases. ICICT 2024.
+
+% \item Tao Wu, Qiushu Chen, \textbf{Dongfang Zhao}, Jinhua Wang, Linhua Jiang.
+% Domain adaptation of time series via contrastive learning with task-specific consistency. Applied Intelligence, 54(23): 12576-12588 (2024).
+
+\item $^\star$Olamide Timothy Tawose, Jun Dai, Lei Yang, \textbf{Dongfang Zhao}.
+Toward Efficient Homomorphic Encryption for Outsourced Databases through Parallel Caching. 
+Proceedings of the ACM on Management of Data (SIGMOD), 2023.
+
+\item $^\star$Xinying Wang, Lipeng Wan, Scott Klasky, \textbf{Dongfang Zhao}, Feng Yan:
+SciLance: Mitigate Load Imbalance for Parallel Scientific Applications in Cloud Environments. International Conference on Cluster Computing (CLUSTER), 2023.
+
+\item $^\star$Olamide Timothy Tawose, Lei Yang, \textbf{Dongfang Zhao}.
+TopoCommit: A Topological Commit Protocol for Cross-Ledger Transactions in Scientific Computing. International Conference on Cluster Computing (CLUSTER), 2023.
+
+% \item Bobo Ju, Yang Liu, Xing Hu, \textbf{Dongfang Zhao}, Linhua Jiang:
+% A novel cell contour-based instance segmentation model and its applications in HER2 breast cancer discrimination. 
+% Biomed. Signal Process. Control. 85: 104941 (2023).
+
+\item 	$^\star$Abdullah Al-Mamun, \textbf{Dongfang Zhao}.
+ECHAIN: Securing Electronic Device Provenance through Privacy-Preserving Consortium Blockchains. 
+The 53rd Annual IEEE/IFIP International Conference on Dependable Systems and Networks (DSN), 2023.
+
+\item $^\star$Muhammad Jahanzeb Khan, $^\star$Olamide Timothy Tawose, Zoey Rui Hu, \textbf{Dongfang Zhao}.
+Exploring the Efficacy of Data-Decoupled Federated Learning for Image Classification and Medical Imaging Analysis. 
+International Workshop on Federated Learning for Distributed Data Mining,
+co-located with the 29th ACM SIGKDD Conference (KDD), 2023.
+
+\item Shuo Chen, Di Li, Bobo Ju, Linhua Jiang, \textbf{Dongfang Zhao}.
+Transparent Object Detection with Simulation Heatmap Guidance and Context Spatial Attention. International Conference on Multimedia Modelling (MMM) (2) 2023: 3-15.
+
+\item \textbf{Dongfang Zhao}. 
+Cross-Blockchain Transactions: Systems, Protocols, and Topological Theory.
+In \textit{Handbook on Blockchain}, pp. 157-193. 
+Cham: Springer International Publishing, 2022.
+
+% \item $^\star$Lesi Wang, \textbf{Dongfang Zhao}.
+% Practical Federated Learning Infrastructure for Privacy-Preserving Scientific Computing. 
+% The 3rd Workshop on Artificial Intelligence and Machine Learning for Scientific Applications (AI4S),
+% collocated with Supercomputing Conference (SC), 2022.
+
+\item $^\star$Xinying Wang, \dots, \textbf{Dongfang Zhao}. 
+Memory Scaling of Cloud-based Big Data Systems: A Hybrid Approach.
+IEEE Transactions on Big Data (TBData). 8(5): 1259-1272 (2022).
+
+\item 	$^\star$Abdullah Al-Mamun, Haoting Shen, \textbf{Dongfang Zhao}.
+DEAN: A Lightweight and Resource-efficient Blockchain Protocol for Reliable Edge Computing. 
+The 36th IEEE International Symposium on Parallel and Distributed Processing (IPDPS), 2022.
+
+\item 	$^\star$Olamide Timothy Tawose, $^\star$Bin Li, Lei Yang, Feng Yan, \textbf{Dongfang Zhao}.
+Topological Modeling and Parallelization of Multidimensional Data on Microelectrode Arrays. 
+The 36th IEEE International Symposium on Parallel and Distributed Processing (IPDPS), 2022.
+% \underline{Direct acceptance}
+
+\item $^\star$Abdullah Al-Mamun, Feng Yan, \textbf{Dongfang Zhao}.
+SciChain: Blockchain-enabled Lightweight and Efficient Data Provenance for Reproducible Scientific Computing. 37th IEEE International Conference on Data Engineering (ICDE), 2021.
+
+\item $^\star$Abdullah Al-Mamun, Feng Yan, \textbf{Dongfang Zhao}.
+BAASH: lightweight, efficient, and reliable blockchain-as-a-service for HPC systems. The International Conference for High Performance Computing, Networking, Storage and Analysis (SC), 2021.
+% \underline{Direct acceptance without revision}
+
+\item $^\star$Xinying Wang, $^\star$Olamide Timothy Tawose, Feng Yan, \textbf{Dongfang Zhao}.
+HDK: Toward High-Performance Deep-Learning-Based Kirchhoff Analysis. The Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI), 2020. 
+% \underline{Oral presentation}
+
+
+\item $^\star$Abdullah Al-Mamun, Jun Dai, Xiaohua Xu, Mohammad Sadoghi, Haoting Shen, \textbf{Dongfang Zhao}.
+Poster DEAN: A Blockchain-Inspired Consensus Protocol Enabling Trustworthy Edge Computing.
+Network and Distributed System Security Symposium (NDSS).
+2020.
+
+\item $^\star$Abdullah Al-Mamun, \dots, \textbf{Dongfang Zhao}.
+Poster Reflector: a fine-grained I/O tracker for HPC systems. 
+The 25th ACM Symposium on Principles and Practice of Parallel Programming (PPoPP), 2020.
+
+\item \textbf{Dongfang Zhao}, Mohamed Mohamed, Heiko Ludwig.
+Locality-Aware Scheduling for Containers in Cloud Computing. IEEE Transactions on Cloud Computing (TCC). 8(2): 635-646 (2020).
+
+% \item Haoting Shen, Shahriar Badsha, and \textbf{Dongfang Zhao}.
+% Poster: Consortium Blockchain for the Assurance of Supply Chain Security.
+% Network and Distributed System Security Symposium (NDSS),
+% 2020.
+
+\item 	$^\star$Xinying Wang, $^\star$Abdullah Al-Mamun, Feng Yan, \textbf{Dongfang Zhao}.
+Toward Accurate and Efficient Emulation of Public Blockchains in the Cloud. The 12th International Conference on Cloud Computing (CLOUD), 2019. 
+% \underline{Best paper award}
+
+\item Heyang Qin, Syed Zawad, Yanqi Zhou, Lei Yang, \textbf{Dongfang Zhao}, Feng Yan.
+Swift machine learning model serving scheduling: a region based reinforcement learning approach.
+The International Conf. for High Performance Computing, Networking, Storage and Analysis (SC), 2019.
+
+\item 	$^\star$Xinying Wang, Cong Xu, Ke Wang, Feng Yan, \textbf{Dongfang Zhao}.
+Toward Cost-Effective Memory Scaling in Clouds: Symbiosis of Virtual and Physical Memory. The 11th IEEE International Conference on Cloud Computing (IEEE CLOUD), 2018.
+% \underline{Best student paper award}
+
+\item 	$^\star$Jiayao Wang, $^\star$Abdullah Al-Mamun, Tonglin Li, Linhua Jiang, \textbf{Dongfang Zhao}.
+Toward Performant and Energy-efficient Queries in Three-tier Wireless Sensor Networks. Proceedings of the 47th International Conference on Parallel Processing (ICPP), 2018.
+
+% --- Prior to 2018 ---
+
+\item Parmita Mehta, Sven Dorkenwald, \textbf{Dongfang Zhao}, Tomer Kaftan, Alvin Cheung, Magdalena Balazinska, Ariel Rokem, Andrew J. Connolly, Jacob VanderPlas, Yusra AlSayyad.
+Comparative Evaluation of Big-Data Systems on Scientific Image Analytics Workloads. 
+VLDB, 2017.
+
+\item \textbf{Dongfang Zhao}, Kan Qiao, Zhou Zhou, Tonglin Li, Zhihan Lu, Xiaohua Xu.
+Toward Efficient and Flexible Metadata Indexing of Big Data Systems. IEEE Transactions on Big Data (TBData). 3(1): 107-117 (2017).
+
+% \item 	Tonglin Li, Xiaobing Zhou, Ke Wang, \textbf{Dongfang Zhao}, Iman Sadooghi, Zhao Zhang, Ioan Raicu:
+% A convergence of key-value storage systems from clouds to supercomputers. Concurrency and Computation: Practice and Experience. 28(1): 44-69 (2016)
+
+\item \textbf{Dongfang Zhao}, Kan Qiao, Zhou Zhou, Tonglin Li, Xiaobing Zhou, Ioan Raicu.
+Exploiting multi-cores for efficient interchange of large messages in distributed systems. Concurrency and Computation: Practice and Experience (CCPE). 28(13): 3568-3585 (2016).
+
+\item \textbf{Dongfang Zhao}, Ke Wang, Kan Qiao, Tonglin Li, Iman Sadooghi, Ioan Raicu.
+Toward high-performance key-value stores through GPU encoding and locality-aware encoding. Journal of Parallel and Distributed Computing (JPDC). 96: 27-37 (2016).
+
+% \item Zhou Zhou, Xu Yang, \textbf{Dongfang Zhao}, Paul Rich, Wei Tang, Jia Wang, Zhiling Lan.
+% I/O-aware bandwidth allocation for petascale computing systems. Parallel Computing (ParCo). 58: 107-116 (2016).
+
+\item \textbf{Dongfang Zhao}, Kan Qiao, Jian Yin, Ioan Raicu.
+Dynamic Virtual Chunks: On Supporting Efficient Accesses to Compressed Scientific Data. IEEE Transactions on Services Computing (TSC). 9(1): 96-109 (2016).
+
+\item \textbf{Dongfang Zhao}, Ning Liu, Dries Kimpe, Robert B. Ross, Xian-He Sun, Ioan Raicu.
+Towards Exploring Data-Intensive Scientific Applications at Extreme Scales through Systems and Simulations. IEEE Transactions on Parallel and Distributed Systems (TPDS). 27(6): 1824-1837 (2016).
+
+% \item Zhou Zhou, Xu Yang, \textbf{Dongfang Zhao}, Paul Rich, Wei Tang, Jia Wang, Zhiling Lan.
+% I/O-Aware Batch Scheduling for Petascale Computing Systems. 
+% IEEE International Conference on Cluster Computing (CLUSTER), 2015.
+
+\item \textbf{Dongfang Zhao}, NagaPramod Mandagere, Gabriel Alatorre, Mohamed Mohamed, Heiko Ludwig.
+Toward locality-aware scheduling for containerized cloud services. 
+IEEE International Conference on Big Data (BigData), 2015.
+
+\item \textbf{Dongfang Zhao}, Kan Qiao, Ioan Raicu.
+HyCache+: Towards Scalable High-Performance Caching Middleware for Parallel File Systems. 
+The 14th IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing (CCGrid), 2014.
+
+\item \textbf{Dongfang Zhao}, Kent Burlingame, Corentin Debains, Pedro Alvarez-Tabio, Ioan Raicu.
+Towards high-performance and cost-effective distributed storage systems with information dispersal algorithms. 
+IEEE International Conference on Cluster Computing (CLUSTER), 2013.
+
+\item 	\textbf{Dongfang Zhao}, Chen Shou, Tanu Malik, Ioan Raicu.
+Distributed data provenance for large-scale data-intensive computing. 
+International Conf. on Cluster Computing \mbox{(CLUSTER)}, 2013.
+
+\item Tonglin Li, Xiaobing Zhou, Kevin Brandstatter, \textbf{Dongfang Zhao}, Ke Wang, Anupam Rajendran, Zhao Zhang, Ioan Raicu.
+ZHT: A Light-Weight Reliable Persistent Dynamic Scalable Zero-Hop Distributed Hash Table. 
+IEEE International Symposium on Parallel and Distributed Processing (IPDPS), 2013.
+
+\item \textbf{Dongfang Zhao}, Li Yang.
+Incremental Isometric Embedding of High-Dimensional Data Using Connected Neighborhood Graphs. IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI). 31(1): 86-98 (2009).
+
+% \vspace{-5mm}
+
+\item \textbf{Dongfang Zhao}, Li Yang.
+Incremental Construction of Neighborhood Graphs for Nonlinear Dimensionality Reduction. 
+International Conference on Pattern Recognition (ICPR), 2006.
+
+\end{enumerate}
+
+\end{document}
