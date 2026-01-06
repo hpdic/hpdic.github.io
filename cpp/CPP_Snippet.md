@@ -183,10 +183,10 @@ ListNode* reverseList(ListNode* head) {
     ListNode* curr = head;
     
     while (curr != nullptr) {
-        ListNode* nextTemp = curr->next; // 1. Save next node
-        curr->next = prev;               // 2. Reverse pointer
-        prev = curr;                     // 3. Move prev forward
-        curr = nextTemp;                 // 4. Move curr forward
+        ListNode* next = curr->next;    // 1. Save next node
+        curr->next = prev;              // 2. Reverse pointer
+        prev = curr;                    // 3. Move prev forward
+        curr = next;                    // 4. Move curr forward
     }
     
     return prev; // New head

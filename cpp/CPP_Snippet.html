@@ -317,10 +317,10 @@ This pattern works for 90% of linked list modification problems.</p>
     ListNode* curr = head;
     
     <span class="hljs-keyword">while</span> (curr != <span class="hljs-literal">nullptr</span>) {
-        ListNode* nextTemp = curr-&gt;next; <span class="hljs-comment">// 1. Save next node</span>
-        curr-&gt;next = prev;               <span class="hljs-comment">// 2. Reverse pointer</span>
-        prev = curr;                     <span class="hljs-comment">// 3. Move prev forward</span>
-        curr = nextTemp;                 <span class="hljs-comment">// 4. Move curr forward</span>
+        ListNode* next = curr-&gt;next;    <span class="hljs-comment">// 1. Save next node</span>
+        curr-&gt;next = prev;              <span class="hljs-comment">// 2. Reverse pointer</span>
+        prev = curr;                    <span class="hljs-comment">// 3. Move prev forward</span>
+        curr = next;                    <span class="hljs-comment">// 4. Move curr forward</span>
     }
     
     <span class="hljs-keyword">return</span> prev; <span class="hljs-comment">// New head</span>
