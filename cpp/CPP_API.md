@@ -113,6 +113,8 @@ s.substr(pos, len);    // Return substring [pos, pos + len)
 s.substr(pos);         // Return substring [pos, end) (Default len is npos)
 s.size();              // Return length (Same as .length(), preferred for consistency)
 s.resize(n);           // Resize/Truncate to length n - O(N) or O(1) if shrinking
+reverse(s.begin(), s.end()); // Reverse string in-place - O(N)
+string reverse_s = string(s.rbegin(), s.rend()); // Create reversed copy - O(N)
 ```
 
 ## Search & Check

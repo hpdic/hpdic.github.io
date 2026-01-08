@@ -238,6 +238,8 @@ s.<span class="hljs-built_in">substr</span>(pos, len);    <span class="hljs-comm
 s.<span class="hljs-built_in">substr</span>(pos);         <span class="hljs-comment">// Return substring [pos, end) (Default len is npos)</span>
 s.<span class="hljs-built_in">size</span>();              <span class="hljs-comment">// Return length (Same as .length(), preferred for consistency)</span>
 s.<span class="hljs-built_in">resize</span>(n);           <span class="hljs-comment">// Resize/Truncate to length n - O(N) or O(1) if shrinking</span>
+<span class="hljs-built_in">reverse</span>(s.<span class="hljs-built_in">begin</span>(), s.<span class="hljs-built_in">end</span>()); <span class="hljs-comment">// Reverse string in-place - O(N)</span>
+string reverse_s = <span class="hljs-built_in">string</span>(s.<span class="hljs-built_in">rbegin</span>(), s.<span class="hljs-built_in">rend</span>()); <span class="hljs-comment">// Create reversed copy - O(N)</span>
 </code></pre>
 <h2 id="search--check">Search &amp; Check</h2>
 <blockquote>
