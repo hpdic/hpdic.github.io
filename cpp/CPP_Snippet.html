@@ -567,7 +567,10 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
 <li><strong>Space:</strong> O(V) for both.</li>
 </ul>
 <h2 id="template-dfs-three-coloring-on-directed-graphs">Template: DFS Three-Coloring on Directed Graphs</h2>
-<p><strong>Logic:</strong> Use 3 states to detect back-edges (pointing to an ancestor in the current recursion stack).</p>
+<ul>
+<li><strong>Note:</strong> This algorithm assumes the graph is connected. For disconnected graphs, loop through all nodes.</li>
+<li><strong>Logic:</strong> Use 3 states to detect back-edges (pointing to an ancestor in the current recursion stack).</li>
+</ul>
 <ul>
 <li><code>0</code>: Unvisited</li>
 <li><code>1</code>: Visiting (Current Path) -&gt; <strong>Cycle found if met</strong></li>

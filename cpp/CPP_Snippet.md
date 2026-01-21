@@ -448,7 +448,8 @@ void bfs(int startNode, int n, vector<vector<int>>& adj) {
 - **Space:** O(V) for both.
 
 ## Template: DFS Three-Coloring on Directed Graphs
-**Logic:** Use 3 states to detect back-edges (pointing to an ancestor in the current recursion stack).
+- **Note:** This algorithm assumes the graph is connected. For disconnected graphs, loop through all nodes.
+- **Logic:** Use 3 states to detect back-edges (pointing to an ancestor in the current recursion stack).
 * `0`: Unvisited
 * `1`: Visiting (Current Path) -> **Cycle found if met**
 * `2`: Visited (Safe)
