@@ -182,47 +182,43 @@
 <h2 id="️-back-to-top"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
 <h1 id="2-dynamic-array-stdvector">2. Dynamic Array (std::vector)</h1>
 <p><strong>Header:</strong> <code>&lt;vector&gt;</code></p>
-<h2 id="initialization-1">Initialization</h2>
-<pre><code class="language-cpp">vector&lt;<span class="hljs-type">int</span>&gt; v;                  <span class="hljs-comment">// Default initialization (empty)</span>
+<pre><code class="language-cpp"><span class="hljs-comment">// --- Initialization ---</span>
+vector&lt;<span class="hljs-type">int</span>&gt; v;                  <span class="hljs-comment">// Default initialization (empty)</span>
 <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">v</span><span class="hljs-params">(n, <span class="hljs-number">-1</span>)</span></span>;           <span class="hljs-comment">// Size n, initialized to -1</span>
 vector&lt;<span class="hljs-type">int</span>&gt; v = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};      <span class="hljs-comment">// Initializer list</span>
 vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">grid</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>)); <span class="hljs-comment">// m x n Matrix initialized to 0</span>
-<span class="hljs-built_in">fill</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">-1</span>);   <span class="hljs-comment">// Fill range with value -1</span>
-<span class="hljs-built_in">iota</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);    <span class="hljs-comment">// Fill range with 0, 1, 2... (Sequential)</span>
 
-<span class="hljs-comment">// Re-initialization (Reset)</span>
-v.<span class="hljs-built_in">assign</span>(n, <span class="hljs-number">0</span>);                 <span class="hljs-comment">// 清空并重置为 n 个 0 (可能会重用内存)</span>
-v = <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>);          <span class="hljs-comment">// 创建新 vector 并覆盖 (彻底替换)</span>
-</code></pre>
-<h2 id="capacity--performance-crucial-for-optimization">Capacity &amp; Performance (Crucial for Optimization)</h2>
-<blockquote>
-<p><strong>Difference:</strong> <code>resize</code> changes logical size (adds elements). <code>reserve</code> changes capacity (pre-allocates memory) to prevent reallocation.</p>
-</blockquote>
-<pre><code class="language-cpp">v.<span class="hljs-built_in">reserve</span>(<span class="hljs-number">100</span>);   <span class="hljs-comment">// Allocates memory for 100 ints. Size is still 0.</span>
-                  <span class="hljs-comment">// Use this before a loop of push_back() to boost speed.</span>
+<span class="hljs-comment">// --- Utility Functions ---</span>
+<span class="hljs-built_in">fill</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">-1</span>);   <span class="hljs-comment">// Fill range with value -1 (Modify existing elements)</span>
+<span class="hljs-built_in">iota</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);    <span class="hljs-comment">// Fill range with 0, 1, 2... (Sequential values)</span>
 
-v.<span class="hljs-built_in">resize</span>(<span class="hljs-number">100</span>);    <span class="hljs-comment">// Resizes array to 100. New elements are 0. Size is 100.</span>
+<span class="hljs-comment">// --- Re-initialization (Reset) ---</span>
+v.<span class="hljs-built_in">assign</span>(n, <span class="hljs-number">0</span>);                 <span class="hljs-comment">// Efficient: Resets content to n 0s (reuses memory if possible)</span>
+v = <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>);          <span class="hljs-comment">// Replace: Constructs new vector and assigns (discards old memory)</span>
 
-v.<span class="hljs-built_in">capacity</span>();     <span class="hljs-comment">// Current allocated capacity</span>
-v.<span class="hljs-built_in">shrink_to_fit</span>(); <span class="hljs-comment">// Frees unused memory (Capacity -&gt; Size)</span>
-</code></pre>
-<h2 id="core-operations-o1">Core Operations (O(1))</h2>
-<ul>
-<li><strong>Performance:</strong> These are amortized <strong>O(1)</strong>. Use them whenever possible.</li>
-</ul>
-<pre><code class="language-cpp">v.<span class="hljs-built_in">push_back</span>(val);           <span class="hljs-comment">// Append element to end</span>
-v.<span class="hljs-built_in">emplace_back</span>(key, val);   <span class="hljs-comment">// equivalent to but faster than v.push_back({key, val});</span>
-v.<span class="hljs-built_in">pop_back</span>();               <span class="hljs-comment">// Remove last element</span>
-v.<span class="hljs-built_in">back</span>();                   <span class="hljs-comment">// Access last element reference (v[n-1])</span>
-v.<span class="hljs-built_in">front</span>();                  <span class="hljs-comment">// Access first element reference (v[0])</span>
-v.<span class="hljs-built_in">size</span>();                   <span class="hljs-comment">// Return number of elements (size_t)</span>
-v.<span class="hljs-built_in">empty</span>();                  <span class="hljs-comment">// Check if vector is empty (bool)</span>
-v.<span class="hljs-built_in">resize</span>(n);                <span class="hljs-comment">// Resize container (fills default values if growing)</span>
-v.<span class="hljs-built_in">clear</span>();                  <span class="hljs-comment">// Remove all elements (Capacity remains)</span>
+<span class="hljs-comment">// --- Adding Elements (Tail) ---</span>
+v.<span class="hljs-built_in">push_back</span>(val);               <span class="hljs-comment">// Copy: Creates a deep copy of &#x27;val&#x27;</span>
+v.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">move</span>(val));    <span class="hljs-comment">// Move: &quot;Steals&quot; resources from &#x27;val&#x27; (No deep copy, val becomes empty)</span>
+v.<span class="hljs-built_in">emplace_back</span>(arg1, arg2);     <span class="hljs-comment">// Construct: Builds object in-place (Fastest, avoids temp object)</span>
 
-<span class="hljs-comment">// Insert &amp; Erase (O(N)), they shift elements; avoid using inside loops</span>
-v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">begin</span>() + i, val);   <span class="hljs-comment">// Insert val at index i, slow</span>
-v.<span class="hljs-built_in">erase</span>(v.<span class="hljs-built_in">begin</span>() + i);         <span class="hljs-comment">// Erase element at index i</span>
+<span class="hljs-comment">// --- Capacity &amp; Memory Optimization ---</span>
+v.<span class="hljs-built_in">reserve</span>(n);                   <span class="hljs-comment">// Optimize: Pre-allocates memory. Prevents reallocations during push_back</span>
+v.<span class="hljs-built_in">shrink_to_fit</span>();              <span class="hljs-comment">// Optimize: Frees unused memory (Capacity -&gt; Size)</span>
+v.<span class="hljs-built_in">size</span>();                       <span class="hljs-comment">// Number of active elements</span>
+v.<span class="hljs-built_in">capacity</span>();                   <span class="hljs-comment">// Number of slots allocated in memory</span>
+v.<span class="hljs-built_in">empty</span>();                      <span class="hljs-comment">// Check if size is 0</span>
+
+<span class="hljs-comment">// --- Access &amp; Modification ---</span>
+v.<span class="hljs-built_in">back</span>();                       <span class="hljs-comment">// Ref to last element</span>
+v.<span class="hljs-built_in">front</span>();                      <span class="hljs-comment">// Ref to first element</span>
+v.<span class="hljs-built_in">pop_back</span>();                   <span class="hljs-comment">// Remove last element (O(1))</span>
+v.<span class="hljs-built_in">resize</span>(n);                    <span class="hljs-comment">// Change size to n (grows with defaults / shrinks)</span>
+v.<span class="hljs-built_in">clear</span>();                      <span class="hljs-comment">// Size -&gt; 0, but Capacity remains unchanged (Fast)</span>
+
+<span class="hljs-comment">// --- O(N) Operations (Slow - Avoid inside loops) ---</span>
+v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">begin</span>() + i, val);             <span class="hljs-comment">// Insert at i: Shifts elements right (Copy)</span>
+v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">begin</span>() + i, std::<span class="hljs-built_in">move</span>(val));  <span class="hljs-comment">// Insert at i: Shifts elements right (Move resource)</span>
+v.<span class="hljs-built_in">erase</span>(v.<span class="hljs-built_in">begin</span>() + i);                   <span class="hljs-comment">// Remove at i: Shifts elements left</span>
 </code></pre>
 <h2 id="️-back-to-top-1"><a href="#table-of-contents">⬆️ Back to Top</a></h2>
 <h1 id="3-string-manipulation-stdstring">3. String Manipulation (std::string)</h1>

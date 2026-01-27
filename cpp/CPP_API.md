@@ -50,50 +50,44 @@ fill(begin(arr), end(arr), nullptr);
 # 2. Dynamic Array (std::vector)
 **Header:** `<vector>`
 
-## Initialization
 ```cpp
+// --- Initialization ---
 vector<int> v;                  // Default initialization (empty)
 vector<int> v(n, -1);           // Size n, initialized to -1
 vector<int> v = {1, 2, 3};      // Initializer list
 vector<vector<int>> grid(m, vector<int>(n, 0)); // m x n Matrix initialized to 0
-fill(v.begin(), v.end(), -1);   // Fill range with value -1
-iota(v.begin(), v.end(), 0);    // Fill range with 0, 1, 2... (Sequential)
 
-// Re-initialization (Reset)
-v.assign(n, 0);                 // 清空并重置为 n 个 0 (可能会重用内存)
-v = vector<int>(n, 0);          // 创建新 vector 并覆盖 (彻底替换)
-```
+// --- Utility Functions ---
+fill(v.begin(), v.end(), -1);   // Fill range with value -1 (Modify existing elements)
+iota(v.begin(), v.end(), 0);    // Fill range with 0, 1, 2... (Sequential values)
 
-## Capacity & Performance (Crucial for Optimization)
-> **Difference:** `resize` changes logical size (adds elements). `reserve` changes capacity (pre-allocates memory) to prevent reallocation.
+// --- Re-initialization (Reset) ---
+v.assign(n, 0);                 // Efficient: Resets content to n 0s (reuses memory if possible)
+v = vector<int>(n, 0);          // Replace: Constructs new vector and assigns (discards old memory)
 
-```cpp
-v.reserve(100);   // Allocates memory for 100 ints. Size is still 0.
-                  // Use this before a loop of push_back() to boost speed.
+// --- Adding Elements (Tail) ---
+v.push_back(val);               // Copy: Creates a deep copy of 'val'
+v.push_back(std::move(val));    // Move: "Steals" resources from 'val' (No deep copy, val becomes empty)
+v.emplace_back(arg1, arg2);     // Construct: Builds object in-place (Fastest, avoids temp object)
 
-v.resize(100);    // Resizes array to 100. New elements are 0. Size is 100.
+// --- Capacity & Memory Optimization ---
+v.reserve(n);                   // Optimize: Pre-allocates memory. Prevents reallocations during push_back
+v.shrink_to_fit();              // Optimize: Frees unused memory (Capacity -> Size)
+v.size();                       // Number of active elements
+v.capacity();                   // Number of slots allocated in memory
+v.empty();                      // Check if size is 0
 
-v.capacity();     // Current allocated capacity
-v.shrink_to_fit(); // Frees unused memory (Capacity -> Size)
-```
+// --- Access & Modification ---
+v.back();                       // Ref to last element
+v.front();                      // Ref to first element
+v.pop_back();                   // Remove last element (O(1))
+v.resize(n);                    // Change size to n (grows with defaults / shrinks)
+v.clear();                      // Size -> 0, but Capacity remains unchanged (Fast)
 
-## Core Operations (O(1))
-- **Performance:** These are amortized **O(1)**. Use them whenever possible.
-
-```cpp
-v.push_back(val);           // Append element to end
-v.emplace_back(key, val);   // equivalent to but faster than v.push_back({key, val});
-v.pop_back();               // Remove last element
-v.back();                   // Access last element reference (v[n-1])
-v.front();                  // Access first element reference (v[0])
-v.size();                   // Return number of elements (size_t)
-v.empty();                  // Check if vector is empty (bool)
-v.resize(n);                // Resize container (fills default values if growing)
-v.clear();                  // Remove all elements (Capacity remains)
-
-// Insert & Erase (O(N)), they shift elements; avoid using inside loops
-v.insert(v.begin() + i, val);   // Insert val at index i, slow
-v.erase(v.begin() + i);         // Erase element at index i
+// --- O(N) Operations (Slow - Avoid inside loops) ---
+v.insert(v.begin() + i, val);             // Insert at i: Shifts elements right (Copy)
+v.insert(v.begin() + i, std::move(val));  // Insert at i: Shifts elements right (Move resource)
+v.erase(v.begin() + i);                   // Remove at i: Shifts elements left
 ```
 
 [⬆️ Back to Top](#table-of-contents)
