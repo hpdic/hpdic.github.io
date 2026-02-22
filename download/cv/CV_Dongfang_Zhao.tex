@@ -5,9 +5,9 @@
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
+  \usepackage[utf8]{inputenc} 
 \else % if luatex or xelatex
-  \ifxetex
+  \ifxetex 
     \usepackage{mathspec}
   \else
     \usepackage{fontspec}
@@ -316,7 +316,7 @@ Emory University, Atlanta, GA
 \subsection{Recent Projects}\label{projects}
 \begin{table}[!ht]
 {\def\arraystretch{1.2}\tabcolsep=0pt
-\begin{tabular}{p{0.16\linewidth}p{0.84\linewidth}}
+\begin{tabular}{p{0.16\linewidth}p{0.84\linewidth}}  
   
   % \textit{Research Areas:} & Artificial intelligence, databases, distributed computing, applied cryptography\\[2.5mm]
   
@@ -326,7 +326,7 @@ Emory University, Atlanta, GA
   % \quad\textbf{Kaimosia} & Intelligence offloading framework enabling offline, server-grade LLM inference on resource-constrained edge devices: \url{https://github.com/hpdic/Kaimosia} (private)\\
   % & \textit{Tags:} on-device AI, small language models, offline inference, AI infrastructure, Python\\
 
-  \textbf{[BadRSSD]} & Information-theoretical backdoor attacks on diffusion models utilizing residual score subspace dispersive loss: \url{https://github.com/hpdic/BadRSSD} (private for now)\\
+  \textbf{[BadRSSD]} & Information-theoretical backdoor attacks on denoising diffusion models utilizing residual score subspace dispersive loss: \url{https://github.com/hpdic/BadRSSD} (private)\\
   & \textit{Tags:} Generative AI security, Latent subspace learning, Fine-tuning integrity, PyTorch\\  
 
   \textbf{[ElasticIVF]} & Elastic in-memory vector indexing and search for streaming data analysis on heterogeneous distributed platforms: \url{https://github.com/hpdic/ElasticIVF}\\
