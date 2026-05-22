@@ -588,9 +588,43 @@ int minDistance(string word1, string word2) {
 
 ## Template: Standard 0/1 Knapsack
 Find max value with capacity `W`.
-**Crucial:** Inner loop must iterate **backwards** to avoid using the same item twice.
 
 ```cpp
+int knapsack2D(int W, vector<int>& wt, vector<int>& val) {
+    int n = wt.size();
+    
+    // dp[i][j] stores the maximum value achievable using a subset 
+    // of the first i items with a maximum weight limit of j
+    vector<vector<int>> dp(n + 1, vector<int>(W + 1, 0));
+
+    // Iterate through all items from 1 to n
+    for (int i = 1; i <= n; i++) {
+        
+        // Iterate through all possible capacity limits from 1 to W
+        for (int j = 1; j <= W; j++) {
+            
+            // Item index in vectors is i minus 1 because vectors are zero indexed
+            if (wt[i - 1] <= j) {
+                // The current item can possibly fit in the current capacity limit j
+                // We choose the maximum between two options:
+                // Option 1: Not including the current item
+                // Option 2: Including the current item and adding its value to the optimal 
+                // solution for the remaining capacity
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - wt[i - 1]] + val[i - 1]);
+            } else {
+                // The current item is strictly heavier than the current capacity limit j
+                // We cannot include it so the optimal value is the same as without it
+                dp[i][j] = dp[i - 1][j];
+            }
+            
+        }
+    }
+    
+    // The bottom right cell contains the maximum value for all items and full capacity
+    return dp[n][W];
+}
+
+// If you want one-dimensional DP, iterate backwards to prevent overwriting states that are needed for future calculations.
 int knapsack(int W, vector<int>& wt, vector<int>& val) {
     // dp[j]: Max value for capacity j
     vector<int> dp(W + 1, 0);

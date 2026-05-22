@@ -138,7 +138,8 @@
         
         </head>
         <body class="vscode-body vscode-light">
-            <h1 align="center">C++ Coding Snippets</h1>
+            <span id="markdown-mermaid" aria-hidden="true" data-config="{&quot;darkModeTheme&quot;:&quot;dark&quot;,&quot;lightModeTheme&quot;:&quot;default&quot;,&quot;maxTextSize&quot;:50000,&quot;clickDrag&quot;:&quot;alt&quot;,&quot;showControls&quot;:&quot;onHoverOrFocus&quot;,&quot;resizable&quot;:true,&quot;maxHeight&quot;:&quot;&quot;}"></span>
+				<h1 align="center">C++ Coding Snippets</h1>
 <h1 id="table-of-contents">Table of Contents</h1>
 <ul>
 <li><a href="#1-intervals">1. Intervals</a></li>
@@ -698,9 +699,43 @@ Initialize <code>fast = head-&gt;next</code>. This ensures that for even lengths
 }
 </code></pre>
 <h2 id="template-standard-01-knapsack">Template: Standard 0/1 Knapsack</h2>
-<p>Find max value with capacity <code>W</code>.
-<strong>Crucial:</strong> Inner loop must iterate <strong>backwards</strong> to avoid using the same item twice.</p>
-<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">knapsack</span><span class="hljs-params">(<span class="hljs-type">int</span> W, vector&lt;<span class="hljs-type">int</span>&gt;&amp; wt, vector&lt;<span class="hljs-type">int</span>&gt;&amp; val)</span> </span>{
+<p>Find max value with capacity <code>W</code>.</p>
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">knapsack2D</span><span class="hljs-params">(<span class="hljs-type">int</span> W, vector&lt;<span class="hljs-type">int</span>&gt;&amp; wt, vector&lt;<span class="hljs-type">int</span>&gt;&amp; val)</span> </span>{
+    <span class="hljs-type">int</span> n = wt.<span class="hljs-built_in">size</span>();
+    
+    <span class="hljs-comment">// dp[i][j] stores the maximum value achievable using a subset </span>
+    <span class="hljs-comment">// of the first i items with a maximum weight limit of j</span>
+    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(W + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));
+
+    <span class="hljs-comment">// Iterate through all items from 1 to n</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) {
+        
+        <span class="hljs-comment">// Iterate through all possible capacity limits from 1 to W</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= W; j++) {
+            
+            <span class="hljs-comment">// Item index in vectors is i minus 1 because vectors are zero indexed</span>
+            <span class="hljs-keyword">if</span> (wt[i - <span class="hljs-number">1</span>] &lt;= j) {
+                <span class="hljs-comment">// The current item can possibly fit in the current capacity limit j</span>
+                <span class="hljs-comment">// We choose the maximum between two options:</span>
+                <span class="hljs-comment">// Option 1: Not including the current item</span>
+                <span class="hljs-comment">// Option 2: Including the current item and adding its value to the optimal </span>
+                <span class="hljs-comment">// solution for the remaining capacity</span>
+                dp[i][j] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j], dp[i - <span class="hljs-number">1</span>][j - wt[i - <span class="hljs-number">1</span>]] + val[i - <span class="hljs-number">1</span>]);
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-comment">// The current item is strictly heavier than the current capacity limit j</span>
+                <span class="hljs-comment">// We cannot include it so the optimal value is the same as without it</span>
+                dp[i][j] = dp[i - <span class="hljs-number">1</span>][j];
+            }
+            
+        }
+    }
+    
+    <span class="hljs-comment">// The bottom right cell contains the maximum value for all items and full capacity</span>
+    <span class="hljs-keyword">return</span> dp[n][W];
+}
+
+<span class="hljs-comment">// If you want one-dimensional DP, iterate backwards to prevent overwriting states that are needed for future calculations.</span>
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">knapsack</span><span class="hljs-params">(<span class="hljs-type">int</span> W, vector&lt;<span class="hljs-type">int</span>&gt;&amp; wt, vector&lt;<span class="hljs-type">int</span>&gt;&amp; val)</span> </span>{
     <span class="hljs-comment">// dp[j]: Max value for capacity j</span>
     <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(W + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;
 
